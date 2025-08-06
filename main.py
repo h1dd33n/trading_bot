@@ -28,8 +28,8 @@ logger = structlog.get_logger()
 
 # Initialize FastAPI app
 app = FastAPI(
-    title="Advanced Mean Reversion Trading Bot",
-    description="A comprehensive trading bot with multiple mean reversion strategies",
+    title="Mean Reversion Trading Bot",
+    description="A comprehensive trading bot with mean reversion strategy",
     version="1.0.0"
 )
 
@@ -46,12 +46,7 @@ app.add_middleware(
 class StrategyParams(BaseModel):
     """Strategy parameters for API updates."""
     lookback_window: Optional[int] = None
-    z_score_threshold: Optional[float] = None
-    bollinger_period: Optional[int] = None
-    bollinger_std: Optional[float] = None
-    rsi_period: Optional[int] = None
-    rsi_oversold: Optional[float] = None
-    rsi_overbought: Optional[float] = None
+    threshold: Optional[float] = None
     position_size_pct: Optional[float] = None
     stop_loss_pct: Optional[float] = None
     take_profit_pct: Optional[float] = None
@@ -219,7 +214,7 @@ trading_bot = TradingBot()
 @app.get("/")
 async def root():
     """Root endpoint."""
-    return {"message": "Advanced Mean Reversion Trading Bot", "version": "1.0.0"}
+    return {"message": "Mean Reversion Trading Bot", "version": "1.0.0"}
 
 
 @app.get("/status")
@@ -318,7 +313,7 @@ def create_dashboard():
         layout="wide"
     )
     
-    st.title("Advanced Mean Reversion Trading Bot Dashboard")
+    st.title("Mean Reversion Trading Bot Dashboard")
     
     # Sidebar
     st.sidebar.header("Configuration")
@@ -326,14 +321,14 @@ def create_dashboard():
     # Strategy selection
     strategy_type = st.sidebar.selectbox(
         "Strategy Type",
-        ["mean_reversion", "bollinger_bands", "rsi_mean_reversion"]
+        ["mean_reversion"]
     )
     
     # Parameter sliders
     st.sidebar.subheader("Strategy Parameters")
     
     lookback_window = st.sidebar.slider("Lookback Window", 5, 50, 20)
-    z_score_threshold = st.sidebar.slider("Z-Score Threshold", 1.0, 3.0, 2.0, 0.1)
+    threshold = st.sidebar.slider("Threshold", 0.005, 0.05, 0.01, 0.001)
     position_size_pct = st.sidebar.slider("Position Size %", 0.01, 0.10, 0.02, 0.01)
     stop_loss_pct = st.sidebar.slider("Stop Loss %", 0.01, 0.20, 0.05, 0.01)
     take_profit_pct = st.sidebar.slider("Take Profit %", 0.05, 0.30, 0.10, 0.01)
@@ -343,7 +338,7 @@ def create_dashboard():
         try:
             update_strategy_params({
                 'lookback_window': lookback_window,
-                'z_score_threshold': z_score_threshold,
+                'threshold': threshold,
                 'position_size_pct': position_size_pct,
                 'stop_loss_pct': stop_loss_pct,
                 'take_profit_pct': take_profit_pct
@@ -385,8 +380,8 @@ def create_dashboard():
     with col1:
         symbols = st.multiselect(
             "Symbols",
-            ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"],
-            default=["AAPL", "MSFT"]
+            ["EURAUD=X", "EURCAD=X"],
+            default=["EURAUD=X", "EURCAD=X"]
         )
     
     with col2:

@@ -1,5 +1,5 @@
 """
-Strategy management module with multiple mean reversion strategies.
+Strategy management module with mean reversion strategy.
 All parameters are easily tweakable for optimization.
 """
 
@@ -60,14 +60,37 @@ class BaseStrategy:
 
 
 class MeanReversionStrategy(BaseStrategy):
-    """Mean reversion strategy using z-score."""
+    """Simple mean reversion strategy using moving average."""
     
     def __init__(self, settings):
         super().__init__(settings)
         self.name = "mean_reversion"
     
+    def should_trade(self, df: pd.DataFrame, threshold: float = 0.01) -> str:
+        """Determine if we should trade based on mean reversion logic."""
+        if df.empty or len(df) < self.settings.strategy.lookback_window:
+            return "HOLD"
+        
+        try:
+            ma = df['Close'].rolling(window=self.settings.strategy.lookback_window).mean()
+            last_price = df['Close'].iloc[-1]
+            last_ma = ma.iloc[-1]
+            
+            if pd.isna(last_ma):
+                return "HOLD"
+            
+            if last_price < last_ma * (1 - threshold):
+                return "BUY"
+            elif last_price > last_ma * (1 + threshold):
+                return "SELL"
+            return "HOLD"
+            
+        except Exception as e:
+            logger.error(f"Error in should_trade for {symbol}: {e}")
+            return "HOLD"
+    
     def generate_signal(self, data: pd.DataFrame, symbol: str) -> Optional[Signal]:
-        """Generate mean reversion signal based on z-score."""
+        """Generate mean reversion signal based on moving average."""
         if data.empty or len(data) < self.settings.strategy.lookback_window:
             return None
         
@@ -75,27 +98,33 @@ class MeanReversionStrategy(BaseStrategy):
             # Get latest data point
             latest = data.iloc[-1]
             
-            # Check if we have enough data for indicators
-            if pd.isna(latest['z_score']):
+            # Calculate moving average
+            ma = data['Close'].rolling(window=self.settings.strategy.lookback_window).mean()
+            last_ma = ma.iloc[-1]
+            
+            if pd.isna(last_ma):
                 return None
             
-            z_score = latest['z_score']
-            z_threshold = self.settings.strategy.z_score_threshold
             price = latest['Close']
+            threshold = self.settings.strategy.threshold
             
-            # Generate signal based on z-score
+            # Generate signal based on mean reversion
             signal_type = SignalType.HOLD
             strength = SignalStrength.WEAK
             
-            if z_score > z_threshold:
-                signal_type = SignalType.SELL
-                if z_score > z_threshold * 1.5:
+            if price < last_ma * (1 - threshold):
+                signal_type = SignalType.BUY
+                # Calculate strength based on distance from MA
+                distance = (last_ma - price) / last_ma
+                if distance > threshold * 2:
                     strength = SignalStrength.STRONG
                 else:
                     strength = SignalStrength.MEDIUM
-            elif z_score < -z_threshold:
-                signal_type = SignalType.BUY
-                if z_score < -z_threshold * 1.5:
+            elif price > last_ma * (1 + threshold):
+                signal_type = SignalType.SELL
+                # Calculate strength based on distance from MA
+                distance = (price - last_ma) / last_ma
+                if distance > threshold * 2:
                     strength = SignalStrength.STRONG
                 else:
                     strength = SignalStrength.MEDIUM
@@ -114,9 +143,10 @@ class MeanReversionStrategy(BaseStrategy):
                     confidence=confidence,
                     strategy=self.name,
                     metadata={
-                        'z_score': z_score,
-                        'threshold': z_threshold,
-                        'lookback_window': self.settings.strategy.lookback_window
+                        'moving_average': last_ma,
+                        'threshold': threshold,
+                        'lookback_window': self.settings.strategy.lookback_window,
+                        'price_distance': abs(price - last_ma) / last_ma
                     }
                 )
             
@@ -129,13 +159,24 @@ class MeanReversionStrategy(BaseStrategy):
     def calculate_confidence(self, data: pd.DataFrame) -> float:
         """Calculate signal confidence based on historical accuracy."""
         try:
-            # Simple confidence based on z-score magnitude
-            latest_z = data.iloc[-1]['z_score']
-            if pd.isna(latest_z):
+            if data.empty or len(data) < self.settings.strategy.lookback_window:
                 return 0.5
             
-            # Normalize z-score to confidence (0-1)
-            confidence = min(abs(latest_z) / (self.settings.strategy.z_score_threshold * 2), 1.0)
+            # Calculate moving average
+            ma = data['Close'].rolling(window=self.settings.strategy.lookback_window).mean()
+            latest_ma = ma.iloc[-1]
+            latest_price = data['Close'].iloc[-1]
+            
+            if pd.isna(latest_ma):
+                return 0.5
+            
+            # Calculate confidence based on distance from moving average
+            distance = abs(latest_price - latest_ma) / latest_ma
+            threshold = self.settings.strategy.threshold
+            
+            # Normalize confidence (0-1) based on distance relative to threshold
+            confidence = min(distance / threshold, 1.0)
+            
             return confidence
             
         except Exception as e:
@@ -149,259 +190,42 @@ class MeanReversionStrategy(BaseStrategy):
         if len(data) < confirmation_period:
             return False
         
-        # Check if signal persists over confirmation period
-        recent_data = data.tail(confirmation_period)
-        z_scores = recent_data['z_score'].dropna()
-        
-        if len(z_scores) < confirmation_period:
-            return False
-        
-        if signal_type == SignalType.BUY:
-            return all(z < -self.settings.strategy.z_score_threshold * 0.8 for z in z_scores)
-        elif signal_type == SignalType.SELL:
-            return all(z > self.settings.strategy.z_score_threshold * 0.8 for z in z_scores)
-        
-        return False
-
-
-class BollingerBandsStrategy(BaseStrategy):
-    """Bollinger Bands mean reversion strategy."""
-    
-    def __init__(self, settings):
-        super().__init__(settings)
-        self.name = "bollinger_bands"
-    
-    def generate_signal(self, data: pd.DataFrame, symbol: str) -> Optional[Signal]:
-        """Generate Bollinger Bands signal."""
-        if data.empty or len(data) < self.settings.strategy.bollinger_period:
-            return None
-        
         try:
-            latest = data.iloc[-1]
+            # Calculate moving average for recent data
+            recent_data = data.tail(confirmation_period)
+            ma = recent_data['Close'].rolling(window=self.settings.strategy.lookback_window).mean()
+            threshold = self.settings.strategy.threshold
             
-            if pd.isna(latest['bollinger_upper']) or pd.isna(latest['bollinger_lower']):
-                return None
+            # Check if signal persists over confirmation period
+            confirmed_signals = 0
+            for i, (timestamp, row) in enumerate(recent_data.iterrows()):
+                if i < self.settings.strategy.lookback_window - 1:
+                    continue
+                
+                price = row['Close']
+                current_ma = ma.iloc[i]
+                
+                if pd.isna(current_ma):
+                    continue
+                
+                if signal_type == SignalType.BUY:
+                    if price < current_ma * (1 - threshold):
+                        confirmed_signals += 1
+                elif signal_type == SignalType.SELL:
+                    if price > current_ma * (1 + threshold):
+                        confirmed_signals += 1
             
-            price = latest['Close']
-            upper_band = latest['bollinger_upper']
-            lower_band = latest['bollinger_lower']
-            middle_band = latest['bollinger_middle']
-            
-            # Calculate percentage distance from bands
-            upper_distance = (price - upper_band) / upper_band
-            lower_distance = (price - lower_band) / lower_band
-            
-            signal_type = SignalType.HOLD
-            strength = SignalStrength.WEAK
-            
-            # Generate signals
-            if price <= lower_band:
-                signal_type = SignalType.BUY
-                if lower_distance < -0.02:  # 2% below lower band
-                    strength = SignalStrength.STRONG
-                else:
-                    strength = SignalStrength.MEDIUM
-            elif price >= upper_band:
-                signal_type = SignalType.SELL
-                if upper_distance > 0.02:  # 2% above upper band
-                    strength = SignalStrength.STRONG
-                else:
-                    strength = SignalStrength.MEDIUM
-            
-            # Calculate confidence
-            confidence = self.calculate_confidence(data)
-            
-            # Check confirmation
-            if self._check_confirmation(data, signal_type):
-                return Signal(
-                    symbol=symbol,
-                    timestamp=latest.name,
-                    signal_type=signal_type,
-                    strength=strength,
-                    price=price,
-                    confidence=confidence,
-                    strategy=self.name,
-                    metadata={
-                        'upper_band': upper_band,
-                        'lower_band': lower_band,
-                        'middle_band': middle_band,
-                        'upper_distance': upper_distance,
-                        'lower_distance': lower_distance
-                    }
-                )
-            
-            return None
+            # Require at least 60% of periods to confirm
+            min_confirmed = max(1, int(confirmation_period * 0.6))
+            return confirmed_signals >= min_confirmed
             
         except Exception as e:
-            logger.error(f"Error generating Bollinger Bands signal for {symbol}: {e}")
-            return None
-    
-    def calculate_confidence(self, data: pd.DataFrame) -> float:
-        """Calculate confidence based on band width and position."""
-        try:
-            latest = data.iloc[-1]
-            
-            if pd.isna(latest['bollinger_upper']) or pd.isna(latest['bollinger_lower']):
-                return 0.5
-            
-            # Calculate band width
-            band_width = (latest['bollinger_upper'] - latest['bollinger_lower']) / latest['bollinger_middle']
-            
-            # Normalize confidence based on band width (wider bands = higher confidence)
-            confidence = min(band_width * 10, 1.0)
-            
-            return confidence
-            
-        except Exception as e:
-            logger.error(f"Error calculating Bollinger confidence: {e}")
-            return 0.5
-    
-    def _check_confirmation(self, data: pd.DataFrame, signal_type: SignalType) -> bool:
-        """Check Bollinger Bands confirmation."""
-        confirmation_period = self.settings.strategy.confirmation_period
-        
-        if len(data) < confirmation_period:
+            logger.error(f"Error checking confirmation: {e}")
             return False
-        
-        recent_data = data.tail(confirmation_period)
-        
-        if signal_type == SignalType.BUY:
-            return all(row['Close'] <= row['bollinger_lower'] for _, row in recent_data.iterrows() 
-                      if not pd.isna(row['bollinger_lower']))
-        elif signal_type == SignalType.SELL:
-            return all(row['Close'] >= row['bollinger_upper'] for _, row in recent_data.iterrows() 
-                      if not pd.isna(row['bollinger_upper']))
-        
-        return False
-
-
-class RSIMeanReversionStrategy(BaseStrategy):
-    """RSI-based mean reversion strategy."""
-    
-    def __init__(self, settings):
-        super().__init__(settings)
-        self.name = "rsi_mean_reversion"
-    
-    def generate_signal(self, data: pd.DataFrame, symbol: str) -> Optional[Signal]:
-        """Generate RSI mean reversion signal."""
-        if data.empty or len(data) < self.settings.strategy.rsi_period:
-            return None
-        
-        # Check if RSI column exists
-        if 'rsi' not in data.columns:
-            logger.error(f"RSI column missing from data for {symbol}. Available columns: {data.columns.tolist()}")
-            return None
-        
-        try:
-            latest = data.iloc[-1]
-            
-            if pd.isna(latest['rsi']):
-                return None
-            
-            rsi = latest['rsi']
-            price = latest['Close']
-            
-            oversold = self.settings.strategy.rsi_oversold
-            overbought = self.settings.strategy.rsi_overbought
-            
-            signal_type = SignalType.HOLD
-            strength = SignalStrength.WEAK
-            
-            # Generate signals
-            if rsi <= oversold:
-                signal_type = SignalType.BUY
-                if rsi <= oversold * 0.8:  # Very oversold
-                    strength = SignalStrength.STRONG
-                else:
-                    strength = SignalStrength.MEDIUM
-            elif rsi >= overbought:
-                signal_type = SignalType.SELL
-                if rsi >= overbought * 1.2:  # Very overbought
-                    strength = SignalStrength.STRONG
-                else:
-                    strength = SignalStrength.MEDIUM
-            
-            # Calculate confidence
-            confidence = self.calculate_confidence(data)
-            
-            # Check confirmation
-            if self._check_confirmation(data, signal_type):
-                return Signal(
-                    symbol=symbol,
-                    timestamp=latest.name,
-                    signal_type=signal_type,
-                    strength=strength,
-                    price=price,
-                    confidence=confidence,
-                    strategy=self.name,
-                    metadata={
-                        'rsi': rsi,
-                        'oversold_threshold': oversold,
-                        'overbought_threshold': overbought
-                    }
-                )
-            
-            return None
-            
-        except Exception as e:
-            logger.error(f"Error generating RSI signal for {symbol}: {e}")
-            # Add more detailed error information
-            if 'rsi' not in data.columns:
-                logger.error(f"RSI column missing from data. Available columns: {data.columns.tolist()}")
-            return None
-    
-    def calculate_confidence(self, data: pd.DataFrame) -> float:
-        """Calculate RSI confidence."""
-        try:
-            latest = data.iloc[-1]
-            
-            if pd.isna(latest['rsi']):
-                return 0.5
-            
-            rsi = latest['rsi']
-            oversold = self.settings.strategy.rsi_oversold
-            overbought = self.settings.strategy.rsi_overbought
-            
-            # Calculate confidence based on RSI extremes
-            if rsi <= oversold:
-                confidence = (oversold - rsi) / oversold
-            elif rsi >= overbought:
-                confidence = (rsi - overbought) / (100 - overbought)
-            else:
-                confidence = 0.5
-            
-            return min(confidence, 1.0)
-            
-        except Exception as e:
-            logger.error(f"Error calculating RSI confidence: {e}")
-            return 0.5
-    
-    def _check_confirmation(self, data: pd.DataFrame, signal_type: SignalType) -> bool:
-        """Check RSI confirmation."""
-        confirmation_period = self.settings.strategy.confirmation_period
-        
-        if len(data) < confirmation_period:
-            return False
-        
-        recent_data = data.tail(confirmation_period)
-        rsi_values = recent_data['rsi'].dropna()
-        
-        if len(rsi_values) < confirmation_period:
-            return False
-        
-        oversold = self.settings.strategy.rsi_oversold
-        overbought = self.settings.strategy.rsi_overbought
-        
-        if signal_type == SignalType.BUY:
-            return all(rsi <= oversold * 1.1 for rsi in rsi_values)
-        elif signal_type == SignalType.SELL:
-            return all(rsi >= overbought * 0.9 for rsi in rsi_values)
-        
-        return False
 
 
 class StrategyManager:
-    """Manages multiple strategies and signal generation."""
+    """Manages mean reversion strategy and signal generation."""
     
     def __init__(self):
         self.settings = get_settings()
@@ -411,9 +235,7 @@ class StrategyManager:
     def _initialize_strategies(self) -> Dict[str, BaseStrategy]:
         """Initialize available strategies."""
         strategies = {
-            StrategyType.MEAN_REVERSION: MeanReversionStrategy(self.settings),
-            StrategyType.BOLLINGER_BANDS: BollingerBandsStrategy(self.settings),
-            StrategyType.RSI_MEAN_REVERSION: RSIMeanReversionStrategy(self.settings)
+            StrategyType.MEAN_REVERSION: MeanReversionStrategy(self.settings)
         }
         return strategies
     
@@ -564,12 +386,12 @@ if __name__ == "__main__":
         sm = StrategyManager()
         
         # Fetch data
-        data = await dm.fetch_historical_data("AAPL", "1mo", "1h")
+        data = await dm.fetch_historical_data("EURAUR=X", "1mo", "1h")
         if not data.empty:
-            data = await dm.calculate_indicators(data, "AAPL")
+            data = await dm.calculate_indicators(data, "EURAUR=X")
             
             # Generate signals
-            signals = await sm.generate_signals({"AAPL": data})
+            signals = await sm.generate_signals({"EURAUR=X": data})
             print(f"Generated {len(signals)} signals")
             
             for signal in signals:

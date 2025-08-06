@@ -27,9 +27,6 @@ class DataSource(str, Enum):
 class StrategyType(str, Enum):
     """Strategy types available."""
     MEAN_REVERSION = "mean_reversion"
-    BOLLINGER_BANDS = "bollinger_bands"
-    Z_SCORE = "z_score"
-    RSI_MEAN_REVERSION = "rsi_mean_reversion"
 
 
 class DatabaseConfig(BaseModel):
@@ -46,7 +43,7 @@ class DatabaseConfig(BaseModel):
 class DataConfig(BaseModel):
     """Data configuration."""
     source: DataSource = Field(default=DataSource.YFINANCE, description="Data source")
-    symbols: List[str] = Field(default=["AAPL", "MSFT", "GOOGL"], description="Trading symbols")
+    symbols: List[str] = Field(default=["EURAUD=X", "EURCAD=X"], description="Trading symbols")
     timeframes: List[str] = Field(default=["1h", "4h", "1d"], description="Timeframes to analyze")
     lookback_days: int = Field(default=252, description="Days of historical data to fetch")
     update_interval: int = Field(default=60, description="Data update interval in seconds")
@@ -57,22 +54,15 @@ class StrategyConfig(BaseModel):
     strategy_type: StrategyType = Field(default=StrategyType.MEAN_REVERSION, description="Strategy type")
     
     # Mean reversion parameters
-    lookback_window: int = Field(default=20, description="Lookback window for mean calculation")
-    z_score_threshold: float = Field(default=2.0, description="Z-score threshold for signals")
-    bollinger_period: int = Field(default=20, description="Bollinger Bands period")
-    bollinger_std: float = Field(default=2.0, description="Bollinger Bands standard deviation")
-    
-    # RSI parameters
-    rsi_period: int = Field(default=14, description="RSI calculation period")
-    rsi_oversold: float = Field(default=30.0, description="RSI oversold threshold")
-    rsi_overbought: float = Field(default=70.0, description="RSI overbought threshold")
+    lookback_window: int = Field(default=30, description="Lookback window for mean calculation")
+    threshold: float = Field(default=0.01, description="Threshold for mean reversion signals")
     
     # Signal parameters
     signal_threshold: float = Field(default=0.5, description="Signal strength threshold")
     confirmation_period: int = Field(default=3, description="Confirmation period for signals")
     
     # Position sizing
-    position_size_pct: float = Field(default=0.02, description="Position size as percentage of portfolio")
+    position_size_pct: float = Field(default=0.04, description="Position size as percentage of portfolio")
     max_positions: int = Field(default=10, description="Maximum concurrent positions")
     
     # Entry/Exit parameters
@@ -94,7 +84,7 @@ class StrategyConfig(BaseModel):
     performance_lookback: int = Field(default=30, description="Performance lookback period")
     sharpe_threshold: float = Field(default=1.0, description="Sharpe ratio threshold for risk adjustment")
     
-    @validator('z_score_threshold', 'bollinger_std', 'rsi_oversold', 'rsi_overbought')
+    @validator('threshold', 'signal_threshold')
     def validate_thresholds(cls, v):
         """Validate threshold values."""
         if v <= 0:

@@ -51,12 +51,6 @@ class NormalizedData(Base):
     symbol = Column(String(10), nullable=False)
     timestamp = Column(DateTime, nullable=False)
     moving_avg = Column(Float, nullable=True)
-    std_dev = Column(Float, nullable=True)
-    z_score = Column(Float, nullable=True)
-    rsi = Column(Float, nullable=True)
-    bollinger_upper = Column(Float, nullable=True)
-    bollinger_lower = Column(Float, nullable=True)
-    bollinger_middle = Column(Float, nullable=True)
     
     __table_args__ = (
         Index('idx_norm_symbol_timestamp', 'symbol', 'timestamp'),
@@ -230,27 +224,9 @@ class DataManager:
             return data
         
         try:
-            # Calculate moving averages
+            # Calculate moving average for mean reversion strategy
             lookback = self.settings.strategy.lookback_window
             data['moving_avg'] = data['Close'].rolling(window=lookback).mean()
-            data['std_dev'] = data['Close'].rolling(window=lookback).std()
-            
-            # Calculate z-score
-            data['z_score'] = (data['Close'] - data['moving_avg']) / data['std_dev']
-            
-            # Calculate RSI
-            data['rsi'] = self._calculate_rsi(data['Close'], self.settings.strategy.rsi_period)
-            
-            # Calculate Bollinger Bands
-            bb_period = self.settings.strategy.bollinger_period
-            bb_std = self.settings.strategy.bollinger_std
-            
-            bb_middle = data['Close'].rolling(window=bb_period).mean()
-            bb_std_dev = data['Close'].rolling(window=bb_period).std()
-            
-            data['bollinger_upper'] = bb_middle + (bb_std_dev * bb_std)
-            data['bollinger_lower'] = bb_middle - (bb_std_dev * bb_std)
-            data['bollinger_middle'] = bb_middle
             
             # Store normalized data in database
             await self._store_normalized_data(symbol, data)
@@ -260,21 +236,6 @@ class DataManager:
         except Exception as e:
             logger.error(f"Error calculating indicators: {e}")
             return data
-    
-    def _calculate_rsi(self, prices: pd.Series, period: int = 14) -> pd.Series:
-        """Calculate RSI indicator."""
-        try:
-            delta = prices.diff()
-            gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
-            loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
-            
-            rs = gain / loss
-            rsi = 100 - (100 / (1 + rs))
-            return rsi
-            
-        except Exception as e:
-            logger.error(f"Error calculating RSI: {e}")
-            return pd.Series(index=prices.index)
     
     async def _store_normalized_data(self, symbol: str, data: pd.DataFrame):
         """Store normalized data in database."""
@@ -301,13 +262,7 @@ class DataManager:
                     normalized_data = NormalizedData(
                         symbol=symbol,
                         timestamp=timestamp,
-                        moving_avg=float(row['moving_avg']) if not pd.isna(row['moving_avg']) else None,
-                        std_dev=float(row['std_dev']) if not pd.isna(row['std_dev']) else None,
-                        z_score=float(row['z_score']) if not pd.isna(row['z_score']) else None,
-                        rsi=float(row['rsi']) if not pd.isna(row['rsi']) else None,
-                        bollinger_upper=float(row['bollinger_upper']) if not pd.isna(row['bollinger_upper']) else None,
-                        bollinger_lower=float(row['bollinger_lower']) if not pd.isna(row['bollinger_lower']) else None,
-                        bollinger_middle=float(row['bollinger_middle']) if not pd.isna(row['bollinger_middle']) else None
+                        moving_avg=float(row['moving_avg']) if not pd.isna(row['moving_avg']) else None
                     )
                     session.add(normalized_data)
             
@@ -418,11 +373,11 @@ if __name__ == "__main__":
     # Test the data manager
     async def test():
         dm = DataManager()
-        data = await dm.fetch_historical_data("AAPL", "1mo", "1h")
-        print(f"Fetched {len(data)} records for AAPL")
+        data = await dm.fetch_historical_data("EURAUR=X", "1mo", "1h")
+        print(f"Fetched {len(data)} records for EURAUR=X")
         
         if not data.empty:
-            data = await dm.calculate_indicators(data, "AAPL")
+            data = await dm.calculate_indicators(data, "EURAUR=X")
             print("Calculated indicators")
             print(data.tail())
     
