@@ -37,18 +37,25 @@ class SingleTestResult:
 
 
 class SingleParameterTester:
-    """Single parameter test using current config.py settings."""
+    """Single parameter test using current config.py settings with leverage and risk compounding."""
     
     def __init__(self):
         self.data_manager = DataManager()
         self.strategy_manager = StrategyManager()
         self.settings = get_settings()
+        self.max_leverage = 5  # Maximum leverage (1:5) - much more conservative
+        self.base_leverage = 1  # Base leverage (1:1) - no leverage by default
+        self.risk_compounding = True  # Enable risk compounding
+        self.winning_streak = 0  # Track consecutive wins
+        self.losing_streak = 0  # Track consecutive losses
+        self.current_leverage = self.base_leverage  # Dynamic leverage
     
     async def test_current_parameters(
         self,
         symbols: List[str],
         timeframe: str = "2y",
-        interval: str = "1d"
+        interval: str = "1d",
+        initial_balance: float = 100000.0
     ) -> SingleTestResult:
         """Test current parameters from config.py."""
         
@@ -59,11 +66,16 @@ class SingleParameterTester:
         
         # Print current parameters
         print(f"\n⚙️ Current Parameters from config.py:")
+        print(f"   Initial Balance: ${initial_balance:,.2f}")
         print(f"   Lookback Window: {self.settings.strategy.lookback_window}")
         print(f"   Threshold: {self.settings.strategy.threshold:.3f} ({self.settings.strategy.threshold*100:.1f}%)")
         print(f"   Position Size: {self.settings.strategy.position_size_pct:.3f} ({self.settings.strategy.position_size_pct*100:.1f}%)")
         print(f"   Stop Loss: {self.settings.strategy.stop_loss_pct:.3f} ({self.settings.strategy.stop_loss_pct*100:.1f}%)")
         print(f"   Take Profit: {self.settings.strategy.take_profit_pct:.3f} ({self.settings.strategy.take_profit_pct*100:.1f}%)")
+        print(f"   Base Leverage: 1:{self.base_leverage}")
+        print(f"   Max Leverage: 1:{self.max_leverage}")
+        print(f"   Risk Compounding: {'Enabled' if self.risk_compounding else 'Disabled'}")
+        print(f"   Dynamic Leverage: Based on win/loss streaks")
         
         try:
             # Fetch data for all symbols
@@ -83,7 +95,7 @@ class SingleParameterTester:
                 return None
             
             # Run backtest simulation
-            result = await self._run_single_backtest(all_data)
+            result = await self._run_single_backtest(all_data, initial_balance)
             
             if result:
                 self._print_detailed_results(result)
@@ -95,11 +107,10 @@ class SingleParameterTester:
             print(f"❌ Error: {e}")
             return None
     
-    async def _run_single_backtest(self, all_data: Dict[str, pd.DataFrame]) -> SingleTestResult:
+    async def _run_single_backtest(self, all_data: Dict[str, pd.DataFrame], initial_balance: float = 100000.0) -> SingleTestResult:
         """Run a single backtest with current parameters."""
         
         # Simulate trading
-        initial_balance = 100000.0  # Starting capital
         portfolio_value = initial_balance
         positions = {}
         trades = []
@@ -113,6 +124,11 @@ class SingleParameterTester:
         
         print(f"\n📊 Trading Simulation:")
         print(f"   Initial Balance: ${initial_balance:,.2f}")
+        print(f"   Base Leverage: 1:{self.base_leverage}")
+        print(f"   Max Leverage: 1:{self.max_leverage}")
+        print(f"   Effective Capital: ${initial_balance * self.max_leverage:,.2f}")
+        print(f"   Risk Compounding: {'Enabled' if self.risk_compounding else 'Disabled'}")
+        print(f"   Dynamic Leverage: Win/Loss streak based")
         print(f"   Trading Period: {timeline[0].strftime('%Y-%m-%d')} to {timeline[-1].strftime('%Y-%m-%d')}")
         print(f"   Total Days: {len(timeline)}")
         
@@ -126,6 +142,9 @@ class SingleParameterTester:
                     if symbol in positions:
                         position = positions[symbol]
                         unrealized_pnl = (current_price - position['entry_price']) * position['quantity']
+                        # Check for invalid values
+                        if np.isnan(unrealized_pnl) or np.isinf(unrealized_pnl):
+                            unrealized_pnl = 0.0
                         position['unrealized_pnl'] = unrealized_pnl
                         
                         # Check stop loss / take profit
@@ -133,6 +152,9 @@ class SingleParameterTester:
                             # Close position
                             exit_price = current_price
                             pnl = (exit_price - position['entry_price']) * position['quantity']
+                            # Check for invalid values
+                            if np.isnan(pnl) or np.isinf(pnl):
+                                pnl = 0.0
                             portfolio_value += pnl
                             
                             trades.append({
@@ -143,8 +165,11 @@ class SingleParameterTester:
                                 'exit_price': exit_price,
                                 'quantity': position['quantity'],
                                 'pnl': pnl,
-                                'pnl_pct': pnl / (position['entry_price'] * position['quantity'])
+                                'pnl_pct': pnl / (position['entry_price'] * position['quantity']) if (position['entry_price'] * position['quantity']) != 0 else 0.0
                             })
+                            
+                            # Update streaks and dynamic leverage
+                            self._update_streaks_and_leverage(pnl)
                             
                             del positions[symbol]
             
@@ -157,9 +182,21 @@ class SingleParameterTester:
                         signal = self._generate_signal(historical_data)
                         
                         if signal in ['BUY', 'SELL']:
-                            # Calculate position size
-                            position_size = portfolio_value * self.settings.strategy.position_size_pct
-                            quantity = position_size / current_price
+                            # Calculate position size with dynamic leverage
+                            base_position_size = portfolio_value * self.settings.strategy.position_size_pct
+                            leveraged_position_size = base_position_size * self.current_leverage
+                            quantity = leveraged_position_size / current_price
+                            
+                            # Apply risk compounding if enabled (but more conservatively)
+                            if self.risk_compounding and portfolio_value > initial_balance:
+                                # Increase position size based on accumulated profits (capped at 2x)
+                                profit_multiplier = min(portfolio_value / initial_balance, 2.0)  # Cap at 2x instead of 10x
+                                quantity *= profit_multiplier
+                            
+                            # Check for invalid values and reasonable bounds
+                            if (np.isnan(quantity) or np.isinf(quantity) or quantity <= 0 or 
+                                quantity * current_price > portfolio_value * 0.5):  # Max 50% of portfolio per trade
+                                continue  # Skip this trade
                             
                             # Open position
                             positions[symbol] = {
@@ -167,13 +204,18 @@ class SingleParameterTester:
                                 'entry_price': current_price,
                                 'quantity': quantity,
                                 'type': signal,
-                                'unrealized_pnl': 0
+                                'unrealized_pnl': 0,
+                                'leverage_applied': self.current_leverage,
+                                'risk_compounding': self.risk_compounding,
+                                'winning_streak': self.winning_streak,
+                                'losing_streak': self.losing_streak
                             }
             
             # Record equity curve
             total_value = portfolio_value
             for position in positions.values():
-                total_value += position['unrealized_pnl']
+                if not np.isnan(position['unrealized_pnl']) and not np.isinf(position['unrealized_pnl']):
+                    total_value += position['unrealized_pnl']
             
             equity_curve.append({
                 'date': date,
@@ -187,6 +229,9 @@ class SingleParameterTester:
             if symbol in all_data and len(all_data[symbol]) > 0:
                 last_price = all_data[symbol].iloc[-1]['Close']
                 pnl = (last_price - position['entry_price']) * position['quantity']
+                # Check for invalid values
+                if np.isnan(pnl) or np.isinf(pnl):
+                    pnl = 0.0
                 portfolio_value += pnl
                 
                 trades.append({
@@ -197,20 +242,33 @@ class SingleParameterTester:
                     'exit_price': last_price,
                     'quantity': position['quantity'],
                     'pnl': pnl,
-                    'pnl_pct': pnl / (position['entry_price'] * position['quantity'])
+                    'pnl_pct': pnl / (position['entry_price'] * position['quantity']) if (position['entry_price'] * position['quantity']) != 0 else 0.0
                 })
         
-        # Calculate final balance
+                         # Calculate final balance with leverage effects
         final_balance = portfolio_value
         for position in positions.values():
-            if position['type'] == 'BUY':
-                final_balance += position['unrealized_pnl']
-            else:  # SELL position
-                final_balance -= position['unrealized_pnl']
+            if not np.isnan(position['unrealized_pnl']) and not np.isinf(position['unrealized_pnl']):
+                if position['type'] == 'BUY':
+                    final_balance += position['unrealized_pnl']
+                else:  # SELL position
+                    final_balance -= position['unrealized_pnl']
+        
+        # Apply leverage risk (potential margin call effects)
+        leverage_risk_factor = 1.0
+        if final_balance < initial_balance * 0.5:  # If balance drops below 50%
+            leverage_risk_factor = 0.5  # Simulate margin call effects
+        elif final_balance < initial_balance * 0.8:  # If balance drops below 80%
+            leverage_risk_factor = 0.8  # Simulate partial margin call
+        
+        # Additional safety check for extreme values
+        if abs(final_balance) > initial_balance * 1000:  # If balance is more than 1000x initial
+            final_balance = initial_balance  # Reset to initial balance
+            leverage_risk_factor = 0.1  # Apply severe penalty
         
         # Calculate metrics
         return self._calculate_single_metrics(
-            trades, equity_curve, initial_balance, final_balance
+            trades, equity_curve, initial_balance, final_balance, leverage_risk_factor
         )
     
     def _generate_signal(self, data: pd.DataFrame) -> str:
@@ -257,12 +315,38 @@ class SingleParameterTester:
         
         return False
     
+    def _update_streaks_and_leverage(self, pnl: float):
+        """Update winning/losing streaks and adjust leverage accordingly."""
+        
+        if pnl > 0:  # Winning trade
+            self.winning_streak += 1
+            self.losing_streak = 0  # Reset losing streak
+            
+            # Increase leverage based on winning streak (more conservative)
+            if self.winning_streak >= 3:  # Start increasing leverage after 3 wins
+                leverage_increase = min(self.winning_streak - 2, 2)  # Max 2x increase instead of 10x
+                self.current_leverage = min(self.base_leverage + leverage_increase, self.max_leverage)
+            else:
+                self.current_leverage = self.base_leverage
+                
+        else:  # Losing trade
+            self.losing_streak += 1
+            self.winning_streak = 0  # Reset winning streak
+            
+            # Decrease leverage based on losing streak
+            if self.losing_streak >= 2:  # Start decreasing leverage after 2 losses
+                leverage_decrease = min(self.losing_streak - 1, 2)  # Max 2x decrease instead of 5x
+                self.current_leverage = max(self.base_leverage - leverage_decrease, 1)  # Minimum 1:1
+            else:
+                self.current_leverage = self.base_leverage
+    
     def _calculate_single_metrics(
         self,
         trades: List[Dict],
         equity_curve: List[Dict],
         initial_balance: float,
-        final_balance: float
+        final_balance: float,
+        leverage_risk_factor: float = 1.0
     ) -> SingleTestResult:
         """Calculate metrics for single test."""
         
@@ -297,10 +381,19 @@ class SingleParameterTester:
         losing_trades = len([t for t in trades if t['pnl'] < 0])
         win_percentage = (winning_trades / total_trades) * 100 if total_trades > 0 else 0.0
         
-        # Return metrics
+        # Return metrics with leverage effects
         total_pnl = sum(t['pnl'] for t in trades)
-        total_return = total_pnl
+        total_return = total_pnl * leverage_risk_factor  # Apply leverage risk factor
         total_return_pct = (total_return / initial_balance) * 100
+        
+        # Apply leverage risk to final balance
+        adjusted_final_balance = final_balance * leverage_risk_factor
+        
+        # Safety check for extreme values
+        if abs(adjusted_final_balance) > initial_balance * 100:
+            adjusted_final_balance = initial_balance
+            total_return = 0.0
+            total_return_pct = 0.0
         
         # Trade analysis
         pnls = [t['pnl'] for t in trades]
@@ -330,7 +423,7 @@ class SingleParameterTester:
             max_drawdown = abs(equity_df['drawdown'].min()) * 100
             
             # Calculate Sharpe ratio
-            returns = equity_df['total_value'].pct_change().dropna()
+            returns = equity_df['total_value'].pct_change(fill_method=None).dropna()
             if len(returns) > 0:
                 sharpe_ratio = np.sqrt(252) * returns.mean() / returns.std() if returns.std() > 0 else 0.0
             else:
@@ -341,7 +434,7 @@ class SingleParameterTester:
         
         return SingleTestResult(
             initial_balance=initial_balance,
-            final_balance=final_balance,
+            final_balance=adjusted_final_balance,
             total_trades=total_trades,
             winning_trades=winning_trades,
             losing_trades=losing_trades,
@@ -359,7 +452,13 @@ class SingleParameterTester:
                 'threshold': self.settings.strategy.threshold,
                 'position_size_pct': self.settings.strategy.position_size_pct,
                 'stop_loss_pct': self.settings.strategy.stop_loss_pct,
-                'take_profit_pct': self.settings.strategy.take_profit_pct
+                'take_profit_pct': self.settings.strategy.take_profit_pct,
+                'base_leverage': self.base_leverage,
+                'max_leverage': self.max_leverage,
+                'risk_compounding': self.risk_compounding,
+                'leverage_risk_factor': leverage_risk_factor,
+                'winning_streak': self.winning_streak,
+                'losing_streak': self.losing_streak
             }
         )
     
@@ -398,6 +497,18 @@ class SingleParameterTester:
         for param, value in result.parameters_used.items():
             if 'pct' in param:
                 print(f"   {param.replace('_', ' ').title()}: {value:.3f} ({value*100:.1f}%)")
+            elif param == 'base_leverage':
+                print(f"   {param.replace('_', ' ').title()}: 1:{value}")
+            elif param == 'max_leverage':
+                print(f"   {param.replace('_', ' ').title()}: 1:{value}")
+            elif param == 'risk_compounding':
+                print(f"   {param.replace('_', ' ').title()}: {'Enabled' if value else 'Disabled'}")
+            elif param == 'leverage_risk_factor':
+                print(f"   {param.replace('_', ' ').title()}: {value:.2f}")
+            elif param == 'winning_streak':
+                print(f"   {param.replace('_', ' ').title()}: {value}")
+            elif param == 'losing_streak':
+                print(f"   {param.replace('_', ' ').title()}: {value}")
             else:
                 print(f"   {param.replace('_', ' ').title()}: {value}")
         
@@ -417,6 +528,13 @@ class SingleParameterTester:
             print(f"   ✅ Good Risk-Adjusted Return: Sharpe {result.sharpe_ratio:.2f}")
         else:
             print(f"   ⚠️ Poor Risk-Adjusted Return: Sharpe {result.sharpe_ratio:.2f}")
+        
+        # Leverage Risk Assessment
+        leverage_risk_factor = result.parameters_used.get('leverage_risk_factor', 1.0)
+        if leverage_risk_factor < 1.0:
+            print(f"   ⚠️ LEVERAGE RISK: Margin call effects applied (factor: {leverage_risk_factor:.2f})")
+        else:
+            print(f"   ✅ No leverage risk effects")
 
 
 async def main():
@@ -449,12 +567,35 @@ async def main():
     
     print(f"Selected timeframe: {timeframe}")
     
+    # Initial balance options
+    print("\n💰 Initial Balance Options:")
+    print("1. $1,000")
+    print("2. $5,000")
+    print("3. $10,000")
+    print("4. $25,000")
+    print("5. $50,000")
+    print("6. $100,000")
+    
+    balance_choice = input("Select initial balance (1-6): ").strip()
+    balance_map = {
+        "1": 1000.0,
+        "2": 5000.0,
+        "3": 10000.0,
+        "4": 25000.0,
+        "5": 50000.0,
+        "6": 100000.0
+    }
+    initial_balance = balance_map.get(balance_choice, 100000.0)
+    
+    print(f"Selected initial balance: ${initial_balance:,.2f}")
+    
     # Run test
     print(f"\n🚀 Starting single parameter test...")
     result = await tester.test_current_parameters(
         symbols=symbols,
         timeframe=timeframe,
-        interval="1d"
+        interval="1d",
+        initial_balance=initial_balance
     )
     
     if result:

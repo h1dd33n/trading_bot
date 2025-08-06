@@ -62,7 +62,7 @@ class StrategyConfig(BaseModel):
     confirmation_period: int = Field(default=3, description="Confirmation period for signals")
     
     # Position sizing
-    position_size_pct: float = Field(default=0.04, description="Position size as percentage of portfolio")
+    position_size_pct: float = Field(default=0.02, description="Position size as percentage of portfolio")
     max_positions: int = Field(default=10, description="Maximum concurrent positions")
     
     # Entry/Exit parameters
