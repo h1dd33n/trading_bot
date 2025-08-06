@@ -43,9 +43,12 @@ class SingleParameterTester:
         self.data_manager = DataManager()
         self.strategy_manager = StrategyManager()
         self.settings = get_settings()
-        self.max_leverage = 5  # Maximum leverage (1:5) - much more conservative
-        self.base_leverage = 1  # Base leverage (1:1) - no leverage by default
-        self.risk_compounding = True  # Enable risk compounding
+        
+        # Use risk configuration settings from config.py
+        risk_config = self.settings.risk
+        self.max_leverage = risk_config.max_leverage_risk  # Maximum leverage from config
+        self.base_leverage = risk_config.base_leverage  # Base leverage from config
+        self.risk_compounding = risk_config.risk_compounding  # Risk compounding from config
         self.winning_streak = 0  # Track consecutive wins
         self.losing_streak = 0  # Track consecutive losses
         self.current_leverage = self.base_leverage  # Dynamic leverage
@@ -187,15 +190,15 @@ class SingleParameterTester:
                             leveraged_position_size = base_position_size * self.current_leverage
                             quantity = leveraged_position_size / current_price
                             
-                            # Apply risk compounding if enabled (but more conservatively)
+                            # Apply risk compounding if enabled (using config settings)
                             if self.risk_compounding and portfolio_value > initial_balance:
-                                # Increase position size based on accumulated profits (capped at 2x)
-                                profit_multiplier = min(portfolio_value / initial_balance, 2.0)  # Cap at 2x instead of 10x
+                                # Increase position size based on accumulated profits (using config cap)
+                                profit_multiplier = min(portfolio_value / initial_balance, self.settings.risk.profit_multiplier_cap)
                                 quantity *= profit_multiplier
                             
-                            # Check for invalid values and reasonable bounds
+                            # Check for invalid values and reasonable bounds (using config settings)
                             if (np.isnan(quantity) or np.isinf(quantity) or quantity <= 0 or 
-                                quantity * current_price > portfolio_value * 0.5):  # Max 50% of portfolio per trade
+                                quantity * current_price > portfolio_value * self.settings.risk.max_position_size_pct):
                                 continue  # Skip this trade
                             
                             # Open position
@@ -254,15 +257,16 @@ class SingleParameterTester:
                 else:  # SELL position
                     final_balance -= position['unrealized_pnl']
         
-        # Apply leverage risk (potential margin call effects)
+        # Apply leverage risk (potential margin call effects) using config settings
+        risk_config = self.settings.risk
         leverage_risk_factor = 1.0
-        if final_balance < initial_balance * 0.5:  # If balance drops below 50%
+        if final_balance < initial_balance * risk_config.margin_call_threshold_50:  # If balance drops below 50%
             leverage_risk_factor = 0.5  # Simulate margin call effects
-        elif final_balance < initial_balance * 0.8:  # If balance drops below 80%
+        elif final_balance < initial_balance * risk_config.margin_call_threshold_80:  # If balance drops below 80%
             leverage_risk_factor = 0.8  # Simulate partial margin call
         
-        # Additional safety check for extreme values
-        if abs(final_balance) > initial_balance * 1000:  # If balance is more than 1000x initial
+        # Additional safety check for extreme values (using config settings)
+        if abs(final_balance) > initial_balance * risk_config.extreme_value_threshold:  # If balance is more than threshold
             final_balance = initial_balance  # Reset to initial balance
             leverage_risk_factor = 0.1  # Apply severe penalty
         
@@ -318,13 +322,16 @@ class SingleParameterTester:
     def _update_streaks_and_leverage(self, pnl: float):
         """Update winning/losing streaks and adjust leverage accordingly."""
         
+        risk_config = self.settings.risk
+        
         if pnl > 0:  # Winning trade
             self.winning_streak += 1
             self.losing_streak = 0  # Reset losing streak
             
-            # Increase leverage based on winning streak (more conservative)
-            if self.winning_streak >= 3:  # Start increasing leverage after 3 wins
-                leverage_increase = min(self.winning_streak - 2, 2)  # Max 2x increase instead of 10x
+            # Increase leverage based on winning streak (using config settings)
+            if (risk_config.enable_dynamic_leverage and 
+                self.winning_streak >= risk_config.winning_streak_threshold):
+                leverage_increase = min(self.winning_streak - (risk_config.winning_streak_threshold - 1), 2)
                 self.current_leverage = min(self.base_leverage + leverage_increase, self.max_leverage)
             else:
                 self.current_leverage = self.base_leverage
@@ -333,9 +340,10 @@ class SingleParameterTester:
             self.losing_streak += 1
             self.winning_streak = 0  # Reset winning streak
             
-            # Decrease leverage based on losing streak
-            if self.losing_streak >= 2:  # Start decreasing leverage after 2 losses
-                leverage_decrease = min(self.losing_streak - 1, 2)  # Max 2x decrease instead of 5x
+            # Decrease leverage based on losing streak (using config settings)
+            if (risk_config.enable_dynamic_leverage and 
+                self.losing_streak >= risk_config.losing_streak_threshold):
+                leverage_decrease = min(self.losing_streak - (risk_config.losing_streak_threshold - 1), 2)
                 self.current_leverage = max(self.base_leverage - leverage_decrease, 1)  # Minimum 1:1
             else:
                 self.current_leverage = self.base_leverage
@@ -389,8 +397,9 @@ class SingleParameterTester:
         # Apply leverage risk to final balance
         adjusted_final_balance = final_balance * leverage_risk_factor
         
-        # Safety check for extreme values
-        if abs(adjusted_final_balance) > initial_balance * 100:
+        # Safety check for extreme values (using config settings)
+        risk_config = self.settings.risk
+        if abs(adjusted_final_balance) > initial_balance * risk_config.safety_balance_threshold:
             adjusted_final_balance = initial_balance
             total_return = 0.0
             total_return_pct = 0.0

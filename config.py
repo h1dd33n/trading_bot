@@ -114,6 +114,26 @@ class RiskConfig(BaseModel):
     # Portfolio constraints
     min_cash_reserve: float = Field(default=0.1, description="Minimum cash reserve")
     max_leverage: float = Field(default=1.0, description="Maximum leverage")
+    
+    # Risk composition settings (from single_test.py)
+    base_leverage: float = Field(default=1.0, description="Base leverage (1:1) - no leverage by default")
+    max_leverage_risk: float = Field(default=5.0, description="Maximum leverage (1:5) - conservative")
+    risk_compounding: bool = Field(default=True, description="Enable risk compounding")
+    profit_multiplier_cap: float = Field(default=2.0, description="Maximum profit multiplier for risk compounding")
+    max_position_size_pct: float = Field(default=0.5, description="Maximum position size as percentage of portfolio")
+    
+    # Dynamic leverage settings
+    enable_dynamic_leverage: bool = Field(default=True, description="Enable dynamic leverage based on streaks")
+    winning_streak_threshold: int = Field(default=3, description="Winning streak threshold to increase leverage")
+    losing_streak_threshold: int = Field(default=2, description="Losing streak threshold to decrease leverage")
+    leverage_increase_factor: float = Field(default=1.0, description="Leverage increase per winning streak")
+    leverage_decrease_factor: float = Field(default=1.0, description="Leverage decrease per losing streak")
+    
+    # Margin call simulation
+    margin_call_threshold_50: float = Field(default=0.5, description="Balance threshold for 50% margin call")
+    margin_call_threshold_80: float = Field(default=0.8, description="Balance threshold for 80% margin call")
+    extreme_value_threshold: float = Field(default=1000.0, description="Extreme value threshold (1000x initial)")
+    safety_balance_threshold: float = Field(default=100.0, description="Safety balance threshold (100x initial)")
 
 
 class ExecutionConfig(BaseModel):
