@@ -1,0 +1,1741 @@
+2025-08-07 14:42:18,020 - __main__ - INFO - Starting YFinance backtest...
+2025-08-07 14:42:22,016 - __main__ - INFO - Backtest completed successfully
+2025-08-07 14:42:22,016 - __main__ - INFO - Results: {'symbol_results': {'EURUSD=X': {'total_trades': 120, 'winning_trades': 44, 'losing_trades': 76, 'win_rate': 0.36666666666666664, 'total_pnl': np.float64(5082.659787109113), 'final_capital': np.float64(105082.6597871091), 'return_pct': np.float64(5.082659787109113)}, 'GBPUSD=X': {'total_trades': 166, 'winning_trades': 70, 'losing_trades': 96, 'win_rate': 0.42168674698795183, 'total_pnl': np.float64(40047.650638386454), 'final_capital': np.float64(140047.65063838646), 'return_pct': np.float64(40.04765063838646)}, 'USDJPY=X': {'total_trades': 490, 'winning_trades': 152, 'losing_trades': 338, 'win_rate': 0.31020408163265306, 'total_pnl': np.float64(-109221.99730964753), 'final_capital': np.float64(-9221.99730964753), 'return_pct': np.float64(-109.22199730964752)}, 'AUDUSD=X': {'total_trades': 385, 'winning_trades': 168, 'losing_trades': 216, 'win_rate': 0.43636363636363634, 'total_pnl': np.float64(143402.42291325636), 'final_capital': np.float64(243402.42291325636), 'return_pct': np.float64(143.40242291325634)}}, 'total_result': {'total_trades': 1161, 'total_pnl': np.float64(79310.7360291044), 'winning_trades': 434, 'overall_win_rate': 0.37381567614125755, 'overall_return_pct': np.float64(79.3107360291044)}, 'backtest_period': '2024-01-01 to 2024-12-31', 'initial_capital': 100000}
+2025-08-07 14:42:22,020 - __main__ - INFO - All bots stopped successfully
+2025-08-07 14:42:22,020 - __main__ - ERROR - Error during cleanup: 'MT5Connection' object has no attribute 'shutdown'
+2025-08-07 14:42:50,711 - __main__ - INFO - Running backtest...
+2025-08-07 14:42:50,712 - __main__ - INFO - Running yfinance backtest for prop firm strategy...
+2025-08-07 14:42:53,915 - __main__ - INFO - Backtest completed
+2025-08-07 14:42:53,915 - __main__ - INFO - Backtest results: {'symbol_results': {'EURUSD=X': {'total_trades': 120, 'winning_trades': 44, 'losing_trades': 76, 'win_rate': 0.36666666666666664, 'total_pnl': np.float64(5082.659787109113), 'final_capital': np.float64(105082.6597871091), 'return_pct': np.float64(5.082659787109113)}, 'GBPUSD=X': {'total_trades': 166, 'winning_trades': 70, 'losing_trades': 96, 'win_rate': 0.42168674698795183, 'total_pnl': np.float64(40047.650638386454), 'final_capital': np.float64(140047.65063838646), 'return_pct': np.float64(40.04765063838646)}, 'USDJPY=X': {'total_trades': 490, 'winning_trades': 152, 'losing_trades': 338, 'win_rate': 0.31020408163265306, 'total_pnl': np.float64(-109221.99730964753), 'final_capital': np.float64(-9221.99730964753), 'return_pct': np.float64(-109.22199730964752)}, 'AUDUSD=X': {'total_trades': 385, 'winning_trades': 168, 'losing_trades': 216, 'win_rate': 0.43636363636363634, 'total_pnl': np.float64(143402.42291325636), 'final_capital': np.float64(243402.42291325636), 'return_pct': np.float64(143.40242291325634)}}, 'total_result': {'total_trades': 1161, 'total_pnl': np.float64(79310.7360291044), 'winning_trades': 434, 'overall_win_rate': 0.37381567614125755, 'overall_return_pct': np.float64(79.3107360291044)}, 'backtest_period': '2024-01-01 to 2024-12-31', 'initial_capital': 100000}
+2025-08-07 14:42:53,915 - __main__ - INFO - MT5 bots launcher shutdown complete
+2025-08-07 15:06:43,432 - __main__ - INFO - ================================================================================
+2025-08-07 15:06:43,482 - __main__ - INFO - ================================================================================
+2025-08-07 15:06:43,496 - __main__ - INFO - 
+2025-08-07 15:06:48,845 - __main__ - INFO - ================================================================================
+2025-08-07 15:06:48,849 - __main__ - INFO - ================================================================================
+2025-08-07 15:06:48,852 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:06:48,856 - __main__ - INFO -    Trades: 120 (W: 44, L: 76)
+2025-08-07 15:06:48,857 - __main__ - INFO -    Win Rate: 36.7%
+2025-08-07 15:06:48,857 - __main__ - INFO -    P&L: $5,082.66
+2025-08-07 15:06:48,857 - __main__ - INFO -    Return: 5.08%
+2025-08-07 15:06:48,857 - __main__ - INFO - 
+2025-08-07 15:06:48,860 - __main__ - INFO -    Trades: 166 (W: 70, L: 96)
+2025-08-07 15:06:48,860 - __main__ - INFO -    Win Rate: 42.2%
+2025-08-07 15:06:48,861 - __main__ - INFO -    P&L: $40,047.65
+2025-08-07 15:06:48,861 - __main__ - INFO -    Return: 40.05%
+2025-08-07 15:06:48,861 - __main__ - INFO - 
+2025-08-07 15:06:48,865 - __main__ - INFO -    Trades: 490 (W: 152, L: 338)
+2025-08-07 15:06:48,865 - __main__ - INFO -    Win Rate: 31.0%
+2025-08-07 15:06:48,866 - __main__ - INFO -    P&L: $-109,222.00
+2025-08-07 15:06:48,866 - __main__ - INFO -    Return: -109.22%
+2025-08-07 15:06:48,866 - __main__ - INFO - 
+2025-08-07 15:06:48,871 - __main__ - INFO -    Trades: 385 (W: 168, L: 216)
+2025-08-07 15:06:48,872 - __main__ - INFO -    Win Rate: 43.6%
+2025-08-07 15:06:48,872 - __main__ - INFO -    P&L: $143,402.42
+2025-08-07 15:06:48,872 - __main__ - INFO -    Return: 143.40%
+2025-08-07 15:06:48,872 - __main__ - INFO - 
+2025-08-07 15:06:48,875 - __main__ - INFO -    Trades: 142 (W: 80, L: 62)
+2025-08-07 15:06:48,876 - __main__ - INFO -    Win Rate: 56.3%
+2025-08-07 15:06:48,876 - __main__ - INFO -    P&L: $96,415.64
+2025-08-07 15:06:48,876 - __main__ - INFO -    Return: 96.42%
+2025-08-07 15:06:48,877 - __main__ - INFO - 
+2025-08-07 15:06:48,882 - __main__ - INFO -    Trades: 66 (W: 12, L: 54)
+2025-08-07 15:06:48,882 - __main__ - INFO -    Win Rate: 18.2%
+2025-08-07 15:06:48,883 - __main__ - INFO -    P&L: $-33,006.24
+2025-08-07 15:06:48,883 - __main__ - INFO -    Return: -33.01%
+2025-08-07 15:06:48,883 - __main__ - INFO - 
+2025-08-07 15:06:48,887 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:06:48,892 - __main__ - INFO -    Winning: 526, Losing: 843
+2025-08-07 15:06:48,893 - __main__ - INFO -    Win Rate: 38.4%
+2025-08-07 15:06:48,893 - __main__ - INFO -    Total P&L: $142,720.14
+2025-08-07 15:06:48,893 - __main__ - INFO -    Overall Return: 142.72%
+2025-08-07 15:06:48,893 - __main__ - INFO -    Avg Win: $271.33
+2025-08-07 15:06:48,893 - __main__ - INFO -    Avg Loss: $169.30
+2025-08-07 15:06:48,893 - __main__ - INFO -    Profit Factor: 1.60
+2025-08-07 15:06:48,893 - __main__ - INFO - 
+2025-08-07 15:06:48,898 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:06:48,923 - __main__ - INFO - 
+2025-08-07 15:06:48,927 - __main__ - INFO - ================================================================================
+2025-08-07 15:06:48,930 - __main__ - INFO - ================================================================================
+2025-08-07 15:06:48,931 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:06:48,931 - __main__ - ERROR - Error during cleanup: 'MT5Connection' object has no attribute 'shutdown'
+2025-08-07 15:07:31,455 - __main__ - INFO - ================================================================================
+2025-08-07 15:07:31,464 - __main__ - INFO - ================================================================================
+2025-08-07 15:07:31,477 - __main__ - INFO - 
+2025-08-07 15:07:37,013 - __main__ - INFO - ================================================================================
+2025-08-07 15:07:37,017 - __main__ - INFO - ================================================================================
+2025-08-07 15:07:37,021 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:07:37,025 - __main__ - INFO -    Trades: 120 (W: 44, L: 76)
+2025-08-07 15:07:37,026 - __main__ - INFO -    Win Rate: 36.7%
+2025-08-07 15:07:37,026 - __main__ - INFO -    P&L: $5,082.66
+2025-08-07 15:07:37,026 - __main__ - INFO -    Return: 5.08%
+2025-08-07 15:07:37,027 - __main__ - INFO - 
+2025-08-07 15:07:37,032 - __main__ - INFO -    Trades: 166 (W: 70, L: 96)
+2025-08-07 15:07:37,032 - __main__ - INFO -    Win Rate: 42.2%
+2025-08-07 15:07:37,032 - __main__ - INFO -    P&L: $40,047.65
+2025-08-07 15:07:37,032 - __main__ - INFO -    Return: 40.05%
+2025-08-07 15:07:37,033 - __main__ - INFO - 
+2025-08-07 15:07:37,038 - __main__ - INFO -    Trades: 490 (W: 152, L: 338)
+2025-08-07 15:07:37,039 - __main__ - INFO -    Win Rate: 31.0%
+2025-08-07 15:07:37,039 - __main__ - INFO -    P&L: $-109,222.00
+2025-08-07 15:07:37,039 - __main__ - INFO -    Return: -109.22%
+2025-08-07 15:07:37,039 - __main__ - INFO - 
+2025-08-07 15:07:37,043 - __main__ - INFO -    Trades: 385 (W: 168, L: 216)
+2025-08-07 15:07:37,044 - __main__ - INFO -    Win Rate: 43.6%
+2025-08-07 15:07:37,044 - __main__ - INFO -    P&L: $143,402.42
+2025-08-07 15:07:37,044 - __main__ - INFO -    Return: 143.40%
+2025-08-07 15:07:37,045 - __main__ - INFO - 
+2025-08-07 15:07:37,048 - __main__ - INFO -    Trades: 142 (W: 80, L: 62)
+2025-08-07 15:07:37,048 - __main__ - INFO -    Win Rate: 56.3%
+2025-08-07 15:07:37,050 - __main__ - INFO -    P&L: $96,415.64
+2025-08-07 15:07:37,051 - __main__ - INFO -    Return: 96.42%
+2025-08-07 15:07:37,051 - __main__ - INFO - 
+2025-08-07 15:07:37,055 - __main__ - INFO -    Trades: 66 (W: 12, L: 54)
+2025-08-07 15:07:37,055 - __main__ - INFO -    Win Rate: 18.2%
+2025-08-07 15:07:37,056 - __main__ - INFO -    P&L: $-33,006.24
+2025-08-07 15:07:37,056 - __main__ - INFO -    Return: -33.01%
+2025-08-07 15:07:37,056 - __main__ - INFO - 
+2025-08-07 15:07:37,059 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:07:37,063 - __main__ - INFO -    Winning: 526, Losing: 843
+2025-08-07 15:07:37,063 - __main__ - INFO -    Win Rate: 38.4%
+2025-08-07 15:07:37,064 - __main__ - INFO -    Total P&L: $142,720.14
+2025-08-07 15:07:37,064 - __main__ - INFO -    Overall Return: 142.72%
+2025-08-07 15:07:37,064 - __main__ - INFO -    Avg Win: $271.33
+2025-08-07 15:07:37,065 - __main__ - INFO -    Avg Loss: $169.30
+2025-08-07 15:07:37,065 - __main__ - INFO -    Profit Factor: 1.60
+2025-08-07 15:07:37,065 - __main__ - INFO - 
+2025-08-07 15:07:37,068 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:07:37,091 - __main__ - INFO - 
+2025-08-07 15:07:37,096 - __main__ - INFO - ================================================================================
+2025-08-07 15:07:37,099 - __main__ - INFO - ================================================================================
+2025-08-07 15:07:37,100 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:07:37,100 - __main__ - ERROR - Error during cleanup: 'MT5Connection' object has no attribute 'shutdown'
+2025-08-07 15:08:36,413 - __main__ - INFO - Running backtest...
+2025-08-07 15:08:36,413 - __main__ - INFO - Running yfinance backtest for prop firm strategy...
+2025-08-07 15:08:39,681 - __main__ - INFO - Backtest completed
+2025-08-07 15:08:39,682 - __main__ - INFO - Backtest results: {'symbol_results': {'EURUSD=X': {'total_trades': 120, 'winning_trades': 44, 'losing_trades': 76, 'win_rate': 0.36666666666666664, 'total_pnl': np.float64(5082.659787109113), 'final_capital': np.float64(105082.6597871091), 'return_pct': np.float64(5.082659787109113)}, 'GBPUSD=X': {'total_trades': 166, 'winning_trades': 70, 'losing_trades': 96, 'win_rate': 0.42168674698795183, 'total_pnl': np.float64(40047.650638386454), 'final_capital': np.float64(140047.65063838646), 'return_pct': np.float64(40.04765063838646)}, 'USDJPY=X': {'total_trades': 490, 'winning_trades': 152, 'losing_trades': 338, 'win_rate': 0.31020408163265306, 'total_pnl': np.float64(-109221.99730964753), 'final_capital': np.float64(-9221.99730964753), 'return_pct': np.float64(-109.22199730964752)}, 'AUDUSD=X': {'total_trades': 385, 'winning_trades': 168, 'losing_trades': 216, 'win_rate': 0.43636363636363634, 'total_pnl': np.float64(143402.42291325636), 'final_capital': np.float64(243402.42291325636), 'return_pct': np.float64(143.40242291325634)}}, 'total_result': {'total_trades': 1161, 'total_pnl': np.float64(79310.7360291044), 'winning_trades': 434, 'losing_trades': 727, 'overall_win_rate': 0.37381567614125755, 'overall_return_pct': np.float64(79.3107360291044), 'avg_win': np.float64(182.74363140346637), 'avg_loss': np.float64(109.09317197951087), 'profit_factor': np.float64(1.6751152073732718)}, 'backtest_period': '2024-01-01 to 2024-12-31', 'initial_capital': 100000}
+2025-08-07 15:08:39,682 - __main__ - INFO - MT5 bots launcher shutdown complete
+2025-08-07 15:09:15,879 - __main__ - INFO - Initializing regular MT5 bot...
+2025-08-07 15:09:16,861 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 15:09:16,861 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 15:09:16,861 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 15:09:16,861 - mt5.mt5_trading_bot - INFO - MT5 Trading Bot initialized for regular account
+2025-08-07 15:09:16,862 - mt5.mt5_trading_bot - INFO - Account balance: 50000.0
+2025-08-07 15:09:16,862 - mt5.mt5_trading_bot - INFO - Max daily loss: 2500.0
+2025-08-07 15:09:16,862 - mt5.mt5_trading_bot - INFO - Max overall loss: 5000.0
+2025-08-07 15:09:16,862 - __main__ - INFO - Regular MT5 bot initialized successfully
+2025-08-07 15:09:16,862 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 15:09:16,875 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 15:09:16,876 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 15:09:16,876 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 15:09:16,876 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot initialized
+2025-08-07 15:09:16,876 - mt5.mt5_prop_firm_bot - INFO - Account balance: 50000.0
+2025-08-07 15:09:16,876 - mt5.mt5_prop_firm_bot - INFO - Max daily loss: 1000.0 (2.0%)
+2025-08-07 15:09:16,876 - mt5.mt5_prop_firm_bot - INFO - Max overall loss: 2000.0 (4.0%)
+2025-08-07 15:09:16,877 - __main__ - INFO - Prop firm MT5 bot initialized successfully
+2025-08-07 15:09:16,877 - __main__ - INFO - Starting regular MT5 bot...
+2025-08-07 15:09:16,877 - mt5.mt5_trading_bot - INFO - MT5 Trading Bot started
+2025-08-07 15:09:16,877 - __main__ - INFO - Starting prop firm MT5 bot...
+2025-08-07 15:09:16,878 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot started
+2025-08-07 15:09:16,878 - __main__ - INFO - All bots started successfully
+2025-08-07 15:09:16,878 - __main__ - INFO - Running bots indefinitely. Press Ctrl+C to stop.
+2025-08-07 15:09:16,879 - mt5.mt5_trading_bot - WARNING - Insufficient data for EURUSD
+2025-08-07 15:09:16,879 - mt5.mt5_trading_bot - WARNING - Insufficient data for GBPUSD
+2025-08-07 15:09:16,879 - mt5.mt5_trading_bot - WARNING - Insufficient data for USDJPY
+2025-08-07 15:09:16,879 - mt5.mt5_trading_bot - WARNING - Insufficient data for AUDUSD
+2025-08-07 15:09:16,879 - mt5.mt5_prop_firm_bot - WARNING - Insufficient data for EURUSD
+2025-08-07 15:09:16,880 - mt5.mt5_prop_firm_bot - WARNING - Insufficient data for GBPUSD
+2025-08-07 15:09:16,880 - mt5.mt5_prop_firm_bot - WARNING - Insufficient data for USDJPY
+2025-08-07 15:09:16,880 - mt5.mt5_prop_firm_bot - WARNING - Insufficient data for AUDUSD
+2025-08-07 15:09:35,881 - __main__ - INFO - Received shutdown signal, stopping bots...
+2025-08-07 15:09:35,882 - __main__ - INFO - Stopping regular MT5 bot...
+2025-08-07 15:09:35,885 - mt5.mt5_trading_bot - INFO - MT5 Trading Bot stopped
+2025-08-07 15:09:35,885 - __main__ - INFO - Stopping prop firm MT5 bot...
+2025-08-07 15:09:35,885 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot stopped
+2025-08-07 15:09:35,885 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:09:35,886 - __main__ - ERROR - Error during cleanup: 'MT5Connection' object has no attribute 'shutdown'
+2025-08-07 15:09:42,494 - __main__ - INFO - ================================================================================
+2025-08-07 15:09:42,500 - __main__ - INFO - ================================================================================
+2025-08-07 15:09:42,509 - __main__ - INFO - 
+2025-08-07 15:09:46,978 - __main__ - INFO - ================================================================================
+2025-08-07 15:09:46,982 - __main__ - INFO - ================================================================================
+2025-08-07 15:09:46,983 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:09:46,986 - __main__ - INFO -    Trades: 120 (W: 44, L: 76)
+2025-08-07 15:09:46,986 - __main__ - INFO -    Win Rate: 36.7%
+2025-08-07 15:09:46,986 - __main__ - INFO -    P&L: $5,082.66
+2025-08-07 15:09:46,986 - __main__ - INFO -    Return: 5.08%
+2025-08-07 15:09:46,987 - __main__ - INFO - 
+2025-08-07 15:09:46,988 - __main__ - INFO -    Trades: 166 (W: 70, L: 96)
+2025-08-07 15:09:46,988 - __main__ - INFO -    Win Rate: 42.2%
+2025-08-07 15:09:46,988 - __main__ - INFO -    P&L: $40,047.65
+2025-08-07 15:09:46,989 - __main__ - INFO -    Return: 40.05%
+2025-08-07 15:09:46,989 - __main__ - INFO - 
+2025-08-07 15:09:46,991 - __main__ - INFO -    Trades: 490 (W: 152, L: 338)
+2025-08-07 15:09:46,991 - __main__ - INFO -    Win Rate: 31.0%
+2025-08-07 15:09:46,991 - __main__ - INFO -    P&L: $-109,222.00
+2025-08-07 15:09:46,991 - __main__ - INFO -    Return: -109.22%
+2025-08-07 15:09:46,991 - __main__ - INFO - 
+2025-08-07 15:09:46,993 - __main__ - INFO -    Trades: 385 (W: 168, L: 216)
+2025-08-07 15:09:46,993 - __main__ - INFO -    Win Rate: 43.6%
+2025-08-07 15:09:46,993 - __main__ - INFO -    P&L: $143,402.42
+2025-08-07 15:09:46,993 - __main__ - INFO -    Return: 143.40%
+2025-08-07 15:09:46,993 - __main__ - INFO - 
+2025-08-07 15:09:46,995 - __main__ - INFO -    Trades: 142 (W: 80, L: 62)
+2025-08-07 15:09:46,995 - __main__ - INFO -    Win Rate: 56.3%
+2025-08-07 15:09:46,995 - __main__ - INFO -    P&L: $96,415.64
+2025-08-07 15:09:46,995 - __main__ - INFO -    Return: 96.42%
+2025-08-07 15:09:46,995 - __main__ - INFO - 
+2025-08-07 15:09:46,997 - __main__ - INFO -    Trades: 66 (W: 12, L: 54)
+2025-08-07 15:09:46,997 - __main__ - INFO -    Win Rate: 18.2%
+2025-08-07 15:09:46,997 - __main__ - INFO -    P&L: $-33,006.24
+2025-08-07 15:09:46,997 - __main__ - INFO -    Return: -33.01%
+2025-08-07 15:09:46,997 - __main__ - INFO - 
+2025-08-07 15:09:47,002 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:09:47,005 - __main__ - INFO -    Winning: 526, Losing: 843
+2025-08-07 15:09:47,006 - __main__ - INFO -    Win Rate: 38.4%
+2025-08-07 15:09:47,006 - __main__ - INFO -    Total P&L: $142,720.14
+2025-08-07 15:09:47,006 - __main__ - INFO -    Overall Return: 142.72%
+2025-08-07 15:09:47,006 - __main__ - INFO -    Avg Win: $271.33
+2025-08-07 15:09:47,006 - __main__ - INFO -    Avg Loss: $169.30
+2025-08-07 15:09:47,007 - __main__ - INFO -    Profit Factor: 1.60
+2025-08-07 15:09:47,007 - __main__ - INFO - 
+2025-08-07 15:09:47,009 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:09:47,028 - __main__ - INFO - 
+2025-08-07 15:09:47,030 - __main__ - INFO - ================================================================================
+2025-08-07 15:09:47,032 - __main__ - INFO - ================================================================================
+2025-08-07 15:09:47,033 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:09:47,033 - __main__ - ERROR - Error during cleanup: 'MT5Connection' object has no attribute 'shutdown'
+2025-08-07 15:11:25,686 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:25,687 - __main__ - INFO - STARTING YFINANCE BACKTEST
+2025-08-07 15:11:25,687 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:25,688 - __main__ - INFO - Symbols: EURUSD=X, GBPUSD=X, USDJPY=X, AUDUSD=X, EURAUD=X, EURCAD=X
+2025-08-07 15:11:25,688 - __main__ - INFO - Period: 2024-01-01 to 2024-12-31
+2025-08-07 15:11:25,688 - __main__ - INFO - Initial Capital: $100,000
+2025-08-07 15:11:25,688 - __main__ - INFO - 
+2025-08-07 15:11:31,215 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:31,215 - __main__ - INFO - BACKTEST RESULTS
+2025-08-07 15:11:31,216 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:31,216 - __main__ - INFO - INDIVIDUAL SYMBOL PERFORMANCE:
+2025-08-07 15:11:31,216 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:11:31,216 - __main__ - INFO - [PROFIT] EURUSD=X:
+2025-08-07 15:11:31,217 - __main__ - INFO -    Trades: 120 (W: 44, L: 76)
+2025-08-07 15:11:31,217 - __main__ - INFO -    Win Rate: 36.7%
+2025-08-07 15:11:31,217 - __main__ - INFO -    P&L: $5,082.66
+2025-08-07 15:11:31,217 - __main__ - INFO -    Return: 5.08%
+2025-08-07 15:11:31,218 - __main__ - INFO - 
+2025-08-07 15:11:31,218 - __main__ - INFO - [PROFIT] GBPUSD=X:
+2025-08-07 15:11:31,218 - __main__ - INFO -    Trades: 166 (W: 70, L: 96)
+2025-08-07 15:11:31,219 - __main__ - INFO -    Win Rate: 42.2%
+2025-08-07 15:11:31,219 - __main__ - INFO -    P&L: $40,047.65
+2025-08-07 15:11:31,219 - __main__ - INFO -    Return: 40.05%
+2025-08-07 15:11:31,220 - __main__ - INFO - 
+2025-08-07 15:11:31,220 - __main__ - INFO - [LOSS] USDJPY=X:
+2025-08-07 15:11:31,220 - __main__ - INFO -    Trades: 490 (W: 152, L: 338)
+2025-08-07 15:11:31,220 - __main__ - INFO -    Win Rate: 31.0%
+2025-08-07 15:11:31,221 - __main__ - INFO -    P&L: $-109,222.00
+2025-08-07 15:11:31,221 - __main__ - INFO -    Return: -109.22%
+2025-08-07 15:11:31,221 - __main__ - INFO - 
+2025-08-07 15:11:31,221 - __main__ - INFO - [PROFIT] AUDUSD=X:
+2025-08-07 15:11:31,222 - __main__ - INFO -    Trades: 385 (W: 168, L: 216)
+2025-08-07 15:11:31,222 - __main__ - INFO -    Win Rate: 43.6%
+2025-08-07 15:11:31,222 - __main__ - INFO -    P&L: $143,402.42
+2025-08-07 15:11:31,222 - __main__ - INFO -    Return: 143.40%
+2025-08-07 15:11:31,222 - __main__ - INFO - 
+2025-08-07 15:11:31,222 - __main__ - INFO - [PROFIT] EURAUD=X:
+2025-08-07 15:11:31,223 - __main__ - INFO -    Trades: 142 (W: 80, L: 62)
+2025-08-07 15:11:31,223 - __main__ - INFO -    Win Rate: 56.3%
+2025-08-07 15:11:31,223 - __main__ - INFO -    P&L: $96,415.64
+2025-08-07 15:11:31,223 - __main__ - INFO -    Return: 96.42%
+2025-08-07 15:11:31,223 - __main__ - INFO - 
+2025-08-07 15:11:31,223 - __main__ - INFO - [LOSS] EURCAD=X:
+2025-08-07 15:11:31,223 - __main__ - INFO -    Trades: 66 (W: 12, L: 54)
+2025-08-07 15:11:31,223 - __main__ - INFO -    Win Rate: 18.2%
+2025-08-07 15:11:31,223 - __main__ - INFO -    P&L: $-33,006.24
+2025-08-07 15:11:31,223 - __main__ - INFO -    Return: -33.01%
+2025-08-07 15:11:31,223 - __main__ - INFO - 
+2025-08-07 15:11:31,224 - __main__ - INFO - OVERALL PERFORMANCE:
+2025-08-07 15:11:31,224 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:11:31,224 - __main__ - INFO - [PROFITABLE] Total Trades: 1369
+2025-08-07 15:11:31,224 - __main__ - INFO -    Winning: 526, Losing: 843
+2025-08-07 15:11:31,225 - __main__ - INFO -    Win Rate: 38.4%
+2025-08-07 15:11:31,225 - __main__ - INFO -    Total P&L: $142,720.14
+2025-08-07 15:11:31,225 - __main__ - INFO -    Overall Return: 142.72%
+2025-08-07 15:11:31,225 - __main__ - INFO -    Avg Win: $271.33
+2025-08-07 15:11:31,226 - __main__ - INFO -    Avg Loss: $169.30
+2025-08-07 15:11:31,226 - __main__ - INFO -    Profit Factor: 1.60
+2025-08-07 15:11:31,226 - __main__ - INFO - 
+2025-08-07 15:11:31,226 - __main__ - INFO - RISK MANAGEMENT SUMMARY:
+2025-08-07 15:11:31,226 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:11:31,247 - __main__ - INFO - 
+2025-08-07 15:11:31,248 - __main__ - INFO - PERFORMANCE RATING: EXCELLENT
+2025-08-07 15:11:31,248 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:31,248 - __main__ - INFO - BACKTEST COMPLETED
+2025-08-07 15:11:31,248 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:31,249 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:11:31,249 - __main__ - INFO - Cleanup completed
+2025-08-07 15:11:51,587 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:51,587 - __main__ - INFO - STARTING YFINANCE BACKTEST
+2025-08-07 15:11:51,587 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:51,588 - __main__ - INFO - Symbols: EURUSD=X, GBPUSD=X, USDJPY=X, AUDUSD=X, EURAUD=X, EURCAD=X
+2025-08-07 15:11:51,588 - __main__ - INFO - Period: 2024-01-01 to 2024-12-31
+2025-08-07 15:11:51,588 - __main__ - INFO - Initial Capital: $100,000
+2025-08-07 15:11:51,588 - __main__ - INFO - 
+2025-08-07 15:11:57,030 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:57,031 - __main__ - INFO - BACKTEST RESULTS
+2025-08-07 15:11:57,031 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:57,032 - __main__ - INFO - INDIVIDUAL SYMBOL PERFORMANCE:
+2025-08-07 15:11:57,032 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:11:57,032 - __main__ - INFO - [PROFIT] EURUSD=X:
+2025-08-07 15:11:57,032 - __main__ - INFO -    Trades: 120 (W: 44, L: 76)
+2025-08-07 15:11:57,033 - __main__ - INFO -    Win Rate: 36.7%
+2025-08-07 15:11:57,033 - __main__ - INFO -    P&L: $5,082.66
+2025-08-07 15:11:57,033 - __main__ - INFO -    Return: 5.08%
+2025-08-07 15:11:57,033 - __main__ - INFO - 
+2025-08-07 15:11:57,033 - __main__ - INFO - [PROFIT] GBPUSD=X:
+2025-08-07 15:11:57,034 - __main__ - INFO -    Trades: 166 (W: 70, L: 96)
+2025-08-07 15:11:57,034 - __main__ - INFO -    Win Rate: 42.2%
+2025-08-07 15:11:57,034 - __main__ - INFO -    P&L: $40,047.65
+2025-08-07 15:11:57,034 - __main__ - INFO -    Return: 40.05%
+2025-08-07 15:11:57,034 - __main__ - INFO - 
+2025-08-07 15:11:57,034 - __main__ - INFO - [LOSS] USDJPY=X:
+2025-08-07 15:11:57,034 - __main__ - INFO -    Trades: 490 (W: 152, L: 338)
+2025-08-07 15:11:57,034 - __main__ - INFO -    Win Rate: 31.0%
+2025-08-07 15:11:57,034 - __main__ - INFO -    P&L: $-109,222.00
+2025-08-07 15:11:57,035 - __main__ - INFO -    Return: -109.22%
+2025-08-07 15:11:57,035 - __main__ - INFO - 
+2025-08-07 15:11:57,035 - __main__ - INFO - [PROFIT] AUDUSD=X:
+2025-08-07 15:11:57,035 - __main__ - INFO -    Trades: 385 (W: 168, L: 216)
+2025-08-07 15:11:57,035 - __main__ - INFO -    Win Rate: 43.6%
+2025-08-07 15:11:57,035 - __main__ - INFO -    P&L: $143,402.42
+2025-08-07 15:11:57,035 - __main__ - INFO -    Return: 143.40%
+2025-08-07 15:11:57,035 - __main__ - INFO - 
+2025-08-07 15:11:57,036 - __main__ - INFO - [PROFIT] EURAUD=X:
+2025-08-07 15:11:57,036 - __main__ - INFO -    Trades: 142 (W: 80, L: 62)
+2025-08-07 15:11:57,036 - __main__ - INFO -    Win Rate: 56.3%
+2025-08-07 15:11:57,036 - __main__ - INFO -    P&L: $96,415.64
+2025-08-07 15:11:57,037 - __main__ - INFO -    Return: 96.42%
+2025-08-07 15:11:57,038 - __main__ - INFO - 
+2025-08-07 15:11:57,039 - __main__ - INFO - [LOSS] EURCAD=X:
+2025-08-07 15:11:57,039 - __main__ - INFO -    Trades: 66 (W: 12, L: 54)
+2025-08-07 15:11:57,039 - __main__ - INFO -    Win Rate: 18.2%
+2025-08-07 15:11:57,039 - __main__ - INFO -    P&L: $-33,006.24
+2025-08-07 15:11:57,040 - __main__ - INFO -    Return: -33.01%
+2025-08-07 15:11:57,040 - __main__ - INFO - 
+2025-08-07 15:11:57,040 - __main__ - INFO - OVERALL PERFORMANCE:
+2025-08-07 15:11:57,040 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:11:57,040 - __main__ - INFO - [PROFITABLE] Total Trades: 1369
+2025-08-07 15:11:57,040 - __main__ - INFO -    Winning: 526, Losing: 843
+2025-08-07 15:11:57,041 - __main__ - INFO -    Win Rate: 38.4%
+2025-08-07 15:11:57,041 - __main__ - INFO -    Total P&L: $142,720.14
+2025-08-07 15:11:57,041 - __main__ - INFO -    Overall Return: 142.72%
+2025-08-07 15:11:57,041 - __main__ - INFO -    Avg Win: $271.33
+2025-08-07 15:11:57,041 - __main__ - INFO -    Avg Loss: $169.30
+2025-08-07 15:11:57,041 - __main__ - INFO -    Profit Factor: 1.60
+2025-08-07 15:11:57,042 - __main__ - INFO - 
+2025-08-07 15:11:57,042 - __main__ - INFO - RISK MANAGEMENT SUMMARY:
+2025-08-07 15:11:57,042 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:11:57,042 - __main__ - INFO -   - 2% Daily Loss Limit Enforced
+2025-08-07 15:11:57,042 - __main__ - INFO -   - 4% Overall Loss Limit Enforced
+2025-08-07 15:11:57,042 - __main__ - INFO -   - ATR-based Position Sizing
+2025-08-07 15:11:57,043 - __main__ - INFO -   - Maximum 3 Concurrent Positions
+2025-08-07 15:11:57,043 - __main__ - INFO -   - 1.5 ATR Stop Loss
+2025-08-07 15:11:57,044 - __main__ - INFO -   - 3 ATR Take Profit
+2025-08-07 15:11:57,044 - __main__ - INFO - 
+2025-08-07 15:11:57,044 - __main__ - INFO - PERFORMANCE RATING: EXCELLENT
+2025-08-07 15:11:57,045 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:57,045 - __main__ - INFO - BACKTEST COMPLETED
+2025-08-07 15:11:57,045 - __main__ - INFO - ================================================================================
+2025-08-07 15:11:57,046 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:11:57,046 - __main__ - INFO - Cleanup completed
+2025-08-07 15:14:18,287 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 15:14:18,314 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 15:14:18,314 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 15:14:18,315 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 15:14:18,315 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot initialized
+2025-08-07 15:14:18,316 - mt5.mt5_prop_firm_bot - INFO - Account balance: 50000.0
+2025-08-07 15:14:18,316 - mt5.mt5_prop_firm_bot - INFO - Max daily loss: 1000.0 (2.0%)
+2025-08-07 15:14:18,316 - mt5.mt5_prop_firm_bot - INFO - Max overall loss: 2000.0 (4.0%)
+2025-08-07 15:14:18,316 - __main__ - INFO - Prop firm MT5 bot initialized successfully
+2025-08-07 15:14:18,317 - __main__ - INFO - Starting prop firm MT5 bot...
+2025-08-07 15:14:18,317 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot started
+2025-08-07 15:14:18,317 - __main__ - INFO - All bots started successfully
+2025-08-07 15:14:18,317 - __main__ - INFO - Running bots indefinitely. Press Ctrl+C to stop.
+2025-08-07 15:14:18,318 - mt5.mt5_prop_firm_bot - WARNING - Insufficient data for AUDUSD
+2025-08-07 15:14:18,319 - mt5.mt5_prop_firm_bot - WARNING - Insufficient data for EURAUD
+2025-08-07 15:14:18,319 - __main__ - INFO - Starting bot monitoring (interval: 60s)
+2025-08-07 15:14:18,319 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:14:34,364 - __main__ - INFO - Received shutdown signal, stopping bots...
+2025-08-07 15:14:34,364 - __main__ - INFO - Stopping prop firm MT5 bot...
+2025-08-07 15:14:34,365 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot stopped
+2025-08-07 15:14:34,366 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:14:34,367 - __main__ - INFO - Cleanup completed
+2025-08-07 15:14:40,205 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 15:14:40,226 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 15:14:40,226 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 15:14:40,226 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 15:14:40,226 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot initialized
+2025-08-07 15:14:40,227 - mt5.mt5_prop_firm_bot - INFO - Account balance: 50000.0
+2025-08-07 15:14:40,227 - mt5.mt5_prop_firm_bot - INFO - Max daily loss: 1000.0 (2.0%)
+2025-08-07 15:14:40,227 - mt5.mt5_prop_firm_bot - INFO - Max overall loss: 2000.0 (4.0%)
+2025-08-07 15:14:40,227 - __main__ - INFO - Prop firm MT5 bot initialized successfully
+2025-08-07 15:14:40,227 - __main__ - INFO - Starting prop firm MT5 bot...
+2025-08-07 15:14:40,228 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot started
+2025-08-07 15:14:40,228 - __main__ - INFO - All bots started successfully
+2025-08-07 15:14:40,228 - __main__ - INFO - Running bots indefinitely. Press Ctrl+C to stop.
+2025-08-07 15:14:40,228 - mt5.mt5_prop_firm_bot - WARNING - Insufficient data for AUDUSD
+2025-08-07 15:14:40,229 - mt5.mt5_prop_firm_bot - WARNING - Insufficient data for EURAUD
+2025-08-07 15:14:40,229 - __main__ - INFO - Starting bot monitoring (interval: 60s)
+2025-08-07 15:14:40,229 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:15:07,809 - __main__ - INFO - Received shutdown signal, stopping bots...
+2025-08-07 15:15:07,811 - __main__ - INFO - Stopping prop firm MT5 bot...
+2025-08-07 15:15:07,812 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot stopped
+2025-08-07 15:15:07,812 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:15:07,812 - __main__ - INFO - Cleanup completed
+2025-08-07 15:16:16,483 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 15:16:16,507 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 15:16:16,508 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 15:16:16,508 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 15:16:16,511 - mt5.mt5_prop_firm_bot - INFO - Found 6 forex symbols
+2025-08-07 15:16:16,512 - mt5.mt5_prop_firm_bot - INFO - Available symbols: ['AUDUSD.pro', 'EURUSD.pro', 'GBPUSD.pro', 'NZDUSD.pro', 'USDCAD.pro', 'USDJPY.pro']
+2025-08-07 15:16:16,512 - mt5.mt5_prop_firm_bot - ERROR - No valid symbols available for trading
+2025-08-07 15:16:16,513 - __main__ - ERROR - Failed to initialize prop firm bot
+2025-08-07 15:16:16,513 - __main__ - INFO - Stopping prop firm MT5 bot...
+2025-08-07 15:16:16,513 - mt5.mt5_prop_firm_bot - WARNING - Prop firm bot is not running
+2025-08-07 15:16:16,513 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:16:16,514 - __main__ - INFO - Cleanup completed
+2025-08-07 15:16:37,657 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 15:16:37,680 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 15:16:37,680 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 15:16:37,680 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 15:16:37,682 - mt5.mt5_prop_firm_bot - INFO - Found 6 forex symbols
+2025-08-07 15:16:37,682 - mt5.mt5_prop_firm_bot - INFO - Available symbols: ['AUDUSD.pro', 'EURUSD.pro', 'GBPUSD.pro', 'NZDUSD.pro', 'USDCAD.pro', 'USDJPY.pro']
+2025-08-07 15:16:37,683 - mt5.mt5_prop_firm_bot - INFO - Trading symbols: ['AUDUSD.pro', 'EURUSD.pro', 'GBPUSD.pro']
+2025-08-07 15:16:37,683 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot initialized successfully
+2025-08-07 15:16:37,683 - mt5.mt5_prop_firm_bot - INFO - Initial balance: $50,000.00
+2025-08-07 15:16:37,684 - mt5.mt5_prop_firm_bot - INFO - Risk limits: 2.0% daily, 4.0% overall
+2025-08-07 15:16:37,684 - __main__ - INFO - Prop firm MT5 bot initialized successfully
+2025-08-07 15:16:37,684 - __main__ - INFO - Starting prop firm MT5 bot...
+2025-08-07 15:16:37,684 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot started
+2025-08-07 15:16:37,684 - __main__ - INFO - All bots started successfully
+2025-08-07 15:16:37,685 - __main__ - INFO - Running bots indefinitely. Press Ctrl+C to stop.
+2025-08-07 15:16:37,889 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:16:38,103 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for EURUSD.pro
+2025-08-07 15:16:38,311 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for GBPUSD.pro
+2025-08-07 15:16:38,317 - __main__ - INFO - Starting bot monitoring (interval: 60s)
+2025-08-07 15:16:38,317 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:17:09,268 - __main__ - INFO - Received shutdown signal, stopping bots...
+2025-08-07 15:17:09,270 - __main__ - INFO - Stopping prop firm MT5 bot...
+2025-08-07 15:17:09,271 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot stopped
+2025-08-07 15:17:09,271 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:17:09,272 - __main__ - INFO - Cleanup completed
+2025-08-07 15:17:37,386 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 15:17:37,409 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 15:17:37,409 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 15:17:37,410 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 15:17:37,412 - mt5.mt5_prop_firm_bot - INFO - Found 6 forex symbols
+2025-08-07 15:17:37,412 - mt5.mt5_prop_firm_bot - INFO - Available symbols: ['AUDUSD.pro', 'EURUSD.pro', 'GBPUSD.pro', 'NZDUSD.pro', 'USDCAD.pro', 'USDJPY.pro']
+2025-08-07 15:17:37,413 - mt5.mt5_prop_firm_bot - INFO - Trading symbols: ['AUDUSD.pro', 'EURUSD.pro']
+2025-08-07 15:17:37,413 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot initialized successfully
+2025-08-07 15:17:37,413 - mt5.mt5_prop_firm_bot - INFO - Initial balance: $50,000.00
+2025-08-07 15:17:37,413 - mt5.mt5_prop_firm_bot - INFO - Risk limits: 2.0% daily, 4.0% overall
+2025-08-07 15:17:37,413 - __main__ - INFO - Prop firm MT5 bot initialized successfully
+2025-08-07 15:17:37,413 - __main__ - INFO - Starting prop firm MT5 bot...
+2025-08-07 15:17:37,414 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot started
+2025-08-07 15:17:37,414 - __main__ - INFO - All bots started successfully
+2025-08-07 15:17:37,414 - __main__ - INFO - Running bots indefinitely. Press Ctrl+C to stop.
+2025-08-07 15:17:37,416 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:17:37,427 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for EURUSD.pro
+2025-08-07 15:17:37,431 - __main__ - INFO - Starting bot monitoring (interval: 60s)
+2025-08-07 15:17:37,432 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:18:37,446 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:18:37,483 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for EURUSD.pro
+2025-08-07 15:18:37,503 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:19:37,518 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:19:37,592 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for EURUSD.pro
+2025-08-07 15:19:37,609 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:19:42,792 - __main__ - INFO - Received shutdown signal, stopping bots...
+2025-08-07 15:19:42,793 - __main__ - INFO - Stopping prop firm MT5 bot...
+2025-08-07 15:19:42,794 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot stopped
+2025-08-07 15:19:42,795 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:19:42,797 - __main__ - INFO - Cleanup completed
+2025-08-07 15:20:35,339 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 15:20:35,354 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 15:20:35,355 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 15:20:35,355 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 15:20:35,357 - mt5.mt5_prop_firm_bot - INFO - Found 6 forex symbols
+2025-08-07 15:20:35,357 - mt5.mt5_prop_firm_bot - INFO - Available symbols: ['AUDUSD.pro', 'EURUSD.pro', 'GBPUSD.pro', 'NZDUSD.pro', 'USDCAD.pro', 'USDJPY.pro']
+2025-08-07 15:20:35,357 - mt5.mt5_prop_firm_bot - INFO - Trading symbols: ['AUDUSD.pro', 'EURUSD.pro']
+2025-08-07 15:20:35,357 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot initialized successfully
+2025-08-07 15:20:35,358 - mt5.mt5_prop_firm_bot - INFO - Initial balance: $50,000.00
+2025-08-07 15:20:35,358 - mt5.mt5_prop_firm_bot - INFO - Risk limits: 2.0% daily, 4.0% overall
+2025-08-07 15:20:35,358 - __main__ - INFO - Prop firm MT5 bot initialized successfully
+2025-08-07 15:20:35,358 - __main__ - INFO - Starting prop firm MT5 bot...
+2025-08-07 15:20:35,358 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot started
+2025-08-07 15:20:35,358 - __main__ - INFO - All bots started successfully
+2025-08-07 15:20:35,358 - __main__ - INFO - Running bots indefinitely. Press Ctrl+C to stop.
+2025-08-07 15:20:35,367 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:20:35,376 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for EURUSD.pro
+2025-08-07 15:20:35,379 - __main__ - INFO - Starting bot monitoring (interval: 60s)
+2025-08-07 15:20:35,380 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:20:45,272 - __main__ - INFO - Received shutdown signal, stopping bots...
+2025-08-07 15:20:45,274 - __main__ - INFO - Stopping prop firm MT5 bot...
+2025-08-07 15:20:45,274 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot stopped
+2025-08-07 15:20:45,274 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:20:45,275 - __main__ - INFO - Cleanup completed
+2025-08-07 15:22:47,785 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 15:22:47,805 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 15:22:47,806 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 15:22:47,806 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 15:22:47,809 - mt5.mt5_prop_firm_bot - INFO - Found 6 forex symbols
+2025-08-07 15:22:47,809 - mt5.mt5_prop_firm_bot - INFO - Available symbols: ['AUDUSD.pro', 'EURUSD.pro', 'GBPUSD.pro', 'NZDUSD.pro', 'USDCAD.pro', 'USDJPY.pro']
+2025-08-07 15:22:47,809 - mt5.mt5_prop_firm_bot - INFO - Trading symbols: ['AUDUSD.pro']
+2025-08-07 15:22:47,810 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot initialized successfully
+2025-08-07 15:22:47,810 - mt5.mt5_prop_firm_bot - INFO - Initial balance: $50,000.00
+2025-08-07 15:22:47,810 - mt5.mt5_prop_firm_bot - INFO - Risk limits: 2.0% daily, 4.0% overall
+2025-08-07 15:22:47,810 - __main__ - INFO - Prop firm MT5 bot initialized successfully
+2025-08-07 15:22:47,810 - __main__ - INFO - Starting prop firm MT5 bot...
+2025-08-07 15:22:47,811 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot started
+2025-08-07 15:22:47,811 - __main__ - INFO - All bots started successfully
+2025-08-07 15:22:47,811 - __main__ - INFO - Running bots indefinitely. Press Ctrl+C to stop.
+2025-08-07 15:22:47,815 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:22:47,823 - __main__ - INFO - Starting bot monitoring (interval: 60s)
+2025-08-07 15:22:47,824 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:23:47,840 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:23:47,843 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:24:47,848 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:24:47,851 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:25:47,864 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:25:47,869 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:26:47,874 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:26:47,881 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:27:47,897 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:27:47,902 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:28:47,916 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:28:47,920 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:29:47,928 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:29:47,931 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:30:47,946 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:30:47,950 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:31:47,956 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:31:47,959 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:32:47,973 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:32:47,976 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:33:47,993 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:33:47,996 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:34:48,004 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:34:48,007 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:35:48,017 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:35:48,020 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:36:48,033 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:36:48,036 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:37:48,052 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:37:48,058 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:38:48,067 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:38:48,069 - __main__ - INFO - Bot Status: {'running': True, 'regular_bot': {'initialized': False, 'active': False}, 'prop_firm_bot': {'initialized': True, 'active': True}}
+2025-08-07 15:39:05,528 - __main__ - INFO - Received shutdown signal, stopping bots...
+2025-08-07 15:39:05,530 - __main__ - INFO - Stopping prop firm MT5 bot...
+2025-08-07 15:39:05,530 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot stopped
+2025-08-07 15:39:05,530 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:39:05,530 - __main__ - INFO - Cleanup completed
+2025-08-07 15:40:48,884 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 15:40:48,905 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 15:40:48,906 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 15:40:48,906 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 15:40:48,908 - mt5.mt5_prop_firm_bot - INFO - Found 6 forex symbols
+2025-08-07 15:40:48,909 - mt5.mt5_prop_firm_bot - INFO - Available symbols: ['AUDUSD.pro', 'EURUSD.pro', 'GBPUSD.pro', 'NZDUSD.pro', 'USDCAD.pro', 'USDJPY.pro']
+2025-08-07 15:40:48,909 - mt5.mt5_prop_firm_bot - INFO - Trading symbols: ['AUDUSD.pro']
+2025-08-07 15:40:48,909 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot initialized successfully
+2025-08-07 15:40:48,909 - mt5.mt5_prop_firm_bot - INFO - Initial balance: $50,000.00
+2025-08-07 15:40:48,909 - mt5.mt5_prop_firm_bot - INFO - Risk limits: 2.0% daily, 4.0% overall
+2025-08-07 15:40:48,909 - __main__ - INFO - Prop firm MT5 bot initialized successfully
+2025-08-07 15:40:48,909 - __main__ - INFO - Starting prop firm MT5 bot...
+2025-08-07 15:40:48,909 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot started
+2025-08-07 15:40:48,910 - __main__ - INFO - All bots started successfully
+2025-08-07 15:40:48,910 - __main__ - INFO - Running bots indefinitely. Press Ctrl+C to stop.
+2025-08-07 15:40:48,915 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:40:48,923 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65218, SMA20: 0.65128, SMA50: 0.64945, RSI: 61.38, ATR: 0.00104
+2025-08-07 15:40:48,923 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=61.38, Price vs SMA20: 0.14%
+2025-08-07 15:40:48,924 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:40:48,930 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:40:48,934 - __main__ - INFO - ================================================================================
+2025-08-07 15:40:48,934 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:40:48,934 - __main__ - INFO - ================================================================================
+2025-08-07 15:40:48,935 - __main__ - INFO - Account: 2194718
+2025-08-07 15:40:48,935 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:40:48,935 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:40:48,935 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:40:48,936 - __main__ - INFO - Positions: 0
+2025-08-07 15:40:48,936 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:40:48,936 - __main__ - INFO - Can take trades: True
+2025-08-07 15:40:48,936 - __main__ - INFO - 
+2025-08-07 15:40:48,936 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:40:48,937 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:40:48,937 - __main__ - INFO -     Price: 0.65218
+2025-08-07 15:40:48,937 - __main__ - INFO -     SMA20: 0.65128
+2025-08-07 15:40:48,937 - __main__ - INFO -     RSI: 61.38
+2025-08-07 15:40:48,938 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:40:48,938 - __main__ - INFO -     Price vs SMA: 0.14%
+2025-08-07 15:40:48,938 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:40:48,938 - __main__ - INFO - ================================================================================
+2025-08-07 15:41:07,582 - __main__ - INFO - Received shutdown signal, stopping bots...
+2025-08-07 15:41:07,583 - __main__ - INFO - Stopping prop firm MT5 bot...
+2025-08-07 15:41:07,583 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot stopped
+2025-08-07 15:41:07,584 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:41:07,584 - __main__ - INFO - Cleanup completed
+2025-08-07 15:41:11,845 - __main__ - INFO - ================================================================================
+2025-08-07 15:41:11,845 - __main__ - INFO - STARTING YFINANCE BACKTEST
+2025-08-07 15:41:11,845 - __main__ - INFO - ================================================================================
+2025-08-07 15:41:11,846 - __main__ - INFO - Symbols: EURUSD=X, GBPUSD=X, USDJPY=X, AUDUSD=X, EURAUD=X, EURCAD=X
+2025-08-07 15:41:11,846 - __main__ - INFO - Period: 2024-01-01 to 2024-12-31
+2025-08-07 15:41:11,846 - __main__ - INFO - Initial Capital: $100,000
+2025-08-07 15:41:11,846 - __main__ - INFO - 
+2025-08-07 15:41:16,749 - __main__ - INFO - ================================================================================
+2025-08-07 15:41:16,749 - __main__ - INFO - BACKTEST RESULTS
+2025-08-07 15:41:16,750 - __main__ - INFO - ================================================================================
+2025-08-07 15:41:16,750 - __main__ - INFO - INDIVIDUAL SYMBOL PERFORMANCE:
+2025-08-07 15:41:16,750 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:41:16,750 - __main__ - INFO - [PROFIT] EURUSD=X:
+2025-08-07 15:41:16,751 - __main__ - INFO -    Trades: 120 (W: 44, L: 76)
+2025-08-07 15:41:16,751 - __main__ - INFO -    Win Rate: 36.7%
+2025-08-07 15:41:16,751 - __main__ - INFO -    P&L: $5,082.66
+2025-08-07 15:41:16,751 - __main__ - INFO -    Return: 5.08%
+2025-08-07 15:41:16,751 - __main__ - INFO - 
+2025-08-07 15:41:16,751 - __main__ - INFO - [PROFIT] GBPUSD=X:
+2025-08-07 15:41:16,751 - __main__ - INFO -    Trades: 166 (W: 70, L: 96)
+2025-08-07 15:41:16,751 - __main__ - INFO -    Win Rate: 42.2%
+2025-08-07 15:41:16,752 - __main__ - INFO -    P&L: $40,047.65
+2025-08-07 15:41:16,752 - __main__ - INFO -    Return: 40.05%
+2025-08-07 15:41:16,752 - __main__ - INFO - 
+2025-08-07 15:41:16,752 - __main__ - INFO - [LOSS] USDJPY=X:
+2025-08-07 15:41:16,752 - __main__ - INFO -    Trades: 490 (W: 152, L: 338)
+2025-08-07 15:41:16,752 - __main__ - INFO -    Win Rate: 31.0%
+2025-08-07 15:41:16,752 - __main__ - INFO -    P&L: $-109,222.00
+2025-08-07 15:41:16,752 - __main__ - INFO -    Return: -109.22%
+2025-08-07 15:41:16,753 - __main__ - INFO - 
+2025-08-07 15:41:16,753 - __main__ - INFO - [PROFIT] AUDUSD=X:
+2025-08-07 15:41:16,753 - __main__ - INFO -    Trades: 385 (W: 168, L: 216)
+2025-08-07 15:41:16,753 - __main__ - INFO -    Win Rate: 43.6%
+2025-08-07 15:41:16,753 - __main__ - INFO -    P&L: $143,402.42
+2025-08-07 15:41:16,753 - __main__ - INFO -    Return: 143.40%
+2025-08-07 15:41:16,753 - __main__ - INFO - 
+2025-08-07 15:41:16,754 - __main__ - INFO - [PROFIT] EURAUD=X:
+2025-08-07 15:41:16,754 - __main__ - INFO -    Trades: 142 (W: 80, L: 62)
+2025-08-07 15:41:16,754 - __main__ - INFO -    Win Rate: 56.3%
+2025-08-07 15:41:16,754 - __main__ - INFO -    P&L: $96,415.64
+2025-08-07 15:41:16,755 - __main__ - INFO -    Return: 96.42%
+2025-08-07 15:41:16,755 - __main__ - INFO - 
+2025-08-07 15:41:16,755 - __main__ - INFO - [LOSS] EURCAD=X:
+2025-08-07 15:41:16,755 - __main__ - INFO -    Trades: 66 (W: 12, L: 54)
+2025-08-07 15:41:16,755 - __main__ - INFO -    Win Rate: 18.2%
+2025-08-07 15:41:16,756 - __main__ - INFO -    P&L: $-33,006.24
+2025-08-07 15:41:16,756 - __main__ - INFO -    Return: -33.01%
+2025-08-07 15:41:16,756 - __main__ - INFO - 
+2025-08-07 15:41:16,756 - __main__ - INFO - OVERALL PERFORMANCE:
+2025-08-07 15:41:16,756 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:41:16,757 - __main__ - INFO - [PROFITABLE] Total Trades: 1369
+2025-08-07 15:41:16,757 - __main__ - INFO -    Winning: 526, Losing: 843
+2025-08-07 15:41:16,757 - __main__ - INFO -    Win Rate: 38.4%
+2025-08-07 15:41:16,757 - __main__ - INFO -    Total P&L: $142,720.14
+2025-08-07 15:41:16,757 - __main__ - INFO -    Overall Return: 142.72%
+2025-08-07 15:41:16,757 - __main__ - INFO -    Avg Win: $271.33
+2025-08-07 15:41:16,757 - __main__ - INFO -    Avg Loss: $169.30
+2025-08-07 15:41:16,757 - __main__ - INFO -    Profit Factor: 1.60
+2025-08-07 15:41:16,758 - __main__ - INFO - 
+2025-08-07 15:41:16,758 - __main__ - INFO - RISK MANAGEMENT SUMMARY:
+2025-08-07 15:41:16,758 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 15:41:16,758 - __main__ - INFO -   - 2% Daily Loss Limit Enforced
+2025-08-07 15:41:16,759 - __main__ - INFO -   - 4% Overall Loss Limit Enforced
+2025-08-07 15:41:16,759 - __main__ - INFO -   - ATR-based Position Sizing
+2025-08-07 15:41:16,759 - __main__ - INFO -   - Maximum 3 Concurrent Positions
+2025-08-07 15:41:16,759 - __main__ - INFO -   - 1.5 ATR Stop Loss
+2025-08-07 15:41:16,759 - __main__ - INFO -   - 3 ATR Take Profit
+2025-08-07 15:41:16,759 - __main__ - INFO - 
+2025-08-07 15:41:16,760 - __main__ - INFO - PERFORMANCE RATING: EXCELLENT
+2025-08-07 15:41:16,760 - __main__ - INFO - ================================================================================
+2025-08-07 15:41:16,760 - __main__ - INFO - BACKTEST COMPLETED
+2025-08-07 15:41:16,761 - __main__ - INFO - ================================================================================
+2025-08-07 15:41:16,761 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:41:16,761 - __main__ - INFO - Cleanup completed
+2025-08-07 15:41:53,563 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 15:41:53,577 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 15:41:53,578 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 15:41:53,578 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 15:41:53,579 - mt5.mt5_prop_firm_bot - INFO - Found 6 forex symbols
+2025-08-07 15:41:53,580 - mt5.mt5_prop_firm_bot - INFO - Available symbols: ['AUDUSD.pro', 'EURUSD.pro', 'GBPUSD.pro', 'NZDUSD.pro', 'USDCAD.pro', 'USDJPY.pro']
+2025-08-07 15:41:53,580 - mt5.mt5_prop_firm_bot - INFO - Trading symbols: ['AUDUSD.pro']
+2025-08-07 15:41:53,580 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot initialized successfully
+2025-08-07 15:41:53,580 - mt5.mt5_prop_firm_bot - INFO - Initial balance: $50,000.00
+2025-08-07 15:41:53,580 - mt5.mt5_prop_firm_bot - INFO - Risk limits: 2.0% daily, 4.0% overall
+2025-08-07 15:41:53,580 - __main__ - INFO - Prop firm MT5 bot initialized successfully
+2025-08-07 15:41:53,580 - __main__ - INFO - Starting prop firm MT5 bot...
+2025-08-07 15:41:53,580 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot started
+2025-08-07 15:41:53,581 - __main__ - INFO - All bots started successfully
+2025-08-07 15:41:53,581 - __main__ - INFO - Running bots indefinitely. Press Ctrl+C to stop.
+2025-08-07 15:41:53,583 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:41:53,588 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65212, SMA20: 0.65128, SMA50: 0.64945, RSI: 61.09, ATR: 0.00104
+2025-08-07 15:41:53,588 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=61.09, Price vs SMA20: 0.13%
+2025-08-07 15:41:53,588 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:41:53,589 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:41:53,592 - __main__ - INFO - ================================================================================
+2025-08-07 15:41:53,592 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:41:53,592 - __main__ - INFO - ================================================================================
+2025-08-07 15:41:53,592 - __main__ - INFO - Account: 2194718
+2025-08-07 15:41:53,592 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:41:53,593 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:41:53,593 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:41:53,593 - __main__ - INFO - Positions: 0
+2025-08-07 15:41:53,593 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:41:53,593 - __main__ - INFO - Can take trades: True
+2025-08-07 15:41:53,593 - __main__ - INFO - 
+2025-08-07 15:41:53,594 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:41:53,594 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:41:53,594 - __main__ - INFO -     Price: 0.65212
+2025-08-07 15:41:53,594 - __main__ - INFO -     SMA20: 0.65128
+2025-08-07 15:41:53,594 - __main__ - INFO -     RSI: 61.09
+2025-08-07 15:41:53,594 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:41:53,594 - __main__ - INFO -     Price vs SMA: 0.13%
+2025-08-07 15:41:53,594 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:41:53,594 - __main__ - INFO - ================================================================================
+2025-08-07 15:42:53,596 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:42:53,601 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65218, SMA20: 0.65128, SMA50: 0.64945, RSI: 61.38, ATR: 0.00104
+2025-08-07 15:42:53,601 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=61.38, Price vs SMA20: 0.14%
+2025-08-07 15:42:53,602 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:42:53,603 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:42:53,609 - __main__ - INFO - ================================================================================
+2025-08-07 15:42:53,610 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:42:53,610 - __main__ - INFO - ================================================================================
+2025-08-07 15:42:53,610 - __main__ - INFO - Account: 2194718
+2025-08-07 15:42:53,610 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:42:53,610 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:42:53,610 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:42:53,611 - __main__ - INFO - Positions: 0
+2025-08-07 15:42:53,611 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:42:53,611 - __main__ - INFO - Can take trades: True
+2025-08-07 15:42:53,611 - __main__ - INFO - 
+2025-08-07 15:42:53,611 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:42:53,611 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:42:53,614 - __main__ - INFO -     Price: 0.65218
+2025-08-07 15:42:53,615 - __main__ - INFO -     SMA20: 0.65128
+2025-08-07 15:42:53,616 - __main__ - INFO -     RSI: 61.38
+2025-08-07 15:42:53,616 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:42:53,616 - __main__ - INFO -     Price vs SMA: 0.14%
+2025-08-07 15:42:53,616 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:42:53,616 - __main__ - INFO - ================================================================================
+2025-08-07 15:43:53,613 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:43:53,615 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65217, SMA20: 0.65128, SMA50: 0.64945, RSI: 61.34, ATR: 0.00104
+2025-08-07 15:43:53,616 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=61.34, Price vs SMA20: 0.14%
+2025-08-07 15:43:53,616 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:43:53,629 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:43:53,632 - __main__ - INFO - ================================================================================
+2025-08-07 15:43:53,633 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:43:53,633 - __main__ - INFO - ================================================================================
+2025-08-07 15:43:53,634 - __main__ - INFO - Account: 2194718
+2025-08-07 15:43:53,635 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:43:53,636 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:43:53,636 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:43:53,636 - __main__ - INFO - Positions: 0
+2025-08-07 15:43:53,637 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:43:53,637 - __main__ - INFO - Can take trades: True
+2025-08-07 15:43:53,637 - __main__ - INFO - 
+2025-08-07 15:43:53,637 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:43:53,637 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:43:53,637 - __main__ - INFO -     Price: 0.65217
+2025-08-07 15:43:53,638 - __main__ - INFO -     SMA20: 0.65128
+2025-08-07 15:43:53,639 - __main__ - INFO -     RSI: 61.34
+2025-08-07 15:43:53,639 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:43:53,639 - __main__ - INFO -     Price vs SMA: 0.14%
+2025-08-07 15:43:53,641 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:43:53,642 - __main__ - INFO - ================================================================================
+2025-08-07 15:44:53,633 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:44:53,638 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65219, SMA20: 0.65128, SMA50: 0.64945, RSI: 61.43, ATR: 0.00104
+2025-08-07 15:44:53,639 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=61.43, Price vs SMA20: 0.14%
+2025-08-07 15:44:53,639 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:44:53,647 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:44:53,650 - __main__ - INFO - ================================================================================
+2025-08-07 15:44:53,650 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:44:53,651 - __main__ - INFO - ================================================================================
+2025-08-07 15:44:53,651 - __main__ - INFO - Account: 2194718
+2025-08-07 15:44:53,651 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:44:53,651 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:44:53,652 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:44:53,652 - __main__ - INFO - Positions: 0
+2025-08-07 15:44:53,653 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:44:53,653 - __main__ - INFO - Can take trades: True
+2025-08-07 15:44:53,653 - __main__ - INFO - 
+2025-08-07 15:44:53,653 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:44:53,653 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:44:53,653 - __main__ - INFO -     Price: 0.65219
+2025-08-07 15:44:53,654 - __main__ - INFO -     SMA20: 0.65128
+2025-08-07 15:44:53,654 - __main__ - INFO -     RSI: 61.43
+2025-08-07 15:44:53,654 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:44:53,654 - __main__ - INFO -     Price vs SMA: 0.14%
+2025-08-07 15:44:53,654 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:44:53,654 - __main__ - INFO - ================================================================================
+2025-08-07 15:45:53,650 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:45:53,653 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65220, SMA20: 0.65128, SMA50: 0.64945, RSI: 61.48, ATR: 0.00104
+2025-08-07 15:45:53,653 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=61.48, Price vs SMA20: 0.14%
+2025-08-07 15:45:53,653 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:45:53,664 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:45:53,667 - __main__ - INFO - ================================================================================
+2025-08-07 15:45:53,668 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:45:53,669 - __main__ - INFO - ================================================================================
+2025-08-07 15:45:53,670 - __main__ - INFO - Account: 2194718
+2025-08-07 15:45:53,671 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:45:53,671 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:45:53,672 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:45:53,672 - __main__ - INFO - Positions: 0
+2025-08-07 15:45:53,672 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:45:53,673 - __main__ - INFO - Can take trades: True
+2025-08-07 15:45:53,673 - __main__ - INFO - 
+2025-08-07 15:45:53,673 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:45:53,673 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:45:53,673 - __main__ - INFO -     Price: 0.65220
+2025-08-07 15:45:53,673 - __main__ - INFO -     SMA20: 0.65128
+2025-08-07 15:45:53,673 - __main__ - INFO -     RSI: 61.48
+2025-08-07 15:45:53,674 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:45:53,674 - __main__ - INFO -     Price vs SMA: 0.14%
+2025-08-07 15:45:53,674 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:45:53,674 - __main__ - INFO - ================================================================================
+2025-08-07 15:46:53,666 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:46:53,669 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65228, SMA20: 0.65129, SMA50: 0.64945, RSI: 61.86, ATR: 0.00104
+2025-08-07 15:46:53,669 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=61.86, Price vs SMA20: 0.15%
+2025-08-07 15:46:53,669 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:46:53,682 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:46:53,685 - __main__ - INFO - ================================================================================
+2025-08-07 15:46:53,686 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:46:53,686 - __main__ - INFO - ================================================================================
+2025-08-07 15:46:53,686 - __main__ - INFO - Account: 2194718
+2025-08-07 15:46:53,686 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:46:53,686 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:46:53,686 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:46:53,686 - __main__ - INFO - Positions: 0
+2025-08-07 15:46:53,686 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:46:53,686 - __main__ - INFO - Can take trades: True
+2025-08-07 15:46:53,686 - __main__ - INFO - 
+2025-08-07 15:46:53,687 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:46:53,687 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:46:53,687 - __main__ - INFO -     Price: 0.65228
+2025-08-07 15:46:53,687 - __main__ - INFO -     SMA20: 0.65129
+2025-08-07 15:46:53,687 - __main__ - INFO -     RSI: 61.86
+2025-08-07 15:46:53,687 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:46:53,687 - __main__ - INFO -     Price vs SMA: 0.15%
+2025-08-07 15:46:53,687 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:46:53,688 - __main__ - INFO - ================================================================================
+2025-08-07 15:47:53,678 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:47:53,681 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65230, SMA20: 0.65129, SMA50: 0.64945, RSI: 61.96, ATR: 0.00104
+2025-08-07 15:47:53,681 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=61.96, Price vs SMA20: 0.16%
+2025-08-07 15:47:53,682 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:47:53,693 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:47:53,697 - __main__ - INFO - ================================================================================
+2025-08-07 15:47:53,697 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:47:53,698 - __main__ - INFO - ================================================================================
+2025-08-07 15:47:53,698 - __main__ - INFO - Account: 2194718
+2025-08-07 15:47:53,698 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:47:53,698 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:47:53,698 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:47:53,698 - __main__ - INFO - Positions: 0
+2025-08-07 15:47:53,699 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:47:53,699 - __main__ - INFO - Can take trades: True
+2025-08-07 15:47:53,699 - __main__ - INFO - 
+2025-08-07 15:47:53,699 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:47:53,699 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:47:53,699 - __main__ - INFO -     Price: 0.65230
+2025-08-07 15:47:53,699 - __main__ - INFO -     SMA20: 0.65129
+2025-08-07 15:47:53,700 - __main__ - INFO -     RSI: 61.96
+2025-08-07 15:47:53,700 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:47:53,700 - __main__ - INFO -     Price vs SMA: 0.16%
+2025-08-07 15:47:53,700 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:47:53,700 - __main__ - INFO - ================================================================================
+2025-08-07 15:48:53,694 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:48:53,699 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65252, SMA20: 0.65130, SMA50: 0.64945, RSI: 62.97, ATR: 0.00104
+2025-08-07 15:48:53,700 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=62.97, Price vs SMA20: 0.19%
+2025-08-07 15:48:53,700 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:48:53,702 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:48:53,706 - __main__ - INFO - ================================================================================
+2025-08-07 15:48:53,706 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:48:53,706 - __main__ - INFO - ================================================================================
+2025-08-07 15:48:53,707 - __main__ - INFO - Account: 2194718
+2025-08-07 15:48:53,709 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:48:53,709 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:48:53,709 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:48:53,710 - __main__ - INFO - Positions: 0
+2025-08-07 15:48:53,710 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:48:53,710 - __main__ - INFO - Can take trades: True
+2025-08-07 15:48:53,711 - __main__ - INFO - 
+2025-08-07 15:48:53,711 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:48:53,711 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:48:53,712 - __main__ - INFO -     Price: 0.65252
+2025-08-07 15:48:53,712 - __main__ - INFO -     SMA20: 0.65130
+2025-08-07 15:48:53,712 - __main__ - INFO -     RSI: 62.97
+2025-08-07 15:48:53,712 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:48:53,712 - __main__ - INFO -     Price vs SMA: 0.19%
+2025-08-07 15:48:53,713 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:48:53,713 - __main__ - INFO - ================================================================================
+2025-08-07 15:49:53,707 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:49:53,713 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65247, SMA20: 0.65130, SMA50: 0.64945, RSI: 62.74, ATR: 0.00104
+2025-08-07 15:49:53,713 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=62.74, Price vs SMA20: 0.18%
+2025-08-07 15:49:53,713 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:49:53,715 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:49:53,717 - __main__ - INFO - ================================================================================
+2025-08-07 15:49:53,718 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:49:53,718 - __main__ - INFO - ================================================================================
+2025-08-07 15:49:53,719 - __main__ - INFO - Account: 2194718
+2025-08-07 15:49:53,719 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:49:53,719 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:49:53,720 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:49:53,720 - __main__ - INFO - Positions: 0
+2025-08-07 15:49:53,720 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:49:53,720 - __main__ - INFO - Can take trades: True
+2025-08-07 15:49:53,721 - __main__ - INFO - 
+2025-08-07 15:49:53,721 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:49:53,722 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:49:53,722 - __main__ - INFO -     Price: 0.65247
+2025-08-07 15:49:53,722 - __main__ - INFO -     SMA20: 0.65130
+2025-08-07 15:49:53,723 - __main__ - INFO -     RSI: 62.74
+2025-08-07 15:49:53,723 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:49:53,723 - __main__ - INFO -     Price vs SMA: 0.18%
+2025-08-07 15:49:53,723 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:49:53,723 - __main__ - INFO - ================================================================================
+2025-08-07 15:50:53,722 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:50:53,725 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65255, SMA20: 0.65130, SMA50: 0.64945, RSI: 63.10, ATR: 0.00104
+2025-08-07 15:50:53,725 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=63.10, Price vs SMA20: 0.19%
+2025-08-07 15:50:53,726 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:50:53,727 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:50:53,730 - __main__ - INFO - ================================================================================
+2025-08-07 15:50:53,731 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:50:53,731 - __main__ - INFO - ================================================================================
+2025-08-07 15:50:53,731 - __main__ - INFO - Account: 2194718
+2025-08-07 15:50:53,732 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:50:53,732 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:50:53,732 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:50:53,732 - __main__ - INFO - Positions: 0
+2025-08-07 15:50:53,732 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:50:53,732 - __main__ - INFO - Can take trades: True
+2025-08-07 15:50:53,733 - __main__ - INFO - 
+2025-08-07 15:50:53,733 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:50:53,734 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:50:53,734 - __main__ - INFO -     Price: 0.65255
+2025-08-07 15:50:53,734 - __main__ - INFO -     SMA20: 0.65130
+2025-08-07 15:50:53,735 - __main__ - INFO -     RSI: 63.10
+2025-08-07 15:50:53,735 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:50:53,735 - __main__ - INFO -     Price vs SMA: 0.19%
+2025-08-07 15:50:53,735 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:50:53,735 - __main__ - INFO - ================================================================================
+2025-08-07 15:51:53,743 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:51:53,747 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65265, SMA20: 0.65131, SMA50: 0.64946, RSI: 63.54, ATR: 0.00104
+2025-08-07 15:51:53,747 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=63.54, Price vs SMA20: 0.21%
+2025-08-07 15:51:53,747 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:51:53,749 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:51:53,752 - __main__ - INFO - ================================================================================
+2025-08-07 15:51:53,752 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:51:53,753 - __main__ - INFO - ================================================================================
+2025-08-07 15:51:53,754 - __main__ - INFO - Account: 2194718
+2025-08-07 15:51:53,754 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:51:53,754 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:51:53,755 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:51:53,755 - __main__ - INFO - Positions: 0
+2025-08-07 15:51:53,755 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:51:53,755 - __main__ - INFO - Can take trades: True
+2025-08-07 15:51:53,755 - __main__ - INFO - 
+2025-08-07 15:51:53,757 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:51:53,757 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:51:53,757 - __main__ - INFO -     Price: 0.65265
+2025-08-07 15:51:53,757 - __main__ - INFO -     SMA20: 0.65131
+2025-08-07 15:51:53,757 - __main__ - INFO -     RSI: 63.54
+2025-08-07 15:51:53,758 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:51:53,758 - __main__ - INFO -     Price vs SMA: 0.21%
+2025-08-07 15:51:53,758 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:51:53,758 - __main__ - INFO - ================================================================================
+2025-08-07 15:52:53,752 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:52:53,756 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65250, SMA20: 0.65130, SMA50: 0.64945, RSI: 62.88, ATR: 0.00104
+2025-08-07 15:52:53,756 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=62.88, Price vs SMA20: 0.18%
+2025-08-07 15:52:53,757 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:52:53,766 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:52:53,769 - __main__ - INFO - ================================================================================
+2025-08-07 15:52:53,770 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:52:53,770 - __main__ - INFO - ================================================================================
+2025-08-07 15:52:53,770 - __main__ - INFO - Account: 2194718
+2025-08-07 15:52:53,770 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:52:53,771 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:52:53,771 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:52:53,772 - __main__ - INFO - Positions: 0
+2025-08-07 15:52:53,772 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:52:53,773 - __main__ - INFO - Can take trades: True
+2025-08-07 15:52:53,774 - __main__ - INFO - 
+2025-08-07 15:52:53,774 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:52:53,774 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:52:53,774 - __main__ - INFO -     Price: 0.65250
+2025-08-07 15:52:53,774 - __main__ - INFO -     SMA20: 0.65130
+2025-08-07 15:52:53,775 - __main__ - INFO -     RSI: 62.88
+2025-08-07 15:52:53,775 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:52:53,775 - __main__ - INFO -     Price vs SMA: 0.18%
+2025-08-07 15:52:53,775 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:52:53,775 - __main__ - INFO - ================================================================================
+2025-08-07 15:53:53,765 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:53:53,769 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65259, SMA20: 0.65130, SMA50: 0.64945, RSI: 63.28, ATR: 0.00104
+2025-08-07 15:53:53,769 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=63.28, Price vs SMA20: 0.20%
+2025-08-07 15:53:53,769 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:53:53,779 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:53:53,782 - __main__ - INFO - ================================================================================
+2025-08-07 15:53:53,782 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:53:53,783 - __main__ - INFO - ================================================================================
+2025-08-07 15:53:53,783 - __main__ - INFO - Account: 2194718
+2025-08-07 15:53:53,783 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:53:53,783 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:53:53,783 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:53:53,784 - __main__ - INFO - Positions: 0
+2025-08-07 15:53:53,784 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:53:53,784 - __main__ - INFO - Can take trades: True
+2025-08-07 15:53:53,785 - __main__ - INFO - 
+2025-08-07 15:53:53,785 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:53:53,786 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:53:53,786 - __main__ - INFO -     Price: 0.65259
+2025-08-07 15:53:53,786 - __main__ - INFO -     SMA20: 0.65130
+2025-08-07 15:53:53,786 - __main__ - INFO -     RSI: 63.28
+2025-08-07 15:53:53,786 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:53:53,786 - __main__ - INFO -     Price vs SMA: 0.20%
+2025-08-07 15:53:53,786 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:53:53,786 - __main__ - INFO - ================================================================================
+2025-08-07 15:54:53,781 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:54:53,784 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65266, SMA20: 0.65131, SMA50: 0.64946, RSI: 63.58, ATR: 0.00104
+2025-08-07 15:54:53,784 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=63.58, Price vs SMA20: 0.21%
+2025-08-07 15:54:53,784 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:54:53,796 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:54:53,800 - __main__ - INFO - ================================================================================
+2025-08-07 15:54:53,800 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:54:53,800 - __main__ - INFO - ================================================================================
+2025-08-07 15:54:53,801 - __main__ - INFO - Account: 2194718
+2025-08-07 15:54:53,801 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:54:53,801 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:54:53,801 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:54:53,801 - __main__ - INFO - Positions: 0
+2025-08-07 15:54:53,801 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:54:53,801 - __main__ - INFO - Can take trades: True
+2025-08-07 15:54:53,801 - __main__ - INFO - 
+2025-08-07 15:54:53,802 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:54:53,802 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:54:53,802 - __main__ - INFO -     Price: 0.65266
+2025-08-07 15:54:53,802 - __main__ - INFO -     SMA20: 0.65131
+2025-08-07 15:54:53,802 - __main__ - INFO -     RSI: 63.58
+2025-08-07 15:54:53,802 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:54:53,802 - __main__ - INFO -     Price vs SMA: 0.21%
+2025-08-07 15:54:53,803 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:54:53,803 - __main__ - INFO - ================================================================================
+2025-08-07 15:55:53,803 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:55:53,808 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65245, SMA20: 0.65130, SMA50: 0.64945, RSI: 62.65, ATR: 0.00104
+2025-08-07 15:55:53,808 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=62.65, Price vs SMA20: 0.18%
+2025-08-07 15:55:53,809 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:55:53,810 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:55:53,814 - __main__ - INFO - ================================================================================
+2025-08-07 15:55:53,814 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:55:53,815 - __main__ - INFO - ================================================================================
+2025-08-07 15:55:53,815 - __main__ - INFO - Account: 2194718
+2025-08-07 15:55:53,815 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:55:53,815 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:55:53,815 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:55:53,815 - __main__ - INFO - Positions: 0
+2025-08-07 15:55:53,815 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:55:53,816 - __main__ - INFO - Can take trades: True
+2025-08-07 15:55:53,816 - __main__ - INFO - 
+2025-08-07 15:55:53,816 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:55:53,817 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:55:53,817 - __main__ - INFO -     Price: 0.65245
+2025-08-07 15:55:53,817 - __main__ - INFO -     SMA20: 0.65130
+2025-08-07 15:55:53,817 - __main__ - INFO -     RSI: 62.65
+2025-08-07 15:55:53,817 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:55:53,817 - __main__ - INFO -     Price vs SMA: 0.18%
+2025-08-07 15:55:53,818 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:55:53,818 - __main__ - INFO - ================================================================================
+2025-08-07 15:56:53,824 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:56:53,827 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65248, SMA20: 0.65130, SMA50: 0.64945, RSI: 62.79, ATR: 0.00104
+2025-08-07 15:56:53,828 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=62.79, Price vs SMA20: 0.18%
+2025-08-07 15:56:53,828 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:56:53,829 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:56:53,831 - __main__ - INFO - ================================================================================
+2025-08-07 15:56:53,832 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:56:53,832 - __main__ - INFO - ================================================================================
+2025-08-07 15:56:53,832 - __main__ - INFO - Account: 2194718
+2025-08-07 15:56:53,833 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:56:53,833 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:56:53,833 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:56:53,833 - __main__ - INFO - Positions: 0
+2025-08-07 15:56:53,833 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:56:53,833 - __main__ - INFO - Can take trades: True
+2025-08-07 15:56:53,834 - __main__ - INFO - 
+2025-08-07 15:56:53,834 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:56:53,834 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:56:53,834 - __main__ - INFO -     Price: 0.65248
+2025-08-07 15:56:53,834 - __main__ - INFO -     SMA20: 0.65130
+2025-08-07 15:56:53,834 - __main__ - INFO -     RSI: 62.79
+2025-08-07 15:56:53,835 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:56:53,835 - __main__ - INFO -     Price vs SMA: 0.18%
+2025-08-07 15:56:53,835 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:56:53,835 - __main__ - INFO - ================================================================================
+2025-08-07 15:57:53,838 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:57:53,845 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65255, SMA20: 0.65130, SMA50: 0.64945, RSI: 63.10, ATR: 0.00104
+2025-08-07 15:57:53,845 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=63.10, Price vs SMA20: 0.19%
+2025-08-07 15:57:53,845 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 15:57:53,847 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 15:57:53,852 - __main__ - INFO - ================================================================================
+2025-08-07 15:57:53,853 - __main__ - INFO - PROP FIRM BOT STATUS
+2025-08-07 15:57:53,853 - __main__ - INFO - ================================================================================
+2025-08-07 15:57:53,853 - __main__ - INFO - Account: 2194718
+2025-08-07 15:57:53,853 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 15:57:53,853 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 15:57:53,853 - __main__ - INFO - Profit: $0.00
+2025-08-07 15:57:53,854 - __main__ - INFO - Positions: 0
+2025-08-07 15:57:53,854 - __main__ - INFO - Waiting for trades: True
+2025-08-07 15:57:53,854 - __main__ - INFO - Can take trades: True
+2025-08-07 15:57:53,854 - __main__ - INFO - 
+2025-08-07 15:57:53,854 - __main__ - INFO - MARKET CONDITIONS:
+2025-08-07 15:57:53,854 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 15:57:53,854 - __main__ - INFO -     Price: 0.65255
+2025-08-07 15:57:53,855 - __main__ - INFO -     SMA20: 0.65130
+2025-08-07 15:57:53,856 - __main__ - INFO -     RSI: 63.10
+2025-08-07 15:57:53,857 - __main__ - INFO -     ATR: 0.00104
+2025-08-07 15:57:53,857 - __main__ - INFO -     Price vs SMA: 0.19%
+2025-08-07 15:57:53,857 - __main__ - INFO -     Signal Ready: False
+2025-08-07 15:57:53,858 - __main__ - INFO - ================================================================================
+2025-08-07 15:58:23,587 - __main__ - INFO - Received shutdown signal, stopping bots...
+2025-08-07 15:58:23,588 - __main__ - INFO - Stopping prop firm MT5 bot...
+2025-08-07 15:58:23,589 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot stopped
+2025-08-07 15:58:23,589 - __main__ - INFO - All bots stopped successfully
+2025-08-07 15:58:23,589 - __main__ - INFO - Cleanup completed
+2025-08-07 16:04:04,336 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 16:04:04,337 - __main__ - INFO - Prop Firm Strategy: RSI < 25 (BUY) or RSI > 75 (SELL) + SMA20 + 0.5% buffer
+2025-08-07 16:04:04,356 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 16:04:04,356 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 16:04:04,356 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 16:04:04,358 - mt5.mt5_prop_firm_bot - INFO - Found 6 forex symbols
+2025-08-07 16:04:04,358 - mt5.mt5_prop_firm_bot - INFO - Available symbols: ['AUDUSD.pro', 'EURUSD.pro', 'GBPUSD.pro', 'NZDUSD.pro', 'USDCAD.pro', 'USDJPY.pro']
+2025-08-07 16:04:04,359 - mt5.mt5_prop_firm_bot - INFO - Trading symbols: ['AUDUSD.pro']
+2025-08-07 16:04:04,359 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot initialized successfully
+2025-08-07 16:04:04,359 - mt5.mt5_prop_firm_bot - INFO - Initial balance: $50,000.00
+2025-08-07 16:04:04,359 - mt5.mt5_prop_firm_bot - INFO - Risk limits: 2.0% daily, 4.0% overall
+2025-08-07 16:04:04,359 - __main__ - INFO - Prop firm MT5 bot initialized successfully
+2025-08-07 16:04:04,359 - __main__ - INFO - Starting prop firm MT5 bot...
+2025-08-07 16:04:04,360 - __main__ - INFO - Waiting for: RSI < 25 (BUY) or RSI > 75 (SELL) with SMA20 + 0.5% buffer
+2025-08-07 16:04:04,360 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot started
+2025-08-07 16:04:04,360 - __main__ - INFO - All bots started successfully
+2025-08-07 16:04:04,360 - __main__ - INFO - Running bots indefinitely. Press Ctrl+C to stop.
+2025-08-07 16:04:04,363 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:04:04,368 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65270, SMA20: 0.65142, SMA50: 0.64959, RSI: 67.33, ATR: 0.00100
+2025-08-07 16:04:04,368 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=67.33, Price vs SMA20: 0.20%
+2025-08-07 16:04:04,368 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:04:04,370 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:04:04,373 - __main__ - INFO - ================================================================================
+2025-08-07 16:04:04,373 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:04:04,374 - __main__ - INFO - ================================================================================
+2025-08-07 16:04:04,374 - __main__ - INFO - Account: 2194718
+2025-08-07 16:04:04,374 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:04:04,374 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:04:04,374 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:04:04,374 - __main__ - INFO - Positions: 0
+2025-08-07 16:04:04,375 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:04:04,375 - __main__ - INFO - Can take trades: True
+2025-08-07 16:04:04,375 - __main__ - INFO - 
+2025-08-07 16:04:04,375 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:04:04,375 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:04:04,376 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:04:04,376 - __main__ - INFO -     Price: 0.65270
+2025-08-07 16:04:04,376 - __main__ - INFO -     SMA20: 0.65142
+2025-08-07 16:04:04,376 - __main__ - INFO -     RSI: 67.33
+2025-08-07 16:04:04,377 - __main__ - INFO -     ATR: 0.00100
+2025-08-07 16:04:04,377 - __main__ - INFO -     Price vs SMA: 0.20%
+2025-08-07 16:04:04,377 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:04:04,383 - __main__ - INFO - 
+2025-08-07 16:04:04,383 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:04:04,384 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:04:04,384 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:04:04,384 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:04:04,384 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:04:04,384 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:04:04,384 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:04:04,385 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:04:04,385 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:04:04,385 - __main__ - INFO - 
+2025-08-07 16:04:04,385 - __main__ - INFO - ================================================================================
+2025-08-07 16:05:04,380 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:05:04,384 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65282, SMA20: 0.65142, SMA50: 0.64959, RSI: 67.81, ATR: 0.00101
+2025-08-07 16:05:04,384 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=67.81, Price vs SMA20: 0.21%
+2025-08-07 16:05:04,385 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:05:04,395 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:05:04,399 - __main__ - INFO - ================================================================================
+2025-08-07 16:05:04,399 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:05:04,399 - __main__ - INFO - ================================================================================
+2025-08-07 16:05:04,400 - __main__ - INFO - Account: 2194718
+2025-08-07 16:05:04,400 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:05:04,400 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:05:04,400 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:05:04,401 - __main__ - INFO - Positions: 0
+2025-08-07 16:05:04,401 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:05:04,402 - __main__ - INFO - Can take trades: True
+2025-08-07 16:05:04,403 - __main__ - INFO - 
+2025-08-07 16:05:04,403 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:05:04,404 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:05:04,404 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:05:04,404 - __main__ - INFO -     Price: 0.65282
+2025-08-07 16:05:04,404 - __main__ - INFO -     SMA20: 0.65142
+2025-08-07 16:05:04,405 - __main__ - INFO -     RSI: 67.81
+2025-08-07 16:05:04,405 - __main__ - INFO -     ATR: 0.00101
+2025-08-07 16:05:04,405 - __main__ - INFO -     Price vs SMA: 0.21%
+2025-08-07 16:05:04,405 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:05:04,409 - __main__ - INFO - 
+2025-08-07 16:05:04,409 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:05:04,410 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:05:04,412 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:05:04,412 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:05:04,412 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:05:04,412 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:05:04,412 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:05:04,413 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:05:04,413 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:05:04,413 - __main__ - INFO - 
+2025-08-07 16:05:04,413 - __main__ - INFO - ================================================================================
+2025-08-07 16:06:04,398 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:06:04,401 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65287, SMA20: 0.65143, SMA50: 0.64959, RSI: 68.01, ATR: 0.00102
+2025-08-07 16:06:04,401 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=68.01, Price vs SMA20: 0.22%
+2025-08-07 16:06:04,401 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:06:04,429 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:06:04,432 - __main__ - INFO - ================================================================================
+2025-08-07 16:06:04,432 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:06:04,432 - __main__ - INFO - ================================================================================
+2025-08-07 16:06:04,433 - __main__ - INFO - Account: 2194718
+2025-08-07 16:06:04,433 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:06:04,433 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:06:04,433 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:06:04,433 - __main__ - INFO - Positions: 0
+2025-08-07 16:06:04,433 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:06:04,433 - __main__ - INFO - Can take trades: True
+2025-08-07 16:06:04,433 - __main__ - INFO - 
+2025-08-07 16:06:04,433 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:06:04,433 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:06:04,433 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:06:04,434 - __main__ - INFO -     Price: 0.65287
+2025-08-07 16:06:04,434 - __main__ - INFO -     SMA20: 0.65143
+2025-08-07 16:06:04,434 - __main__ - INFO -     RSI: 68.01
+2025-08-07 16:06:04,434 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:06:04,434 - __main__ - INFO -     Price vs SMA: 0.22%
+2025-08-07 16:06:04,435 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:06:04,437 - __main__ - INFO - 
+2025-08-07 16:06:04,438 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:06:04,438 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:06:04,438 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:06:04,438 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:06:04,438 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:06:04,438 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:06:04,438 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:06:04,438 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:06:04,438 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:06:04,438 - __main__ - INFO - 
+2025-08-07 16:06:04,439 - __main__ - INFO - ================================================================================
+2025-08-07 16:07:04,411 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:07:04,414 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65272, SMA20: 0.65142, SMA50: 0.64959, RSI: 67.41, ATR: 0.00102
+2025-08-07 16:07:04,414 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=67.41, Price vs SMA20: 0.20%
+2025-08-07 16:07:04,414 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:07:04,441 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:07:04,444 - __main__ - INFO - ================================================================================
+2025-08-07 16:07:04,444 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:07:04,444 - __main__ - INFO - ================================================================================
+2025-08-07 16:07:04,444 - __main__ - INFO - Account: 2194718
+2025-08-07 16:07:04,445 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:07:04,445 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:07:04,445 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:07:04,445 - __main__ - INFO - Positions: 0
+2025-08-07 16:07:04,445 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:07:04,445 - __main__ - INFO - Can take trades: True
+2025-08-07 16:07:04,445 - __main__ - INFO - 
+2025-08-07 16:07:04,446 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:07:04,446 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:07:04,446 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:07:04,446 - __main__ - INFO -     Price: 0.65272
+2025-08-07 16:07:04,446 - __main__ - INFO -     SMA20: 0.65142
+2025-08-07 16:07:04,446 - __main__ - INFO -     RSI: 67.41
+2025-08-07 16:07:04,447 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:07:04,447 - __main__ - INFO -     Price vs SMA: 0.20%
+2025-08-07 16:07:04,447 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:07:04,450 - __main__ - INFO - 
+2025-08-07 16:07:04,450 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:07:04,450 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:07:04,450 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:07:04,450 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:07:04,450 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:07:04,451 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:07:04,451 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:07:04,451 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:07:04,451 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:07:04,451 - __main__ - INFO - 
+2025-08-07 16:07:04,451 - __main__ - INFO - ================================================================================
+2025-08-07 16:08:04,424 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:08:04,429 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65255, SMA20: 0.65141, SMA50: 0.64958, RSI: 66.71, ATR: 0.00102
+2025-08-07 16:08:04,430 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=66.71, Price vs SMA20: 0.18%
+2025-08-07 16:08:04,430 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:08:04,455 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:08:04,458 - __main__ - INFO - ================================================================================
+2025-08-07 16:08:04,458 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:08:04,458 - __main__ - INFO - ================================================================================
+2025-08-07 16:08:04,458 - __main__ - INFO - Account: 2194718
+2025-08-07 16:08:04,459 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:08:04,459 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:08:04,459 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:08:04,460 - __main__ - INFO - Positions: 0
+2025-08-07 16:08:04,460 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:08:04,460 - __main__ - INFO - Can take trades: True
+2025-08-07 16:08:04,460 - __main__ - INFO - 
+2025-08-07 16:08:04,461 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:08:04,461 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:08:04,462 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:08:04,462 - __main__ - INFO -     Price: 0.65255
+2025-08-07 16:08:04,462 - __main__ - INFO -     SMA20: 0.65141
+2025-08-07 16:08:04,463 - __main__ - INFO -     RSI: 66.71
+2025-08-07 16:08:04,463 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:08:04,463 - __main__ - INFO -     Price vs SMA: 0.18%
+2025-08-07 16:08:04,463 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:08:04,466 - __main__ - INFO - 
+2025-08-07 16:08:04,466 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:08:04,466 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:08:04,467 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:08:04,467 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:08:04,467 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:08:04,467 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:08:04,468 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:08:04,468 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:08:04,468 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:08:04,468 - __main__ - INFO - 
+2025-08-07 16:08:04,468 - __main__ - INFO - ================================================================================
+2025-08-07 16:09:04,450 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:09:04,455 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65268, SMA20: 0.65142, SMA50: 0.64959, RSI: 67.25, ATR: 0.00102
+2025-08-07 16:09:04,456 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=67.25, Price vs SMA20: 0.19%
+2025-08-07 16:09:04,456 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:09:04,478 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:09:04,481 - __main__ - INFO - ================================================================================
+2025-08-07 16:09:04,481 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:09:04,481 - __main__ - INFO - ================================================================================
+2025-08-07 16:09:04,481 - __main__ - INFO - Account: 2194718
+2025-08-07 16:09:04,481 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:09:04,482 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:09:04,482 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:09:04,482 - __main__ - INFO - Positions: 0
+2025-08-07 16:09:04,482 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:09:04,482 - __main__ - INFO - Can take trades: True
+2025-08-07 16:09:04,482 - __main__ - INFO - 
+2025-08-07 16:09:04,482 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:09:04,482 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:09:04,482 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:09:04,482 - __main__ - INFO -     Price: 0.65268
+2025-08-07 16:09:04,482 - __main__ - INFO -     SMA20: 0.65142
+2025-08-07 16:09:04,483 - __main__ - INFO -     RSI: 67.25
+2025-08-07 16:09:04,483 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:09:04,483 - __main__ - INFO -     Price vs SMA: 0.19%
+2025-08-07 16:09:04,483 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:09:04,485 - __main__ - INFO - 
+2025-08-07 16:09:04,485 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:09:04,485 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:09:04,485 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:09:04,486 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:09:04,486 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:09:04,486 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:09:04,486 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:09:04,486 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:09:04,486 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:09:04,487 - __main__ - INFO - 
+2025-08-07 16:09:04,487 - __main__ - INFO - ================================================================================
+2025-08-07 16:10:04,460 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:10:04,463 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65271, SMA20: 0.65142, SMA50: 0.64959, RSI: 67.37, ATR: 0.00102
+2025-08-07 16:10:04,463 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=67.37, Price vs SMA20: 0.20%
+2025-08-07 16:10:04,464 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:10:04,490 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:10:04,494 - __main__ - INFO - ================================================================================
+2025-08-07 16:10:04,495 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:10:04,495 - __main__ - INFO - ================================================================================
+2025-08-07 16:10:04,495 - __main__ - INFO - Account: 2194718
+2025-08-07 16:10:04,495 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:10:04,495 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:10:04,495 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:10:04,496 - __main__ - INFO - Positions: 0
+2025-08-07 16:10:04,496 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:10:04,496 - __main__ - INFO - Can take trades: True
+2025-08-07 16:10:04,496 - __main__ - INFO - 
+2025-08-07 16:10:04,496 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:10:04,496 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:10:04,496 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:10:04,497 - __main__ - INFO -     Price: 0.65275
+2025-08-07 16:10:04,497 - __main__ - INFO -     SMA20: 0.65142
+2025-08-07 16:10:04,497 - __main__ - INFO -     RSI: 67.53
+2025-08-07 16:10:04,497 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:10:04,497 - __main__ - INFO -     Price vs SMA: 0.20%
+2025-08-07 16:10:04,497 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:10:04,500 - __main__ - INFO - 
+2025-08-07 16:10:04,500 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:10:04,501 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:10:04,501 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:10:04,501 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:10:04,501 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:10:04,502 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:10:04,502 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:10:04,502 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:10:04,503 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:10:04,503 - __main__ - INFO - 
+2025-08-07 16:10:04,503 - __main__ - INFO - ================================================================================
+2025-08-07 16:11:04,467 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:11:04,470 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65288, SMA20: 0.65143, SMA50: 0.64959, RSI: 68.05, ATR: 0.00102
+2025-08-07 16:11:04,470 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=68.05, Price vs SMA20: 0.22%
+2025-08-07 16:11:04,470 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:11:04,514 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:11:04,516 - __main__ - INFO - ================================================================================
+2025-08-07 16:11:04,517 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:11:04,517 - __main__ - INFO - ================================================================================
+2025-08-07 16:11:04,517 - __main__ - INFO - Account: 2194718
+2025-08-07 16:11:04,517 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:11:04,518 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:11:04,518 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:11:04,519 - __main__ - INFO - Positions: 0
+2025-08-07 16:11:04,519 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:11:04,519 - __main__ - INFO - Can take trades: True
+2025-08-07 16:11:04,519 - __main__ - INFO - 
+2025-08-07 16:11:04,519 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:11:04,519 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:11:04,519 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:11:04,519 - __main__ - INFO -     Price: 0.65288
+2025-08-07 16:11:04,520 - __main__ - INFO -     SMA20: 0.65143
+2025-08-07 16:11:04,520 - __main__ - INFO -     RSI: 68.05
+2025-08-07 16:11:04,520 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:11:04,520 - __main__ - INFO -     Price vs SMA: 0.22%
+2025-08-07 16:11:04,520 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:11:04,522 - __main__ - INFO - 
+2025-08-07 16:11:04,522 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:11:04,522 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:11:04,522 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:11:04,522 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:11:04,522 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:11:04,522 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:11:04,522 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:11:04,523 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:11:04,523 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:11:04,523 - __main__ - INFO - 
+2025-08-07 16:11:04,523 - __main__ - INFO - ================================================================================
+2025-08-07 16:12:04,476 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:12:04,480 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65292, SMA20: 0.65143, SMA50: 0.64959, RSI: 68.20, ATR: 0.00102
+2025-08-07 16:12:04,480 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=68.20, Price vs SMA20: 0.23%
+2025-08-07 16:12:04,480 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:12:04,536 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:12:04,539 - __main__ - INFO - ================================================================================
+2025-08-07 16:12:04,540 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:12:04,540 - __main__ - INFO - ================================================================================
+2025-08-07 16:12:04,540 - __main__ - INFO - Account: 2194718
+2025-08-07 16:12:04,541 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:12:04,541 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:12:04,541 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:12:04,541 - __main__ - INFO - Positions: 0
+2025-08-07 16:12:04,541 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:12:04,541 - __main__ - INFO - Can take trades: True
+2025-08-07 16:12:04,542 - __main__ - INFO - 
+2025-08-07 16:12:04,542 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:12:04,542 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:12:04,542 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:12:04,542 - __main__ - INFO -     Price: 0.65292
+2025-08-07 16:12:04,542 - __main__ - INFO -     SMA20: 0.65143
+2025-08-07 16:12:04,542 - __main__ - INFO -     RSI: 68.20
+2025-08-07 16:12:04,542 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:12:04,542 - __main__ - INFO -     Price vs SMA: 0.23%
+2025-08-07 16:12:04,543 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:12:04,545 - __main__ - INFO - 
+2025-08-07 16:12:04,545 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:12:04,545 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:12:04,545 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:12:04,545 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:12:04,545 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:12:04,545 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:12:04,545 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:12:04,545 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:12:04,546 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:12:04,546 - __main__ - INFO - 
+2025-08-07 16:12:04,546 - __main__ - INFO - ================================================================================
+2025-08-07 16:12:45,187 - __main__ - INFO - Received shutdown signal, stopping bots...
+2025-08-07 16:12:45,188 - __main__ - INFO - Stopping prop firm MT5 bot...
+2025-08-07 16:12:45,188 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot stopped
+2025-08-07 16:12:45,188 - __main__ - INFO - All bots stopped successfully
+2025-08-07 16:12:45,189 - __main__ - INFO - Cleanup completed
+2025-08-07 16:13:23,550 - __main__ - INFO - Initializing prop firm MT5 bot...
+2025-08-07 16:13:23,550 - __main__ - INFO - Prop Firm Strategy: RSI < 25 (BUY) or RSI > 75 (SELL) + SMA20 + 0.5% buffer
+2025-08-07 16:13:23,566 - mt5.mt5_config - INFO - Connected to MT5 account: 2194718
+2025-08-07 16:13:23,566 - mt5.mt5_config - INFO - Account balance: 50000.0
+2025-08-07 16:13:23,566 - mt5.mt5_config - INFO - Account equity: 50000.0
+2025-08-07 16:13:23,567 - mt5.mt5_prop_firm_bot - INFO - Found 6 forex symbols
+2025-08-07 16:13:23,567 - mt5.mt5_prop_firm_bot - INFO - Available symbols: ['AUDUSD.pro', 'EURUSD.pro', 'GBPUSD.pro', 'NZDUSD.pro', 'USDCAD.pro', 'USDJPY.pro']
+2025-08-07 16:13:23,568 - mt5.mt5_prop_firm_bot - INFO - Trading symbols: ['AUDUSD.pro']
+2025-08-07 16:13:23,568 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot initialized successfully
+2025-08-07 16:13:23,568 - mt5.mt5_prop_firm_bot - INFO - Initial balance: $50,000.00
+2025-08-07 16:13:23,568 - mt5.mt5_prop_firm_bot - INFO - Risk limits: 2.0% daily, 4.0% overall
+2025-08-07 16:13:23,568 - __main__ - INFO - Prop firm MT5 bot initialized successfully
+2025-08-07 16:13:23,569 - __main__ - INFO - Starting prop firm MT5 bot...
+2025-08-07 16:13:23,569 - __main__ - INFO - Waiting for: RSI < 25 (BUY) or RSI > 75 (SELL) with SMA20 + 0.5% buffer
+2025-08-07 16:13:23,569 - mt5.mt5_prop_firm_bot - INFO - MT5 Prop Firm Bot started
+2025-08-07 16:13:23,569 - __main__ - INFO - All bots started successfully
+2025-08-07 16:13:23,569 - __main__ - INFO - Running bots indefinitely. Press Ctrl+C to stop.
+2025-08-07 16:13:23,572 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:13:23,576 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65282, SMA20: 0.65142, SMA50: 0.64959, RSI: 67.81, ATR: 0.00102
+2025-08-07 16:13:23,577 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=67.81, Price vs SMA20: 0.21%
+2025-08-07 16:13:23,577 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:13:23,579 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:13:23,582 - __main__ - INFO - ================================================================================
+2025-08-07 16:13:23,582 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:13:23,582 - __main__ - INFO - ================================================================================
+2025-08-07 16:13:23,582 - __main__ - INFO - Account: 2194718
+2025-08-07 16:13:23,583 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:13:23,583 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:13:23,583 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:13:23,583 - __main__ - INFO - Positions: 0
+2025-08-07 16:13:23,583 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:13:23,583 - __main__ - INFO - Can take trades: True
+2025-08-07 16:13:23,583 - __main__ - INFO - 
+2025-08-07 16:13:23,583 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:13:23,584 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:13:23,584 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:13:23,584 - __main__ - INFO -     Price: 0.65282
+2025-08-07 16:13:23,584 - __main__ - INFO -     SMA20: 0.65142
+2025-08-07 16:13:23,584 - __main__ - INFO -     RSI: 67.81
+2025-08-07 16:13:23,585 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:13:23,585 - __main__ - INFO -     Price vs SMA: 0.21%
+2025-08-07 16:13:23,585 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:13:23,585 - __main__ - INFO -     [NEUTRAL] NO SIGNAL: RSI=67.81 is between 25-75 (neutral)
+2025-08-07 16:13:23,585 - __main__ - INFO - 
+2025-08-07 16:13:23,585 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:13:23,585 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:13:23,586 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:13:23,586 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:13:23,586 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:13:23,586 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:13:23,586 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:13:23,586 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:13:23,586 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:13:23,587 - __main__ - INFO - 
+2025-08-07 16:13:23,587 - __main__ - INFO - ================================================================================
+2025-08-07 16:14:23,583 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:14:23,586 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65293, SMA20: 0.65143, SMA50: 0.64959, RSI: 68.24, ATR: 0.00102
+2025-08-07 16:14:23,586 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=68.24, Price vs SMA20: 0.23%
+2025-08-07 16:14:23,586 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:14:23,600 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:14:23,604 - __main__ - INFO - ================================================================================
+2025-08-07 16:14:23,604 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:14:23,605 - __main__ - INFO - ================================================================================
+2025-08-07 16:14:23,605 - __main__ - INFO - Account: 2194718
+2025-08-07 16:14:23,605 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:14:23,606 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:14:23,606 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:14:23,606 - __main__ - INFO - Positions: 0
+2025-08-07 16:14:23,606 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:14:23,606 - __main__ - INFO - Can take trades: True
+2025-08-07 16:14:23,606 - __main__ - INFO - 
+2025-08-07 16:14:23,606 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:14:23,606 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:14:23,607 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:14:23,607 - __main__ - INFO -     Price: 0.65293
+2025-08-07 16:14:23,607 - __main__ - INFO -     SMA20: 0.65143
+2025-08-07 16:14:23,607 - __main__ - INFO -     RSI: 68.24
+2025-08-07 16:14:23,607 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:14:23,607 - __main__ - INFO -     Price vs SMA: 0.23%
+2025-08-07 16:14:23,607 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:14:23,607 - __main__ - INFO -     [NEUTRAL] NO SIGNAL: RSI=68.24 is between 25-75 (neutral)
+2025-08-07 16:14:23,608 - __main__ - INFO - 
+2025-08-07 16:14:23,608 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:14:23,608 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:14:23,608 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:14:23,608 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:14:23,608 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:14:23,609 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:14:23,609 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:14:23,609 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:14:23,609 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:14:23,609 - __main__ - INFO - 
+2025-08-07 16:14:23,609 - __main__ - INFO - ================================================================================
+2025-08-07 16:15:23,602 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:15:23,605 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65286, SMA20: 0.65142, SMA50: 0.64959, RSI: 67.97, ATR: 0.00102
+2025-08-07 16:15:23,605 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=67.97, Price vs SMA20: 0.22%
+2025-08-07 16:15:23,605 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:15:23,617 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:15:23,621 - __main__ - INFO - ================================================================================
+2025-08-07 16:15:23,621 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:15:23,621 - __main__ - INFO - ================================================================================
+2025-08-07 16:15:23,621 - __main__ - INFO - Account: 2194718
+2025-08-07 16:15:23,622 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:15:23,622 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:15:23,622 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:15:23,622 - __main__ - INFO - Positions: 0
+2025-08-07 16:15:23,622 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:15:23,622 - __main__ - INFO - Can take trades: True
+2025-08-07 16:15:23,622 - __main__ - INFO - 
+2025-08-07 16:15:23,622 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:15:23,623 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:15:23,623 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:15:23,624 - __main__ - INFO -     Price: 0.65286
+2025-08-07 16:15:23,624 - __main__ - INFO -     SMA20: 0.65142
+2025-08-07 16:15:23,625 - __main__ - INFO -     RSI: 67.97
+2025-08-07 16:15:23,625 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:15:23,625 - __main__ - INFO -     Price vs SMA: 0.22%
+2025-08-07 16:15:23,625 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:15:23,625 - __main__ - INFO -     [NEUTRAL] NO SIGNAL: RSI=67.97 is between 25-75 (neutral)
+2025-08-07 16:15:23,625 - __main__ - INFO - 
+2025-08-07 16:15:23,625 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:15:23,625 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:15:23,626 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:15:23,626 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:15:23,626 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:15:23,626 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:15:23,626 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:15:23,626 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:15:23,626 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:15:23,627 - __main__ - INFO - 
+2025-08-07 16:15:23,627 - __main__ - INFO - ================================================================================
+2025-08-07 16:16:23,615 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:16:23,622 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65288, SMA20: 0.65143, SMA50: 0.64959, RSI: 68.05, ATR: 0.00102
+2025-08-07 16:16:23,623 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=68.05, Price vs SMA20: 0.22%
+2025-08-07 16:16:23,623 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:16:23,643 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:16:23,648 - __main__ - INFO - ================================================================================
+2025-08-07 16:16:23,648 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:16:23,648 - __main__ - INFO - ================================================================================
+2025-08-07 16:16:23,649 - __main__ - INFO - Account: 2194718
+2025-08-07 16:16:23,650 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:16:23,650 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:16:23,651 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:16:23,651 - __main__ - INFO - Positions: 0
+2025-08-07 16:16:23,651 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:16:23,651 - __main__ - INFO - Can take trades: True
+2025-08-07 16:16:23,651 - __main__ - INFO - 
+2025-08-07 16:16:23,651 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:16:23,651 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:16:23,652 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:16:23,652 - __main__ - INFO -     Price: 0.65288
+2025-08-07 16:16:23,652 - __main__ - INFO -     SMA20: 0.65143
+2025-08-07 16:16:23,652 - __main__ - INFO -     RSI: 68.05
+2025-08-07 16:16:23,652 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:16:23,653 - __main__ - INFO -     Price vs SMA: 0.22%
+2025-08-07 16:16:23,653 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:16:23,653 - __main__ - INFO -     [NEUTRAL] NO SIGNAL: RSI=68.05 is between 25-75 (neutral)
+2025-08-07 16:16:23,653 - __main__ - INFO - 
+2025-08-07 16:16:23,653 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:16:23,654 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:16:23,654 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:16:23,654 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:16:23,654 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:16:23,654 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:16:23,655 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:16:23,655 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:16:23,655 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:16:23,655 - __main__ - INFO - 
+2025-08-07 16:16:23,655 - __main__ - INFO - ================================================================================
+2025-08-07 16:17:23,643 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:17:23,651 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65294, SMA20: 0.65143, SMA50: 0.64959, RSI: 68.28, ATR: 0.00102
+2025-08-07 16:17:23,652 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=68.28, Price vs SMA20: 0.23%
+2025-08-07 16:17:23,652 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:17:23,671 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:17:23,674 - __main__ - INFO - ================================================================================
+2025-08-07 16:17:23,675 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:17:23,675 - __main__ - INFO - ================================================================================
+2025-08-07 16:17:23,675 - __main__ - INFO - Account: 2194718
+2025-08-07 16:17:23,675 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:17:23,676 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:17:23,676 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:17:23,676 - __main__ - INFO - Positions: 0
+2025-08-07 16:17:23,678 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:17:23,678 - __main__ - INFO - Can take trades: True
+2025-08-07 16:17:23,678 - __main__ - INFO - 
+2025-08-07 16:17:23,679 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:17:23,679 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:17:23,679 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:17:23,679 - __main__ - INFO -     Price: 0.65294
+2025-08-07 16:17:23,679 - __main__ - INFO -     SMA20: 0.65143
+2025-08-07 16:17:23,680 - __main__ - INFO -     RSI: 68.28
+2025-08-07 16:17:23,680 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:17:23,680 - __main__ - INFO -     Price vs SMA: 0.23%
+2025-08-07 16:17:23,680 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:17:23,680 - __main__ - INFO -     [NEUTRAL] NO SIGNAL: RSI=68.28 is between 25-75 (neutral)
+2025-08-07 16:17:23,680 - __main__ - INFO - 
+2025-08-07 16:17:23,680 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:17:23,681 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:17:23,681 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:17:23,681 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:17:23,681 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:17:23,681 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:17:23,681 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:17:23,681 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:17:23,682 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:17:23,682 - __main__ - INFO - 
+2025-08-07 16:17:23,682 - __main__ - INFO - ================================================================================
+2025-08-07 16:18:23,655 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:18:23,659 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65288, SMA20: 0.65143, SMA50: 0.64959, RSI: 68.05, ATR: 0.00102
+2025-08-07 16:18:23,660 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=68.05, Price vs SMA20: 0.22%
+2025-08-07 16:18:23,660 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:18:23,685 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:18:23,688 - __main__ - INFO - ================================================================================
+2025-08-07 16:18:23,689 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:18:23,689 - __main__ - INFO - ================================================================================
+2025-08-07 16:18:23,690 - __main__ - INFO - Account: 2194718
+2025-08-07 16:18:23,690 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:18:23,690 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:18:23,691 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:18:23,694 - __main__ - INFO - Positions: 0
+2025-08-07 16:18:23,694 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:18:23,694 - __main__ - INFO - Can take trades: True
+2025-08-07 16:18:23,694 - __main__ - INFO - 
+2025-08-07 16:18:23,694 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:18:23,695 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:18:23,698 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:18:23,699 - __main__ - INFO -     Price: 0.65288
+2025-08-07 16:18:23,699 - __main__ - INFO -     SMA20: 0.65143
+2025-08-07 16:18:23,699 - __main__ - INFO -     RSI: 68.05
+2025-08-07 16:18:23,699 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:18:23,700 - __main__ - INFO -     Price vs SMA: 0.22%
+2025-08-07 16:18:23,700 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:18:23,700 - __main__ - INFO -     [NEUTRAL] NO SIGNAL: RSI=68.05 is between 25-75 (neutral)
+2025-08-07 16:18:23,700 - __main__ - INFO - 
+2025-08-07 16:18:23,700 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:18:23,700 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:18:23,700 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:18:23,700 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:18:23,701 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:18:23,701 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:18:23,701 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:18:23,701 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:18:23,701 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:18:23,701 - __main__ - INFO - 
+2025-08-07 16:18:23,702 - __main__ - INFO - ================================================================================
+2025-08-07 16:19:23,666 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:19:23,669 - mt5.mt5_prop_firm_bot - INFO - AUDUSD.pro - Price: 0.65286, SMA20: 0.65142, SMA50: 0.64959, RSI: 67.97, ATR: 0.00102
+2025-08-07 16:19:23,670 - mt5.mt5_prop_firm_bot - INFO - No signal for AUDUSD.pro: RSI=67.97, Price vs SMA20: 0.22%
+2025-08-07 16:19:23,670 - mt5.mt5_prop_firm_bot - INFO - No trading signal for AUDUSD.pro - waiting for better conditions
+2025-08-07 16:19:23,712 - mt5.mt5_prop_firm_bot - INFO - Successfully retrieved 100 bars for AUDUSD.pro
+2025-08-07 16:19:23,715 - __main__ - INFO - ================================================================================
+2025-08-07 16:19:23,715 - __main__ - INFO - PROP FIRM BOT STATUS & TRADING CRITERIA
+2025-08-07 16:19:23,716 - __main__ - INFO - ================================================================================
+2025-08-07 16:19:23,716 - __main__ - INFO - Account: 2194718
+2025-08-07 16:19:23,716 - __main__ - INFO - Balance: $50,000.00
+2025-08-07 16:19:23,716 - __main__ - INFO - Equity: $50,000.00
+2025-08-07 16:19:23,716 - __main__ - INFO - Profit: $0.00
+2025-08-07 16:19:23,716 - __main__ - INFO - Positions: 0
+2025-08-07 16:19:23,716 - __main__ - INFO - Waiting for trades: True
+2025-08-07 16:19:23,716 - __main__ - INFO - Can take trades: True
+2025-08-07 16:19:23,716 - __main__ - INFO - 
+2025-08-07 16:19:23,717 - __main__ - INFO - MARKET CONDITIONS & TRADING SIGNALS:
+2025-08-07 16:19:23,717 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:19:23,717 - __main__ - INFO -   AUDUSD.pro:
+2025-08-07 16:19:23,717 - __main__ - INFO -     Price: 0.65283
+2025-08-07 16:19:23,717 - __main__ - INFO -     SMA20: 0.65142
+2025-08-07 16:19:23,717 - __main__ - INFO -     RSI: 67.85
+2025-08-07 16:19:23,717 - __main__ - INFO -     ATR: 0.00102
+2025-08-07 16:19:23,718 - __main__ - INFO -     Price vs SMA: 0.22%
+2025-08-07 16:19:23,718 - __main__ - INFO -     Signal Ready: False
+2025-08-07 16:19:23,718 - __main__ - INFO -     [NEUTRAL] NO SIGNAL: RSI=67.85 is between 25-75 (neutral)
+2025-08-07 16:19:23,718 - __main__ - INFO - 
+2025-08-07 16:19:23,718 - __main__ - INFO - RISK MANAGEMENT STATUS:
+2025-08-07 16:19:23,718 - __main__ - INFO - ------------------------------------------------------------
+2025-08-07 16:19:23,719 - __main__ - INFO -   Trading Criteria:
+2025-08-07 16:19:23,719 - __main__ - INFO -     • RSI < 25 (BUY) or RSI > 75 (SELL)
+2025-08-07 16:19:23,719 - __main__ - INFO -     • Price 0.5% below/above SMA20
+2025-08-07 16:19:23,719 - __main__ - INFO -     • ATR-based position sizing
+2025-08-07 16:19:23,719 - __main__ - INFO -     • 1.5 ATR stop loss, 3 ATR take profit
+2025-08-07 16:19:23,719 - __main__ - INFO -     • Max 3 concurrent positions
+2025-08-07 16:19:23,720 - __main__ - INFO -     • 2% daily loss limit, 4% overall loss limit
+2025-08-07 16:19:23,720 - __main__ - INFO - 
+2025-08-07 16:19:23,720 - __main__ - INFO - ================================================================================

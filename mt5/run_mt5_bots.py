@@ -1,0 +1,241 @@
+"""
+MT5 Bots Launcher
+Run both regular and prop firm MT5 trading bots with monitoring.
+"""
+
+import asyncio
+import logging
+import argparse
+from typing import Dict, Any
+from datetime import datetime
+import signal
+import sys
+
+# Handle imports for both direct execution and module import
+try:
+    # Try relative imports first (when run as module)
+    from .mt5_trading_bot import MT5TradingBot
+    from .mt5_prop_firm_bot import MT5PropFirmBot, YFinanceBacktester
+    from .mt5_config import AccountType
+except ImportError:
+    # Fall back to absolute imports (when run directly)
+    from mt5_trading_bot import MT5TradingBot
+    from mt5_prop_firm_bot import MT5PropFirmBot, YFinanceBacktester
+    from mt5_config import AccountType
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('mt5_bots.log'),
+        logging.StreamHandler()
+    ]
+)
+
+logger = logging.getLogger(__name__)
+
+
+class MT5BotsLauncher:
+    """Launcher for MT5 trading bots."""
+    
+    def __init__(self):
+        self.regular_bot = None
+        self.prop_firm_bot = None
+        self.running = False
+        
+    async def initialize_bots(self, run_regular: bool = True, run_prop_firm: bool = True) -> bool:
+        """Initialize the trading bots."""
+        try:
+            if run_regular:
+                logger.info("Initializing regular MT5 bot...")
+                self.regular_bot = MT5TradingBot(AccountType.REGULAR)
+                if not await self.regular_bot.initialize():
+                    logger.error("Failed to initialize regular bot")
+                    return False
+                logger.info("Regular MT5 bot initialized successfully")
+            
+            if run_prop_firm:
+                logger.info("Initializing prop firm MT5 bot...")
+                self.prop_firm_bot = MT5PropFirmBot()
+                if not await self.prop_firm_bot.initialize():
+                    logger.error("Failed to initialize prop firm bot")
+                    return False
+                logger.info("Prop firm MT5 bot initialized successfully")
+            
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error initializing bots: {e}")
+            return False
+    
+    async def start_bots(self, run_regular: bool = True, run_prop_firm: bool = True):
+        """Start the trading bots."""
+        try:
+            if run_regular and self.regular_bot:
+                logger.info("Starting regular MT5 bot...")
+                await self.regular_bot.start_trading()
+            
+            if run_prop_firm and self.prop_firm_bot:
+                logger.info("Starting prop firm MT5 bot...")
+                await self.prop_firm_bot.start_trading()
+            
+            self.running = True
+            logger.info("All bots started successfully")
+            
+        except Exception as e:
+            logger.error(f"Error starting bots: {e}")
+    
+    async def stop_bots(self):
+        """Stop the trading bots."""
+        try:
+            if self.regular_bot:
+                logger.info("Stopping regular MT5 bot...")
+                await self.regular_bot.stop_trading()
+            
+            if self.prop_firm_bot:
+                logger.info("Stopping prop firm MT5 bot...")
+                await self.prop_firm_bot.stop_trading()
+            
+            self.running = False
+            logger.info("All bots stopped successfully")
+            
+        except Exception as e:
+            logger.error(f"Error stopping bots: {e}")
+    
+    async def cleanup(self):
+        """Cleanup resources."""
+        try:
+            if self.regular_bot:
+                self.regular_bot.cleanup()
+            
+            if self.prop_firm_bot:
+                self.prop_firm_bot.cleanup()
+                
+        except Exception as e:
+            logger.error(f"Error during cleanup: {e}")
+    
+    def get_status(self) -> Dict[str, Any]:
+        """Get status of all bots."""
+        status = {
+            "timestamp": datetime.now().isoformat(),
+            "running": self.running
+        }
+        
+        if self.regular_bot:
+            status["regular_bot"] = self.regular_bot.get_status()
+        
+        if self.prop_firm_bot:
+            status["prop_firm_bot"] = self.prop_firm_bot.get_status()
+        
+        return status
+    
+    async def run_backtest(self, symbols: list = None, start_date: str = "2024-01-01", end_date: str = "2024-12-31"):
+        """Run yfinance backtest for prop firm strategy."""
+        try:
+            if symbols is None:
+                symbols = ["EURUSD=X", "GBPUSD=X", "USDJPY=X", "AUDUSD=X"]
+            
+            logger.info("Running yfinance backtest for prop firm strategy...")
+            
+            backtester = YFinanceBacktester(
+                symbols=symbols,
+                initial_capital=100000
+            )
+            
+            result = backtester.run_backtest(start_date, end_date)
+            
+            logger.info("Backtest completed")
+            logger.info(f"Backtest results: {result}")
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"Error running backtest: {e}")
+            return None
+    
+    async def monitor_bots(self, interval: int = 60):
+        """Monitor bots and log status."""
+        while self.running:
+            try:
+                status = self.get_status()
+                logger.info(f"Bot status: {status}")
+                
+                # Check for any issues
+                if self.regular_bot and not self.regular_bot.connection.connected:
+                    logger.warning("Regular bot connection lost")
+                
+                if self.prop_firm_bot and not self.prop_firm_bot.connection.connected:
+                    logger.warning("Prop firm bot connection lost")
+                
+                await asyncio.sleep(interval)
+                
+            except Exception as e:
+                logger.error(f"Error monitoring bots: {e}")
+                await asyncio.sleep(interval)
+
+
+async def main():
+    """Main function to run the MT5 bots."""
+    parser = argparse.ArgumentParser(description="MT5 Trading Bots Launcher")
+    parser.add_argument("--regular", action="store_true", help="Run regular trading bot")
+    parser.add_argument("--prop-firm", action="store_true", help="Run prop firm trading bot")
+    parser.add_argument("--backtest", action="store_true", help="Run backtest only")
+    parser.add_argument("--monitor", action="store_true", help="Enable monitoring")
+    parser.add_argument("--duration", type=int, default=3600, help="Run duration in seconds (default: 3600)")
+    
+    args = parser.parse_args()
+    
+    # Default to running both bots if none specified
+    if not args.regular and not args.prop_firm and not args.backtest:
+        args.regular = True
+        args.prop_firm = True
+    
+    launcher = MT5BotsLauncher()
+    
+    def signal_handler(signum, frame):
+        """Handle shutdown signals."""
+        logger.info("Received shutdown signal, stopping bots...")
+        asyncio.create_task(launcher.stop_bots())
+    
+    # Register signal handlers
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+    
+    try:
+        if args.backtest:
+            # Run backtest only
+            logger.info("Running backtest...")
+            await launcher.run_backtest()
+            return
+        
+        # Initialize bots
+        if not await launcher.initialize_bots(args.regular, args.prop_firm):
+            logger.error("Failed to initialize bots")
+            return
+        
+        # Start bots
+        await launcher.start_bots(args.regular, args.prop_firm)
+        
+        # Start monitoring if requested
+        if args.monitor:
+            monitor_task = asyncio.create_task(launcher.monitor_bots())
+        
+        # Run for specified duration
+        logger.info(f"Running bots for {args.duration} seconds...")
+        await asyncio.sleep(args.duration)
+        
+        # Stop bots
+        await launcher.stop_bots()
+        
+    except KeyboardInterrupt:
+        logger.info("Keyboard interrupt received")
+    except Exception as e:
+        logger.error(f"Error in main: {e}")
+    finally:
+        await launcher.cleanup()
+        logger.info("MT5 bots launcher shutdown complete")
+
+
+if __name__ == "__main__":
+    asyncio.run(main()) 

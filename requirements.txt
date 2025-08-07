@@ -39,6 +39,9 @@ pydantic-settings>=2.0.0
 alpaca-py>=0.13.0
 # ibapi>=10.19.0  # Interactive Brokers API - install manually from IB website
 
+# MT5 Trading
+MetaTrader5>=5.0.45
+
 # Development tools
 black>=23.0.0
 pylint>=2.17.0
