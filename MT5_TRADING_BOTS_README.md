@@ -4,7 +4,7 @@
 
 This system provides separate MT5 trading bots for regular and prop firm accounts with configurable parameters and comprehensive backtesting capabilities. The bots use mean reversion strategies with advanced filtering and risk management.
 
-## 🎯 Key Features
+## 🎯 Key Features s
 
 - **Separate Configurations**: Different parameters for regular and prop firm accounts
 - **Configurable Risk Management**: Adjustable daily/overall loss limits
