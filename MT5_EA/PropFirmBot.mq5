@@ -10,14 +10,14 @@
 
 //--- Input Parameters
 input group "=== Trading Parameters ==="
-input double   InpThreshold = 0.01;           // Threshold for signal generation (1%) - matches Python
-input int      InpLookbackWindow = 30;        // Lookback window for MA calculation - matches Python
-input ENUM_TIMEFRAMES InpTimeframe = PERIOD_D1; // Timeframe for MA calculation - matches Python daily
-input double   InpPositionSizePct = 0.02;     // Position size as % of balance (2%) - matches Python
-input double   InpStopLossPct = 0.05;         // Stop loss as % of price (5%) - matches Python
-input double   InpTakeProfitPct = 0.10;       // Take profit as % of price (10%) - matches Python
-input int      InpMaxHoldTime = 168;          // Maximum hold time in hours (7 days)
-input double   InpMinPositionSpacing = 0.002; // Minimum spacing between positions (0.2%)
+input double   InpThreshold = 0.008;          // Threshold for signal generation (0.8%) - more aggressive
+input int      InpLookbackWindow = 20;        // Lookback window for MA calculation - shorter for faster signals
+input ENUM_TIMEFRAMES InpTimeframe = PERIOD_H4; // Timeframe for MA calculation - 4H for more signals
+input double   InpPositionSizePct = 0.05;     // Position size as % of balance (5%) - larger positions
+input double   InpStopLossPct = 0.03;         // Stop loss as % of price (3%) - tighter SL
+input double   InpTakeProfitPct = 0.06;       // Take profit as % of price (6%) - 2:1 R:R ratio
+input int      InpMaxHoldTime = 48;           // Maximum hold time in hours (2 days)
+input double   InpMinPositionSpacing = 0.003; // Minimum spacing between positions (0.3%)
 
 input group "=== Risk Management ==="
 input double   InpMaxLossPerTrade = 0.01;     // Max loss per trade (1%)
@@ -34,6 +34,17 @@ input bool     InpEnableTrailingStop = false; // Enable trailing stop
 input double   InpTrailingStopPct = 0.02;     // Trailing stop percentage
 input bool     InpEnableBreakeven = false;    // Enable breakeven trigger
 input double   InpBreakevenTrigger = 0.01;    // Breakeven trigger percentage
+
+input group "=== Advanced Strategy ==="
+input bool     InpEnableMomentumFilter = true; // Enable momentum filter
+input int      InpMomentumPeriod = 14;        // Momentum calculation period
+input double   InpMomentumThreshold = 0.5;    // Momentum threshold
+input bool     InpEnableVolatilityFilter = true; // Enable volatility filter
+input int      InpVolatilityPeriod = 20;      // Volatility calculation period
+input double   InpMinVolatility = 0.005;      // Minimum volatility threshold
+input bool     InpEnableDynamicSizing = true; // Enable dynamic position sizing
+input double   InpWinStreakMultiplier = 1.2;  // Position size multiplier for win streaks
+input double   InpMaxPositionSize = 0.15;     // Maximum position size (15%)
 
 //--- Global Variables
 double g_initialBalance = 0;
@@ -196,6 +207,25 @@ bool HasClosePositions(double currentPrice)
 }
 
 //+------------------------------------------------------------------+
+//| Update win/loss streaks based on position P&L                   |
+//+------------------------------------------------------------------+
+void UpdateStreaks(double pnl)
+{
+    if(pnl > 0)
+    {
+        g_winStreak++;
+        g_loseStreak = 0;
+        Print("🎉 Win streak: ", g_winStreak, " | P&L: +$", DoubleToString(pnl, 2));
+    }
+    else if(pnl < 0)
+    {
+        g_loseStreak++;
+        g_winStreak = 0;
+        Print("📉 Lose streak: ", g_loseStreak, " | P&L: -$", DoubleToString(MathAbs(pnl), 2));
+    }
+}
+
+//+------------------------------------------------------------------+
 //| Close a specific position by ticket                             |
 //+------------------------------------------------------------------+
 void ClosePosition(ulong ticket)
@@ -205,6 +235,7 @@ void ClosePosition(ulong ticket)
     
     ENUM_POSITION_TYPE posType = (ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE);
     double volume = PositionGetDouble(POSITION_VOLUME);
+    double pnl = PositionGetDouble(POSITION_PROFIT);
     
     MqlTradeRequest request = {};
     MqlTradeResult result = {};
@@ -224,6 +255,7 @@ void ClosePosition(ulong ticket)
     if(success && result.retcode == TRADE_RETCODE_DONE)
     {
         Print("✅ Position closed: Ticket ", ticket, " at ", DoubleToString(request.price, _Digits));
+        UpdateStreaks(pnl);
     }
     else
     {
@@ -343,10 +375,42 @@ string GenerateSignal(double currentPrice, double ma)
     Print("   Buy Threshold: ", DoubleToString(buyThreshold, _Digits), " (", DoubleToString(-threshold * 100, 3), "%)");
     Print("   Sell Threshold: ", DoubleToString(sellThreshold, _Digits), " (", DoubleToString(threshold * 100, 3), "%)");
     Print("   Current Deviation: ", DoubleToString(deviation, 3), "%");
-    Print("   Price < Buy Threshold? ", (currentPrice < buyThreshold ? "YES" : "NO"));
-    Print("   Price > Sell Threshold? ", (currentPrice > sellThreshold ? "YES" : "NO"));
     
-    // Mean reversion logic
+    // Calculate momentum and volatility filters
+    double momentum = CalculateMomentum(InpMomentumPeriod);
+    double volatility = CalculateVolatility(InpVolatilityPeriod);
+    
+    Print("   Momentum: ", DoubleToString(momentum, 2), "%");
+    Print("   Volatility: ", DoubleToString(volatility * 100, 2), "%");
+    
+    // Apply momentum filter
+    if(InpEnableMomentumFilter)
+    {
+        if(currentPrice < buyThreshold && momentum > InpMomentumThreshold)
+        {
+            Print("   ✅ BUY Signal: Price below threshold + positive momentum");
+            return "BUY";
+        }
+        else if(currentPrice > sellThreshold && momentum < -InpMomentumThreshold)
+        {
+            Print("   ✅ SELL Signal: Price above threshold + negative momentum");
+            return "SELL";
+        }
+        else
+        {
+            Print("   ⏸️  HOLD: Momentum filter not satisfied");
+            return "HOLD";
+        }
+    }
+    
+    // Apply volatility filter
+    if(InpEnableVolatilityFilter && volatility < InpMinVolatility)
+    {
+        Print("   ⏸️  HOLD: Volatility too low (", DoubleToString(volatility * 100, 2), "% < ", DoubleToString(InpMinVolatility * 100, 2), "%)");
+        return "HOLD";
+    }
+    
+    // Mean reversion logic (if filters are disabled or passed)
     if(currentPrice < buyThreshold)
     {
         Print("   🟢 BUY Signal: Price below buy threshold");
@@ -362,6 +426,81 @@ string GenerateSignal(double currentPrice, double ma)
         Print("   ⏸️  HOLD: Price within threshold range");
         return "HOLD";
     }
+}
+
+//+------------------------------------------------------------------+
+//| Calculate momentum (rate of change)                             |
+//+------------------------------------------------------------------+
+double CalculateMomentum(int period)
+{
+    if(period <= 0) return 0;
+    
+    double currentPrice = iClose(_Symbol, InpTimeframe, 0);
+    double pastPrice = iClose(_Symbol, InpTimeframe, period);
+    
+    if(pastPrice <= 0) return 0;
+    
+    return (currentPrice - pastPrice) / pastPrice * 100;
+}
+
+//+------------------------------------------------------------------+
+//| Calculate volatility (standard deviation)                       |
+//+------------------------------------------------------------------+
+double CalculateVolatility(int period)
+{
+    if(period <= 0) return 0;
+    
+    double sum = 0;
+    double sumSquared = 0;
+    int count = 0;
+    
+    for(int i = 0; i < period; i++)
+    {
+        double close = iClose(_Symbol, InpTimeframe, i);
+        if(close > 0)
+        {
+            sum += close;
+            sumSquared += close * close;
+            count++;
+        }
+    }
+    
+    if(count <= 1) return 0;
+    
+    double mean = sum / count;
+    double variance = (sumSquared / count) - (mean * mean);
+    
+    return MathSqrt(variance) / mean; // Return as percentage
+}
+
+//+------------------------------------------------------------------+
+//| Calculate dynamic position size based on win streak             |
+//+------------------------------------------------------------------+
+double CalculateDynamicPositionSize(double baseSize)
+{
+    if(!InpEnableDynamicSizing)
+        return baseSize;
+    
+    double dynamicSize = baseSize;
+    
+    // Increase size based on win streak
+    if(g_winStreak > 0)
+    {
+        double multiplier = 1.0 + (g_winStreak * (InpWinStreakMultiplier - 1.0));
+        dynamicSize *= multiplier;
+    }
+    
+    // Decrease size based on losing streak
+    if(g_loseStreak > 0)
+    {
+        double multiplier = 1.0 / (1.0 + (g_loseStreak * 0.2));
+        dynamicSize *= multiplier;
+    }
+    
+    // Cap at maximum position size
+    dynamicSize = MathMin(dynamicSize, InpMaxPositionSize);
+    
+    return dynamicSize;
 }
 
 //+------------------------------------------------------------------+
@@ -421,9 +560,12 @@ ENUM_ORDER_TYPE_FILLING GetBestFillingMode()
 //+------------------------------------------------------------------+
 void OpenPosition(ENUM_ORDER_TYPE orderType, double price)
 {
-    // Calculate position size
+    // Calculate base position size
     double balance = AccountInfoDouble(ACCOUNT_BALANCE);
-    double positionSize = balance * InpPositionSizePct * g_currentLeverage;
+    double basePositionSize = balance * InpPositionSizePct * g_currentLeverage;
+    
+    // Apply dynamic position sizing
+    double dynamicPositionSize = CalculateDynamicPositionSize(basePositionSize);
     
     // Get symbol info
     double minLot = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
@@ -431,7 +573,7 @@ void OpenPosition(ENUM_ORDER_TYPE orderType, double price)
     double lotStep = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_STEP);
     
     // Convert to lots (simplified calculation)
-    double lotSize = positionSize / 1000; // Rough conversion for forex
+    double lotSize = dynamicPositionSize / 1000; // Rough conversion for forex
     
     // Ensure minimum lot size and normalize
     lotSize = MathMax(lotSize, minLot);
@@ -440,7 +582,9 @@ void OpenPosition(ENUM_ORDER_TYPE orderType, double price)
     
     Print("💰 Position Size Calculation:");
     Print("   Balance: $", DoubleToString(balance, 2));
-    Print("   Position Size %: ", DoubleToString(InpPositionSizePct * 100, 2), "%");
+    Print("   Base Position Size %: ", DoubleToString(InpPositionSizePct * 100, 2), "%");
+    Print("   Dynamic Position Size: ", DoubleToString(dynamicPositionSize, 2));
+    Print("   Win Streak: ", g_winStreak, " | Lose Streak: ", g_loseStreak);
     Print("   Leverage: ", DoubleToString(g_currentLeverage, 1));
     Print("   Calculated Lots: ", DoubleToString(lotSize, 2));
     Print("   Min Lot: ", DoubleToString(minLot, 2));
@@ -475,9 +619,9 @@ void OpenPosition(ENUM_ORDER_TYPE orderType, double price)
     request.deviation = InpSlippage;
     request.magic = InpMagicNumber;
     request.comment = "PropFirmBot";
-    request.type_filling = GetBestFillingMode(); // Use the new function
+    request.type_filling = GetBestFillingMode();
     
-    Print("�� Order Details:");
+    Print("📋 Order Details:");
     Print("   Type: ", (orderType == ORDER_TYPE_BUY ? "BUY" : "SELL"));
     Print("   Price: ", DoubleToString(price, _Digits));
     Print("   Lots: ", DoubleToString(lotSize, 2));
