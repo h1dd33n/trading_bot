@@ -14,8 +14,10 @@ input double   InpThreshold = 0.001;          // Threshold for signal generation
 input int      InpLookbackWindow = 20;        // Lookback window for MA calculation
 input ENUM_TIMEFRAMES InpTimeframe = PERIOD_H1; // Timeframe for MA calculation
 input double   InpPositionSizePct = 0.02;     // Position size as % of balance (2%)
-input double   InpStopLossPct = 0.05;         // Stop loss as % of price (5%)
-input double   InpTakeProfitPct = 0.10;       // Take profit as % of price (10%)
+input double   InpStopLossPct = 0.02;         // Stop loss as % of price (2%)
+input double   InpTakeProfitPct = 0.04;       // Take profit as % of price (4%)
+input int      InpMaxHoldTime = 24;           // Maximum hold time in hours
+input double   InpMinPositionSpacing = 0.005; // Minimum spacing between positions (0.5%)
 
 input group "=== Risk Management ==="
 input double   InpMaxLossPerTrade = 0.01;     // Max loss per trade (1%)
@@ -156,6 +158,73 @@ bool ShouldTrade()
 }
 
 //+------------------------------------------------------------------+
+//| Check if we have positions too close to current price           |
+//+------------------------------------------------------------------+
+bool HasClosePositions(double currentPrice)
+{
+    for(int i = 0; i < PositionsTotal(); i++)
+    {
+        ulong ticket = PositionGetTicket(i);
+        if(ticket <= 0)
+            continue;
+        
+        if(!PositionSelectByTicket(ticket))
+            continue;
+        
+        // Check if position is for this symbol
+        if(PositionGetString(POSITION_SYMBOL) != _Symbol)
+            continue;
+        
+        double openPrice = PositionGetDouble(POSITION_PRICE_OPEN);
+        double priceDiff = MathAbs(currentPrice - openPrice) / currentPrice;
+        
+        if(priceDiff < InpMinPositionSpacing)
+        {
+            Print("⚠️  Position too close: ", DoubleToString(openPrice, _Digits), " (diff: ", DoubleToString(priceDiff * 100, 2), "%)");
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+//+------------------------------------------------------------------+
+//| Close a specific position by ticket                             |
+//+------------------------------------------------------------------+
+void ClosePosition(ulong ticket)
+{
+    if(!PositionSelectByTicket(ticket))
+        return;
+    
+    ENUM_POSITION_TYPE posType = (ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE);
+    double volume = PositionGetDouble(POSITION_VOLUME);
+    
+    MqlTradeRequest request = {};
+    MqlTradeResult result = {};
+    
+    request.action = TRADE_ACTION_DEAL;
+    request.position = ticket;
+    request.symbol = _Symbol;
+    request.volume = volume;
+    request.type = (posType == POSITION_TYPE_BUY) ? ORDER_TYPE_SELL : ORDER_TYPE_BUY;
+    request.price = (posType == POSITION_TYPE_BUY) ? SymbolInfoDouble(_Symbol, SYMBOL_BID) : SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+    request.deviation = InpSlippage;
+    request.magic = InpMagicNumber;
+    request.comment = "TimeExit";
+    
+    bool success = OrderSend(request, result);
+    
+    if(success && result.retcode == TRADE_RETCODE_DONE)
+    {
+        Print("✅ Position closed: Ticket ", ticket, " at ", DoubleToString(request.price, _Digits));
+    }
+    else
+    {
+        Print("❌ Failed to close position. Error: ", result.retcode, " - ", result.comment);
+    }
+}
+
+//+------------------------------------------------------------------+
 //| Check for exit signals on existing positions                    |
 //+------------------------------------------------------------------+
 void CheckExitSignals()
@@ -172,6 +241,18 @@ void CheckExitSignals()
         // Check if position is for this symbol
         if(PositionGetString(POSITION_SYMBOL) != _Symbol)
             continue;
+        
+        // Check time-based exit
+        datetime openTime = (datetime)PositionGetInteger(POSITION_TIME);
+        datetime currentTime = TimeCurrent();
+        int hoursOpen = (int)((currentTime - openTime) / 3600);
+        
+        if(hoursOpen >= InpMaxHoldTime)
+        {
+            Print("⏰ Closing position due to max hold time: ", hoursOpen, " hours");
+            ClosePosition(ticket);
+            continue;
+        }
         
         // Check trailing stop
         if(InpEnableTrailingStop)
@@ -190,6 +271,13 @@ void CheckEntrySignals()
 {
     // Get current CLOSE price for signal generation (consistent with MA calculation)
     double currentPrice = iClose(_Symbol, InpTimeframe, 0);
+    
+    // Check if we have positions too close to current price
+    if(HasClosePositions(currentPrice))
+    {
+        Print("⏸️  Skipping signal - positions too close to current price");
+        return;
+    }
     
     // Calculate moving average
     double ma = CalculateMA(InpLookbackWindow);
