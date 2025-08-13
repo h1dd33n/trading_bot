@@ -10,8 +10,8 @@
 
 //--- Input Parameters
 input group "=== Trading Parameters ==="
-input double   InpThreshold = 0.01;           // Threshold for signal generation (1%)
-input int      InpLookbackWindow = 30;        // Lookback window for MA calculation
+input double   InpThreshold = 0.005;          // Threshold for signal generation (0.5%)
+input int      InpLookbackWindow = 20;        // Lookback window for MA calculation
 input double   InpPositionSizePct = 0.02;     // Position size as % of balance (2%)
 input double   InpStopLossPct = 0.05;         // Stop loss as % of price (5%)
 input double   InpTakeProfitPct = 0.10;       // Take profit as % of price (10%)
@@ -90,6 +90,15 @@ void OnDeinit(const int reason)
 //+------------------------------------------------------------------+
 void OnTick()
 {
+    static int tickCount = 0;
+    tickCount++;
+    
+    // Print every 100 ticks to avoid spam
+    if(tickCount % 100 == 0)
+    {
+        Print("🔄 OnTick #", tickCount, " - Time: ", TimeToString(TimeCurrent()));
+    }
+    
     // Check if we should trade
     if(!ShouldTrade())
         return;
@@ -108,11 +117,17 @@ bool ShouldTrade()
 {
     // Check if market is closed
     if(!MQLInfoInteger(MQL_TRADE_ALLOWED))
+    {
+        Print("❌ Trading not allowed by MQL");
         return false;
+    }
     
     // Check if we have open positions
     if(PositionsTotal() > 0)
+    {
+        Print("⏸️  Already have open positions: ", PositionsTotal());
         return false;
+    }
     
     // Check daily loss limit
     double currentBalance = AccountInfoDouble(ACCOUNT_BALANCE);
@@ -131,6 +146,7 @@ bool ShouldTrade()
         return false;
     }
     
+    Print("✅ ShouldTrade: All checks passed");
     return true;
 }
 
@@ -167,25 +183,43 @@ void CheckExitSignals()
 //+------------------------------------------------------------------+
 void CheckEntrySignals()
 {
-    // Get current price
-    double currentPrice = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+    // Get current CLOSE price for signal generation (consistent with MA calculation)
+    double currentPrice = iClose(_Symbol, PERIOD_D1, 0);
     
     // Calculate moving average
     double ma = CalculateMA(InpLookbackWindow);
     
     if(ma <= 0)
+    {
+        Print("⚠️  Cannot calculate MA - insufficient data");
         return;
+    }
     
     // Generate signal
     string signal = GenerateSignal(currentPrice, ma);
     
+    // Debug output
+    Print("📊 Signal Analysis:");
+    Print("   Current Price: ", DoubleToString(currentPrice, _Digits));
+    Print("   MA(", InpLookbackWindow, "): ", DoubleToString(ma, _Digits));
+    Print("   Threshold: ", DoubleToString(InpThreshold * 100, 2), "%");
+    Print("   Signal: ", signal);
+    
     if(signal == "BUY")
     {
-        OpenPosition(ORDER_TYPE_BUY, currentPrice);
+        double askPrice = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+        Print("🟢 Opening BUY position at ASK: ", DoubleToString(askPrice, _Digits));
+        OpenPosition(ORDER_TYPE_BUY, askPrice);
     }
     else if(signal == "SELL")
     {
-        OpenPosition(ORDER_TYPE_SELL, currentPrice);
+        double bidPrice = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+        Print("🔴 Opening SELL position at BID: ", DoubleToString(bidPrice, _Digits));
+        OpenPosition(ORDER_TYPE_SELL, bidPrice);
+    }
+    else
+    {
+        Print("⏸️  No signal - holding");
     }
 }
 
@@ -196,17 +230,33 @@ string GenerateSignal(double currentPrice, double ma)
 {
     double threshold = InpThreshold;
     
+    // Calculate deviation percentages
+    double buyThreshold = ma * (1 - threshold);
+    double sellThreshold = ma * (1 + threshold);
+    
+    double deviation = (currentPrice - ma) / ma * 100;
+    
+    Print("🔍 Signal Calculation:");
+    Print("   Buy Threshold: ", DoubleToString(buyThreshold, _Digits), " (", DoubleToString(-threshold * 100, 2), "%)");
+    Print("   Sell Threshold: ", DoubleToString(sellThreshold, _Digits), " (", DoubleToString(threshold * 100, 2), "%)");
+    Print("   Current Deviation: ", DoubleToString(deviation, 2), "%");
+    
     // Mean reversion logic
-    if(currentPrice < ma * (1 - threshold))
+    if(currentPrice < buyThreshold)
     {
+        Print("   🟢 BUY Signal: Price below buy threshold");
         return "BUY";
     }
-    else if(currentPrice > ma * (1 + threshold))
+    else if(currentPrice > sellThreshold)
     {
+        Print("   🔴 SELL Signal: Price above sell threshold");
         return "SELL";
     }
-    
-    return "HOLD";
+    else
+    {
+        Print("   ⏸️  HOLD: Price within threshold range");
+        return "HOLD";
+    }
 }
 
 //+------------------------------------------------------------------+
@@ -242,17 +292,27 @@ void OpenPosition(ENUM_ORDER_TYPE orderType, double price)
     double balance = AccountInfoDouble(ACCOUNT_BALANCE);
     double positionSize = balance * InpPositionSizePct * g_currentLeverage;
     
-    // Convert to lots
-    double lotSize = NormalizeDouble(positionSize / (price * 100000), 2);
-    
-    // Ensure minimum lot size
+    // Get symbol info
     double minLot = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
     double maxLot = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MAX);
     double lotStep = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_STEP);
     
+    // Convert to lots (simplified calculation)
+    double lotSize = positionSize / 1000; // Rough conversion for forex
+    
+    // Ensure minimum lot size and normalize
     lotSize = MathMax(lotSize, minLot);
     lotSize = MathMin(lotSize, maxLot);
     lotSize = NormalizeDouble(lotSize / lotStep, 2) * lotStep;
+    
+    Print("💰 Position Size Calculation:");
+    Print("   Balance: $", DoubleToString(balance, 2));
+    Print("   Position Size %: ", DoubleToString(InpPositionSizePct * 100, 2), "%");
+    Print("   Leverage: ", DoubleToString(g_currentLeverage, 1));
+    Print("   Calculated Lots: ", DoubleToString(lotSize, 2));
+    Print("   Min Lot: ", DoubleToString(minLot, 2));
+    Print("   Max Lot: ", DoubleToString(maxLot, 2));
+    Print("   Lot Step: ", DoubleToString(lotStep, 2));
     
     // Calculate stop loss and take profit
     double sl = 0, tp = 0;
@@ -283,6 +343,13 @@ void OpenPosition(ENUM_ORDER_TYPE orderType, double price)
     request.magic = InpMagicNumber;
     request.comment = "PropFirmBot";
     request.type_filling = ORDER_FILLING_IOC;
+    
+    Print("📋 Order Details:");
+    Print("   Type: ", (orderType == ORDER_TYPE_BUY ? "BUY" : "SELL"));
+    Print("   Price: ", DoubleToString(price, _Digits));
+    Print("   Lots: ", DoubleToString(lotSize, 2));
+    Print("   SL: ", DoubleToString(sl, _Digits));
+    Print("   TP: ", DoubleToString(tp, _Digits));
     
     // Send order
     bool success = OrderSend(request, result);
