@@ -21,6 +21,7 @@ input group "=== Risk Management ==="
 input double   InpMaxLossPerTrade = 0.01;     // Max loss per trade (1%)
 input double   InpMaxDailyLoss = 0.02;        // Max daily loss (2%)
 input double   InpMaxOverallLoss = 0.04;      // Max overall loss (4%)
+input int      InpMaxPositions = 10;          // Maximum open positions
 input bool     InpEnableRiskCompounding = true; // Enable risk compounding
 input double   InpLeverageMultiplier = 1.0;   // Leverage multiplier
 
@@ -74,6 +75,8 @@ int OnInit()
     Print("📊 Symbol: ", _Symbol);
     Print("⚙️  Threshold: ", DoubleToString(InpThreshold * 100, 1), "%");
     Print("📈 Position Size: ", DoubleToString(InpPositionSizePct * 100, 1), "%");
+    Print("🔢 Max Positions: ", InpMaxPositions);
+    Print("⏰ Timeframe: ", EnumToString(InpTimeframe));
     
     return INIT_SUCCEEDED;
 }
@@ -123,10 +126,11 @@ bool ShouldTrade()
         return false;
     }
     
-    // Check if we have open positions
-    if(PositionsTotal() > 0)
+    // Check if we have reached maximum positions
+    int currentPositions = PositionsTotal();
+    if(currentPositions >= InpMaxPositions)
     {
-        Print("⏸️  Already have open positions: ", PositionsTotal());
+        Print("⏸️  Maximum positions reached: ", currentPositions, "/", InpMaxPositions);
         return false;
     }
     
@@ -147,7 +151,7 @@ bool ShouldTrade()
         return false;
     }
     
-    Print("✅ ShouldTrade: All checks passed");
+    Print("✅ ShouldTrade: All checks passed (Positions: ", currentPositions, "/", InpMaxPositions, ")");
     return true;
 }
 
