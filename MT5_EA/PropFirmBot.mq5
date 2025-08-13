@@ -10,8 +10,9 @@
 
 //--- Input Parameters
 input group "=== Trading Parameters ==="
-input double   InpThreshold = 0.005;          // Threshold for signal generation (0.5%)
+input double   InpThreshold = 0.001;          // Threshold for signal generation (0.1%)
 input int      InpLookbackWindow = 20;        // Lookback window for MA calculation
+input ENUM_TIMEFRAMES InpTimeframe = PERIOD_H1; // Timeframe for MA calculation
 input double   InpPositionSizePct = 0.02;     // Position size as % of balance (2%)
 input double   InpStopLossPct = 0.05;         // Stop loss as % of price (5%)
 input double   InpTakeProfitPct = 0.10;       // Take profit as % of price (10%)
@@ -184,7 +185,7 @@ void CheckExitSignals()
 void CheckEntrySignals()
 {
     // Get current CLOSE price for signal generation (consistent with MA calculation)
-    double currentPrice = iClose(_Symbol, PERIOD_D1, 0);
+    double currentPrice = iClose(_Symbol, InpTimeframe, 0);
     
     // Calculate moving average
     double ma = CalculateMA(InpLookbackWindow);
@@ -237,9 +238,14 @@ string GenerateSignal(double currentPrice, double ma)
     double deviation = (currentPrice - ma) / ma * 100;
     
     Print("🔍 Signal Calculation:");
-    Print("   Buy Threshold: ", DoubleToString(buyThreshold, _Digits), " (", DoubleToString(-threshold * 100, 2), "%)");
-    Print("   Sell Threshold: ", DoubleToString(sellThreshold, _Digits), " (", DoubleToString(threshold * 100, 2), "%)");
-    Print("   Current Deviation: ", DoubleToString(deviation, 2), "%");
+    Print("   Current Price: ", DoubleToString(currentPrice, _Digits));
+    Print("   MA: ", DoubleToString(ma, _Digits));
+    Print("   Threshold: ", DoubleToString(threshold * 100, 3), "%");
+    Print("   Buy Threshold: ", DoubleToString(buyThreshold, _Digits), " (", DoubleToString(-threshold * 100, 3), "%)");
+    Print("   Sell Threshold: ", DoubleToString(sellThreshold, _Digits), " (", DoubleToString(threshold * 100, 3), "%)");
+    Print("   Current Deviation: ", DoubleToString(deviation, 3), "%");
+    Print("   Price < Buy Threshold? ", (currentPrice < buyThreshold ? "YES" : "NO"));
+    Print("   Price > Sell Threshold? ", (currentPrice > sellThreshold ? "YES" : "NO"));
     
     // Mean reversion logic
     if(currentPrice < buyThreshold)
@@ -267,19 +273,37 @@ double CalculateMA(int period)
     double ma = 0;
     int count = 0;
     
+    Print("📊 MA Calculation Debug:");
+    Print("   Period: ", period);
+    Print("   Timeframe: ", EnumToString(InpTimeframe));
+    
     for(int i = 0; i < period; i++)
     {
-        double close = iClose(_Symbol, PERIOD_D1, i);
+        double close = iClose(_Symbol, InpTimeframe, i);
         if(close > 0)
         {
             ma += close;
             count++;
+            if(i < 5) // Show first 5 values for debugging
+            {
+                Print("   Bar ", i, ": ", DoubleToString(close, _Digits));
+            }
+        }
+        else
+        {
+            Print("   ⚠️  Bar ", i, ": No data (", close, ")");
         }
     }
     
     if(count > 0)
-        return ma / count;
+    {
+        double result = ma / count;
+        Print("   Total bars used: ", count, "/", period);
+        Print("   MA Result: ", DoubleToString(result, _Digits));
+        return result;
+    }
     
+    Print("   ❌ No valid data for MA calculation");
     return 0;
 }
 
