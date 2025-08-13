@@ -284,6 +284,29 @@ double CalculateMA(int period)
 }
 
 //+------------------------------------------------------------------+
+//| Get the best available filling mode for the broker              |
+//+------------------------------------------------------------------+
+ENUM_ORDER_TYPE_FILLING GetBestFillingMode()
+{
+    // Check what filling modes are supported
+    if(SymbolInfoInteger(_Symbol, SYMBOL_FILLING_FOK))
+    {
+        Print("✅ Using FOK (Fill or Kill) filling mode");
+        return ORDER_FILLING_FOK;
+    }
+    else if(SymbolInfoInteger(_Symbol, SYMBOL_FILLING_IOC))
+    {
+        Print("✅ Using IOC (Immediate or Cancel) filling mode");
+        return ORDER_FILLING_IOC;
+    }
+    else
+    {
+        Print("⚠️  Using default filling mode (no specific mode specified)");
+        return ORDER_FILLING_DEFAULT;
+    }
+}
+
+//+------------------------------------------------------------------+
 //| Open a new position                                             |
 //+------------------------------------------------------------------+
 void OpenPosition(ENUM_ORDER_TYPE orderType, double price)
@@ -342,9 +365,9 @@ void OpenPosition(ENUM_ORDER_TYPE orderType, double price)
     request.deviation = InpSlippage;
     request.magic = InpMagicNumber;
     request.comment = "PropFirmBot";
-    request.type_filling = ORDER_FILLING_IOC;
+    request.type_filling = GetBestFillingMode(); // Use the new function
     
-    Print("📋 Order Details:");
+    Print("�� Order Details:");
     Print("   Type: ", (orderType == ORDER_TYPE_BUY ? "BUY" : "SELL"));
     Print("   Price: ", DoubleToString(price, _Digits));
     Print("   Lots: ", DoubleToString(lotSize, 2));
@@ -365,6 +388,24 @@ void OpenPosition(ENUM_ORDER_TYPE orderType, double price)
     else
     {
         Print("❌ Failed to open position. Error: ", result.retcode, " - ", result.comment);
+        
+        // Try without filling mode if it failed
+        if(result.retcode == 10030) // Unsupported filling mode
+        {
+            Print("🔄 Retrying without filling mode specification...");
+            request.type_filling = ORDER_FILLING_DEFAULT;
+            success = OrderSend(request, result);
+            
+            if(success && result.retcode == TRADE_RETCODE_DONE)
+            {
+                Print("✅ Position opened on retry: ", (orderType == ORDER_TYPE_BUY ? "BUY" : "SELL"), " ", DoubleToString(lotSize, 2), " lots at ", DoubleToString(price, _Digits));
+                g_lastTradeTime = TimeCurrent();
+            }
+            else
+            {
+                Print("❌ Retry also failed. Error: ", result.retcode, " - ", result.comment);
+            }
+        }
     }
 }
 
