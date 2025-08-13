@@ -10,14 +10,14 @@
 
 //--- Input Parameters
 input group "=== Trading Parameters ==="
-input double   InpThreshold = 0.001;          // Threshold for signal generation (0.1%)
-input int      InpLookbackWindow = 20;        // Lookback window for MA calculation
-input ENUM_TIMEFRAMES InpTimeframe = PERIOD_H1; // Timeframe for MA calculation
-input double   InpPositionSizePct = 0.02;     // Position size as % of balance (2%)
-input double   InpStopLossPct = 0.02;         // Stop loss as % of price (2%)
-input double   InpTakeProfitPct = 0.04;       // Take profit as % of price (4%)
-input int      InpMaxHoldTime = 24;           // Maximum hold time in hours
-input double   InpMinPositionSpacing = 0.005; // Minimum spacing between positions (0.5%)
+input double   InpThreshold = 0.01;           // Threshold for signal generation (1%) - matches Python
+input int      InpLookbackWindow = 30;        // Lookback window for MA calculation - matches Python
+input ENUM_TIMEFRAMES InpTimeframe = PERIOD_D1; // Timeframe for MA calculation - matches Python daily
+input double   InpPositionSizePct = 0.02;     // Position size as % of balance (2%) - matches Python
+input double   InpStopLossPct = 0.05;         // Stop loss as % of price (5%) - matches Python
+input double   InpTakeProfitPct = 0.10;       // Take profit as % of price (10%) - matches Python
+input int      InpMaxHoldTime = 168;          // Maximum hold time in hours (7 days)
+input double   InpMinPositionSpacing = 0.002; // Minimum spacing between positions (0.2%)
 
 input group "=== Risk Management ==="
 input double   InpMaxLossPerTrade = 0.01;     // Max loss per trade (1%)
@@ -125,6 +125,13 @@ bool ShouldTrade()
     if(!MQLInfoInteger(MQL_TRADE_ALLOWED))
     {
         Print("❌ Trading not allowed by MQL");
+        return false;
+    }
+    
+    // Check minimum time between trades (1 hour minimum)
+    datetime currentTime = TimeCurrent();
+    if(currentTime - g_lastTradeTime < 3600) // 1 hour = 3600 seconds
+    {
         return false;
     }
     
