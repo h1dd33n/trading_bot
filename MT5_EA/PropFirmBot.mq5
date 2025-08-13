@@ -288,25 +288,9 @@ double CalculateMA(int period)
 //+------------------------------------------------------------------+
 ENUM_ORDER_TYPE_FILLING GetBestFillingMode()
 {
-    // Check what filling modes are supported
-    long fillingFOK = SymbolInfoInteger(_Symbol, SYMBOL_FILLING_FOK);
-    long fillingIOC = SymbolInfoInteger(_Symbol, SYMBOL_FILLING_IOC);
-    
-    if(fillingFOK)
-    {
-        Print("✅ Using FOK (Fill or Kill) filling mode");
-        return ORDER_FILLING_FOK;
-    }
-    else if(fillingIOC)
-    {
-        Print("✅ Using IOC (Immediate or Cancel) filling mode");
-        return ORDER_FILLING_IOC;
-    }
-    else
-    {
-        Print("⚠️  Using default filling mode (no specific mode specified)");
-        return ORDER_FILLING_FOK; // Use FOK as default
-    }
+    // Try FOK first (most common)
+    Print("✅ Using FOK (Fill or Kill) filling mode");
+    return ORDER_FILLING_FOK;
 }
 
 //+------------------------------------------------------------------+
