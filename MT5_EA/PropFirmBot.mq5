@@ -10,22 +10,25 @@
 
 //--- Input Parameters
 input group "=== Trading Parameters ==="
-input double   InpThreshold = 0.008;          // Threshold for signal generation (0.8%) - more aggressive
-input int      InpLookbackWindow = 20;        // Lookback window for MA calculation - shorter for faster signals
-input ENUM_TIMEFRAMES InpTimeframe = PERIOD_H4; // Timeframe for MA calculation - 4H for more signals
-input double   InpPositionSizePct = 0.05;     // Position size as % of balance (5%) - larger positions
-input double   InpStopLossPct = 0.03;         // Stop loss as % of price (3%) - tighter SL
-input double   InpTakeProfitPct = 0.06;       // Take profit as % of price (6%) - 2:1 R:R ratio
-input int      InpMaxHoldTime = 48;           // Maximum hold time in hours (2 days)
-input double   InpMinPositionSpacing = 0.003; // Minimum spacing between positions (0.3%)
+input double   InpThreshold = 0.005;          // Threshold for signal generation (0.5%) - more aggressive
+input int      InpLookbackWindow = 15;        // Lookback window for MA calculation - shorter for more signals
+input ENUM_TIMEFRAMES InpTimeframe = PERIOD_H1; // Timeframe for MA calculation - 1H for maximum signals
+input double   InpPositionSizePct = 0.10;     // Position size as % of balance (10%) - larger positions
+input double   InpStopLossPct = 0.02;         // Stop loss as % of price (2%) - tighter SL
+input double   InpTakeProfitPct = 0.04;       // Take profit as % of price (4%) - 2:1 R:R ratio
+input int      InpMaxHoldTime = 24;           // Maximum hold time in hours (1 day)
+input double   InpMinPositionSpacing = 0.002; // Minimum spacing between positions (0.2%)
 
-input group "=== Risk Management ==="
+input group "=== Margin & Risk Management ==="
 input double   InpMaxLossPerTrade = 0.01;     // Max loss per trade (1%)
-input double   InpMaxDailyLoss = 0.02;        // Max daily loss (2%)
-input double   InpMaxOverallLoss = 0.04;      // Max overall loss (4%)
-input int      InpMaxPositions = 10;          // Maximum open positions
-input bool     InpEnableRiskCompounding = true; // Enable risk compounding
-input double   InpLeverageMultiplier = 1.0;   // Leverage multiplier
+input double   InpMaxDailyLoss = 0.07;        // Max daily loss (7%) - your setting
+input double   InpMaxOverallLoss = 0.15;      // Max overall loss (15%) - your setting
+input int      InpMaxPositions = 15;          // Maximum open positions - increased
+input bool     InpEnableMarginTrading = true; // Enable margin trading
+input double   InpMarginMultiplier = 3.0;     // Margin multiplier (3x leverage)
+input double   InpWinSizeIncrease = 1.5;      // Position size increase after win (50%)
+input double   InpLossSizeDecrease = 0.7;     // Position size decrease after loss (30%)
+input double   InpMaxPositionSize = 0.25;     // Maximum position size (25%)
 
 input group "=== Advanced Settings ==="
 input int      InpMagicNumber = 234000;       // Magic number for orders
@@ -44,7 +47,6 @@ input int      InpVolatilityPeriod = 20;      // Volatility calculation period
 input double   InpMinVolatility = 0.005;      // Minimum volatility threshold
 input bool     InpEnableDynamicSizing = true; // Enable dynamic position sizing
 input double   InpWinStreakMultiplier = 1.2;  // Position size multiplier for win streaks
-input double   InpMaxPositionSize = 0.15;     // Maximum position size (15%)
 
 //--- Global Variables
 double g_initialBalance = 0;
@@ -54,6 +56,51 @@ datetime g_lastTradeTime = 0;
 int g_winStreak = 0;
 int g_loseStreak = 0;
 double g_currentLeverage = 1.0;
+
+//+------------------------------------------------------------------+
+//| Check data availability and print debug info                    |
+//+------------------------------------------------------------------+
+bool CheckDataAvailability()
+{
+    Print("🔍 Data Availability Check:");
+    Print("   Symbol: ", _Symbol);
+    Print("   Timeframe: ", EnumToString(InpTimeframe));
+    
+    // Check total bars available
+    int totalBars = iBars(_Symbol, InpTimeframe);
+    Print("   Total bars available: ", totalBars);
+    
+    if(totalBars < InpLookbackWindow)
+    {
+        Print("   ❌ Insufficient data: Need ", InpLookbackWindow, " bars, have ", totalBars);
+        return false;
+    }
+    
+    // Check first and last bar times
+    datetime firstBarTime = iTime(_Symbol, InpTimeframe, totalBars - 1);
+    datetime lastBarTime = iTime(_Symbol, InpTimeframe, 0);
+    
+    Print("   First bar: ", TimeToString(firstBarTime));
+    Print("   Last bar: ", TimeToString(lastBarTime));
+    Print("   Current time: ", TimeToString(TimeCurrent()));
+    
+    // Check if we have recent data
+    if(TimeCurrent() - lastBarTime > 3600) // More than 1 hour old
+    {
+        Print("   ⚠️  Data might be stale");
+    }
+    
+    // Test MA calculation
+    double testMA = CalculateMA(InpLookbackWindow);
+    if(testMA <= 0)
+    {
+        Print("   ❌ MA calculation failed");
+        return false;
+    }
+    
+    Print("   ✅ Data availability check passed");
+    return true;
+}
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
@@ -67,7 +114,7 @@ int OnInit()
     g_lastTradeTime = 0;
     g_winStreak = 0;
     g_loseStreak = 0;
-    g_currentLeverage = InpLeverageMultiplier;
+    g_currentLeverage = InpMarginMultiplier; // Use margin multiplier for leverage
     
     // Validate input parameters
     if(!ValidateInputs())
@@ -83,6 +130,13 @@ int OnInit()
         return INIT_FAILED;
     }
     
+    // Check data availability
+    if(!CheckDataAvailability())
+    {
+        Print("❌ Data availability check failed");
+        return INIT_FAILED;
+    }
+    
     Print("✅ Prop Firm Bot initialized successfully");
     Print("💰 Initial Balance: $", DoubleToString(g_initialBalance, 2));
     Print("📊 Symbol: ", _Symbol);
@@ -90,6 +144,8 @@ int OnInit()
     Print("📈 Position Size: ", DoubleToString(InpPositionSizePct * 100, 1), "%");
     Print("🔢 Max Positions: ", InpMaxPositions);
     Print("⏰ Timeframe: ", EnumToString(InpTimeframe));
+    Print("💳 Margin Trading: ", (InpEnableMarginTrading ? "Enabled" : "Disabled"));
+    Print("📈 Margin Multiplier: ", DoubleToString(InpMarginMultiplier, 1), "x");
     
     return INIT_SUCCEEDED;
 }
@@ -139,9 +195,9 @@ bool ShouldTrade()
         return false;
     }
     
-    // Check minimum time between trades (1 hour minimum)
+    // Check minimum time between trades (15 minutes minimum)
     datetime currentTime = TimeCurrent();
-    if(currentTime - g_lastTradeTime < 3600) // 1 hour = 3600 seconds
+    if(currentTime - g_lastTradeTime < 900) // 15 minutes = 900 seconds
     {
         return false;
     }
@@ -474,7 +530,7 @@ double CalculateVolatility(int period)
 }
 
 //+------------------------------------------------------------------+
-//| Calculate dynamic position size based on win streak             |
+//| Calculate dynamic position size based on win/loss streaks       |
 //+------------------------------------------------------------------+
 double CalculateDynamicPositionSize(double baseSize)
 {
@@ -483,22 +539,31 @@ double CalculateDynamicPositionSize(double baseSize)
     
     double dynamicSize = baseSize;
     
+    // Apply margin multiplier if enabled
+    if(InpEnableMarginTrading)
+    {
+        dynamicSize *= InpMarginMultiplier;
+    }
+    
     // Increase size based on win streak
     if(g_winStreak > 0)
     {
-        double multiplier = 1.0 + (g_winStreak * (InpWinStreakMultiplier - 1.0));
-        dynamicSize *= multiplier;
+        double winMultiplier = MathPow(InpWinSizeIncrease, g_winStreak);
+        dynamicSize *= winMultiplier;
+        Print("   🎯 Win streak multiplier: ", DoubleToString(winMultiplier, 2), "x (", g_winStreak, " wins)");
     }
     
     // Decrease size based on losing streak
     if(g_loseStreak > 0)
     {
-        double multiplier = 1.0 / (1.0 + (g_loseStreak * 0.2));
-        dynamicSize *= multiplier;
+        double lossMultiplier = MathPow(InpLossSizeDecrease, g_loseStreak);
+        dynamicSize *= lossMultiplier;
+        Print("   📉 Loss streak multiplier: ", DoubleToString(lossMultiplier, 2), "x (", g_loseStreak, " losses)");
     }
     
     // Cap at maximum position size
-    dynamicSize = MathMin(dynamicSize, InpMaxPositionSize);
+    double maxSize = g_initialBalance * InpMaxPositionSize;
+    dynamicSize = MathMin(dynamicSize, maxSize);
     
     return dynamicSize;
 }
