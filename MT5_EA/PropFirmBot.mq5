@@ -289,12 +289,15 @@ double CalculateMA(int period)
 ENUM_ORDER_TYPE_FILLING GetBestFillingMode()
 {
     // Check what filling modes are supported
-    if(SymbolInfoInteger(_Symbol, SYMBOL_FILLING_FOK))
+    long fillingFOK = SymbolInfoInteger(_Symbol, SYMBOL_FILLING_FOK);
+    long fillingIOC = SymbolInfoInteger(_Symbol, SYMBOL_FILLING_IOC);
+    
+    if(fillingFOK)
     {
         Print("✅ Using FOK (Fill or Kill) filling mode");
         return ORDER_FILLING_FOK;
     }
-    else if(SymbolInfoInteger(_Symbol, SYMBOL_FILLING_IOC))
+    else if(fillingIOC)
     {
         Print("✅ Using IOC (Immediate or Cancel) filling mode");
         return ORDER_FILLING_IOC;
@@ -302,7 +305,7 @@ ENUM_ORDER_TYPE_FILLING GetBestFillingMode()
     else
     {
         Print("⚠️  Using default filling mode (no specific mode specified)");
-        return ORDER_FILLING_DEFAULT;
+        return ORDER_FILLING_FOK; // Use FOK as default
     }
 }
 
@@ -393,17 +396,33 @@ void OpenPosition(ENUM_ORDER_TYPE orderType, double price)
         if(result.retcode == 10030) // Unsupported filling mode
         {
             Print("🔄 Retrying without filling mode specification...");
-            request.type_filling = ORDER_FILLING_DEFAULT;
-            success = OrderSend(request, result);
             
-            if(success && result.retcode == TRADE_RETCODE_DONE)
+            // Create new request without filling mode
+            MqlTradeRequest request2 = {};
+            MqlTradeResult result2 = {};
+            
+            request2.action = TRADE_ACTION_DEAL;
+            request2.symbol = _Symbol;
+            request2.volume = lotSize;
+            request2.type = orderType;
+            request2.price = price;
+            request2.sl = sl;
+            request2.tp = tp;
+            request2.deviation = InpSlippage;
+            request2.magic = InpMagicNumber;
+            request2.comment = "PropFirmBot";
+            // No type_filling specified - let broker decide
+            
+            success = OrderSend(request2, result2);
+            
+            if(success && result2.retcode == TRADE_RETCODE_DONE)
             {
                 Print("✅ Position opened on retry: ", (orderType == ORDER_TYPE_BUY ? "BUY" : "SELL"), " ", DoubleToString(lotSize, 2), " lots at ", DoubleToString(price, _Digits));
                 g_lastTradeTime = TimeCurrent();
             }
             else
             {
-                Print("❌ Retry also failed. Error: ", result.retcode, " - ", result.comment);
+                Print("❌ Retry also failed. Error: ", result2.retcode, " - ", result2.comment);
             }
         }
     }
